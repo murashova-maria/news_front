@@ -1,0 +1,92 @@
+.bigCard {
+    border-radius: 10px;
+    width: 100%;
+
+
+    &.Investigations {
+        border: 1px solid #27AE60;
+    }
+
+    &.Sport {
+        border: 1px solid #20127F;
+    }
+
+    &.Technology {
+        border: 1px solid #7A5648;
+    }
+
+    &.New {
+        border: 1px solid #DA191C;
+    }
+
+    &.Weather {
+        border: 1px solid #F57C1F;
+    }
+
+    &.Business {
+        border: 1px solid #913E98;
+    }
+
+    &__img {
+        position: relative;
+
+        img {
+            border-radius: 10px 10px 0 0;
+            width: 100%;
+        }
+
+
+        & .tag {
+            position: absolute;
+            right: 0;
+            top: 0;
+            background: #FFFFFF;
+            border-radius: 0px 9px 0px 5px;
+            padding: 5px 10px;
+        }
+
+        &_title {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            color: #FFFFFF;
+            font-weight: 700;
+            @include adap-font(24, 20);
+            max-width: 80%;
+            padding: 19px 20px;
+
+            @media(max-width: 1190px) {
+                font-size: 18px;
+            }
+
+            @media(max-width: 700px) {
+                font-size: 12px;
+            }
+        }
+    }
+
+    &__desc {
+        padding: 10px 20px 20px;
+
+        &_top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            font-weight: 400;
+            font-size: 14px;
+            color: #cccccc;
+
+            margin-bottom: 10px;
+        }
+
+        &_bot {
+            font-weight: 400;
+            font-size: 16px;
+
+            @media(max-width: 1000px) {
+                font-size: 12px;
+            }
+        }
+    }
+}

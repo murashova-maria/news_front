@@ -1,0 +1,125 @@
+.littleCard {
+    border-radius: 10px;
+    max-width: 100%;
+    margin-bottom: 20px;
+
+    
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+
+
+    &.Investigations {
+        border: 1px solid #27AE60;
+    }
+
+    &.Sport {
+        border: 1px solid #20127F;
+    }
+
+    &.Technology {
+        border: 1px solid #7A5648;
+    }
+
+    &.New {
+        border: 1px solid #DA191C;
+    }
+
+    &.Weather {
+        border: 1px solid #F57C1F;
+    }
+
+    &.Business {
+        border: 1px solid #913E98;
+    }
+
+    &__img {
+        position: relative;
+
+       
+
+        img {
+            border-radius: 10px 10px 0 0;
+            width: 100%;
+        }
+        &.hasNewsId {
+            & img {
+                max-height: 161px;
+            }
+
+            & .littleCard__img_title {
+                font-size: 14px !important;
+            }
+        }
+
+        & .tag {
+            position: absolute;
+            right: 0;
+            top: 0;
+            background: #FFFFFF;
+            border-radius: 0px 9px 0px 5px;
+            padding: 5px 10px;
+
+            @media(max-width: 1190px) {
+                font-size: 10px;
+            }
+        }
+
+        &_title {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            color: #FFFFFF;
+            font-weight: 700;
+            font-size: 18px;
+            max-width: 80%;
+            padding: 19px 20px;
+
+            @media(max-width: 1190px) {
+                font-size: 12px;
+            }
+        }
+    }
+
+    &__desc {
+        padding: 10px 20px 20px;
+
+        &.hasNewsId {
+            & .littleCard__desc_bot {
+                font-size: 14px !important;
+            }
+        }
+
+        &_top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            font-weight: 400;
+            font-size: 14px;
+            color: #cccccc;
+
+            margin-bottom: 10px;
+            @media(max-width: 1190px) {
+                font-size: 10px;
+            }
+            @media(max-width: 960px) {
+                font-size: 8px;
+            }
+        }
+
+        &_bot {
+            font-weight: 400;
+            font-size: 16px;
+
+            @media(max-width: 1190px) {
+                font-size: 10px;
+            }
+
+            @media(max-width: 960px) {
+                font-size: 8px;
+            }
+        }
+    }
+}

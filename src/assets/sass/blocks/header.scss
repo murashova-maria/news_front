@@ -1,0 +1,115 @@
+@import "../general/variables.scss";
+
+.header {
+    width: 100%;
+    padding: 11px 0px;
+
+    position: relative;
+    z-index: 11;
+
+    height: 100%;
+    box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
+
+    &__doubleLogo {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+       
+
+        img {
+            margin-right: 10px;
+        }
+    }
+
+    &__menu {
+        display: none;
+    }
+
+    &__container {
+        width: 100%;
+        padding: 0px 70px;
+        margin: 0 auto;
+
+        &.bgcRed {
+            background-color: #DA191C;
+            padding: 10px 70px;
+        }
+    }
+
+    &__row {
+        display: flex;
+        // gap: 55px;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    &_logo {
+        display: block;
+    }
+}
+
+.nav {
+    display: flex;
+    margin: 0 auto;
+
+    &__list {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        color: #000000;
+    }
+
+    &__item {
+        @include adap-font(18, 15);
+        padding: 0px clamp(65px, 1vw, 50px) 0px 0px;
+        font-style: normal;
+    }
+
+    &__link {
+        font-weight: 600;
+        position: relative;
+
+        &::before {
+            content: "";
+            width: 100%;
+            height: 3px;
+            background: $button;
+            bottom: -15.3px;
+            position: absolute;
+            left: 0;
+            transform: scaleX(0);
+            transform-origin: center;
+            transition: transform 0.3s;
+        }
+
+        &:hover::before {
+            transform: scaleX(1);
+            transition: transform 0.3s;
+            opacity: .6;
+        }
+    }
+}
+
+.breaking {
+
+    @include adap-font(24, 21);
+    padding: 0px clamp(65px, 1vw, 50px) 0px 0px;
+    font-style: normal;
+
+    @media(max-width: 1000px) {
+        font-size: 15px;
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    &__title {
+        font-weight: 700;
+    }
+
+    &__tire {
+        font-size: 30px;
+        margin: 0 20px;
+    }
+}

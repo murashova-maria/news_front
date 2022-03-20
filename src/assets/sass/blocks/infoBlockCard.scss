@@ -1,0 +1,95 @@
+.infoBlockCard {
+    min-width: 640px;
+    border-radius: 10px;
+    display: flex;
+    margin-bottom: 20px;
+    border: 1px solid #fff;
+    cursor: pointer;
+    transition: all .2s ease-in-out;
+
+    @media(max-width: 1000px) {
+        min-width: 100%;
+    }
+
+    &:hover {
+        transform: scale(1.02);
+    }
+
+    &.Investigations {
+        border-color: #27AE60;
+    }
+
+    &.Sport {
+        border-color: #20127F;
+    }
+
+    &.Technology {
+        border-color: #7A5648;
+    }
+
+    &.New {
+        border-color: #DA191C;
+    }
+
+    &.Weather {
+        border-color: #F57C1F;
+    }
+
+    &.Business {
+        border-color: #913E98;
+    }
+
+    &__left {
+        position: relative;
+        width: 30%;
+
+        & img {
+            border-radius: 10px 0 0 10px;
+            height: 100%;
+            width: 100%;
+        }
+
+        &_tag {
+            position: absolute;
+            right: 0;
+            top: 0;
+            padding: 5px 10px;
+            background-color: #fff;
+            border-radius: 0px 0px 0px 5px;
+            font-weight: 700;
+            font-size: 12px;
+        }
+    }
+
+    &__right {
+        width: 70%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-direction: column;
+        padding: 20px;
+
+        &_top {
+            font-weight: 700;
+            font-size: 18px;
+
+            @media(max-width: 1190px) {
+                font-size: 12px;
+            }
+        }
+
+        &_bot {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-weight: 600;
+            font-size: 14px;
+            color: #CCCCCC;
+            
+            @media (max-width: 1000px) {
+                font-size: 10px;
+            }
+        }
+    }
+}

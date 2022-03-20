@@ -1,0 +1,122 @@
+.correctnews {
+    margin-top: 40px;
+    display: flex;
+
+    &__left {
+        max-width: 70%;
+
+        &_tags {
+            display: flex;
+
+            & .tagNews {
+                padding: 5px 10px;
+                box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+                border-radius: 5px;
+                font-weight: 700;
+                font-size: 14px;
+                flex: 1 1 100%;
+                margin-right: 20px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                &:last-child {
+                    margin-right: 0;
+                }
+
+                &.Investigations {
+                    max-width: 103px;
+                }
+
+                &.Sport {
+                    max-width: 50px;
+                }
+
+                &.Technology {
+                    max-width: 157px;
+                }
+
+                &.New {
+                    max-width: 40px;
+                }
+
+                &.Weather {
+                    max-width: 65px;
+                }
+
+                &.Business {
+                    max-width: 146px;
+                }
+            }
+        }
+
+        &_photo {
+
+            &_title {
+                font-weight: 700;
+                font-size: 64px;
+                font-family: $smooch;
+            }
+
+            &_block {
+                position: relative;
+                border: 1px solid #CCCCCC;
+                border-radius: 10px;
+
+                & .blockNews {
+                    width: 100%;
+                }
+
+                & .planetNews {
+                    position: absolute;
+                    top: -217px;
+                    right: 186px;
+                    z-index: -1;
+                    width: 411px;
+                }
+
+                &_info {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    padding: 10px;
+
+                    font-weight: 400;
+                    font-size: 18px;
+                    color: #999999;
+
+                    &_item {
+                        display: flex;
+                        align-items: center;
+
+                        & .iconPhoto {
+                            margin-right: 5px;
+                        }
+                    }
+                }
+            }
+        }
+
+        &_text {
+            margin-top: 40px;
+            font-size: 18px;
+            margin-bottom: 60px;
+        }
+    }
+
+    &__right {
+        width: 30%;
+        margin-left: 20px;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        &_title {
+            font-weight: 700;
+            font-size: 36px;
+            font-family: $smooch;
+            margin-bottom: 20px;
+        }
+    }
+}

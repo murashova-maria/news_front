@@ -1,0 +1,42 @@
+.tabs {
+    background: #FFFFFF;
+    /* Синий неакцентный */
+
+    border: 1px solid #20127F;
+    box-sizing: border-box;
+    border-radius: 10px;
+    max-width: 310px;
+    max-height: 155px;
+
+    @media(max-width:700px) {
+        max-height: 250px;
+    }
+    width: 30%;
+
+    &__container {
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__link {
+        padding: 4px 0 4px 10px;
+        font-weight: 600;
+        font-size: 16px;
+        border-radius: 10px;
+        margin-bottom: 10px;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+
+        background-color: #fff;
+
+        transition: all .2s ease-in-out;
+
+        &:hover {
+            background-color: $button;
+            color: #fff;
+        }
+    }
+}
