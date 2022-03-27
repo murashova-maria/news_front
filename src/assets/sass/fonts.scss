@@ -1,1 +1,42 @@
 @import url('https://fonts.googleapis.com/css2?family=Smooch+Sans:wght@700&display=swap');
+
+@font-face {
+    font-style: normal;
+    font-weight: 400;
+    font-family: 'Gilroy-R';
+
+    font-display: swap;
+
+    src: url("../fonts/Gilroy-Regular.woff2") format("woff2"),
+    url("../fonts/Gilroy-Regular.woff") format("woff");
+}
+@font-face {
+    font-style: normal;
+    font-weight: 500;
+    font-family: 'Gilroy-M';
+
+    font-display: swap;
+
+    src: url("../fonts/Gilroy-Medium.woff2") format("woff2"),
+    url("../fonts/Gilroy-Medium.woff") format("woff");
+}
+@font-face {
+    font-style: normal;
+    font-weight: 600;
+    font-family: 'Gilroy-SB';
+
+    font-display: swap;
+
+    src: url("../fonts/Gilroy-Semibold.woff2") format("woff2"),
+    url("../fonts/Gilroy-Semibold.woff") format("woff");
+}
+@font-face {
+    font-style: normal;
+    font-weight: 700;
+    font-family: 'Gilroy-B';
+
+    font-display: swap;
+
+    src: url("../fonts/Gilroy-Bold.woff2") format("woff2"),
+    url("../fonts/Gilroy-Bold.woff") format("woff");
+}

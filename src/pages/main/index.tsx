@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { TopCards } from '../../components/Cards/TopCards'
 import { InfoBlock } from '../../components/InfoBlock/InfoBlock'
 import { useAppSelector } from '../../store'
@@ -10,11 +11,13 @@ export const Main: React.FC = () => {
     const [newsItems, setNewsItems] = useState<Array<INewsItem>>(items)
     const [topNews, setTopNews] = useState<Array<INewsItem>>([items[1], items[2]])
 
+    const history = useNavigate()
+
     return (
         <>
             <div className='main__section0'>
                 <div className="main__section0_left">
-                    <div className={`bigCard ${newsItems[0].tag[0]}`}>
+                    <div onClick={() => history({pathname:`/news?newsid=28`})} className={`bigCard ${newsItems[0].tag[0]}`}>
                         <div className="bigCard__img">
                             <div className={`tag ${newsItems[0].tag[0]}`}>{newsItems[0].tag[0]}</div>
                             <img src={newsItems[0].img} alt="newsItems" />

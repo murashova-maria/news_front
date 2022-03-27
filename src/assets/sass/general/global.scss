@@ -108,6 +108,18 @@ body {
   input[type="number"] {
     appearance: textfield;
   }
+
+  .wrapper {
+    overflow: hidden;
+
+    &.overflowX {
+      overflow-y: auto;
+    }
+
+    @media(max-width:1400px) {
+      overflow-y: auto;
+  }
+  }
   
   .container {
     width: 100%;
@@ -120,6 +132,9 @@ body {
     color: black;
     transform: translateY(40px);
     padding: 0 70px;
+    &.h100vh {
+      height: 100vh;
+    }
 
     @media(max-width: 1000px) {
       padding: 0 30px;

@@ -3,6 +3,12 @@
     max-width: 100%;
     margin-bottom: 20px;
 
+    cursor: pointer;
+    transition: all .2s ease-in-out;
+
+    &:hover {
+        transform: scale(1.02);
+    }
     
 
     &:last-child {

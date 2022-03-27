@@ -35,14 +35,6 @@ export const CorrectNews: React.FC = () => {
         setRandNews([newNews[rand], weatherNews[rand], sportNews[rand], technologyNews[rand], businessNews[rand]])
     }, [items])
 
-useEffect(() => {
-console.log('randNews', randNews);
-
-}, [randNews])
-
-
-
-
     return (
         <div className='correctnews'>
             <div className="correctnews__left">

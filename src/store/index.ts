@@ -1,9 +1,13 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import newsSlice from './newsReducer'
+import adminSlice from './adminReducer'
+import dataAdminSlice from './dataAdminReducer'
 
 const rootReducer = combineReducers({
-    news: newsSlice
+    news: newsSlice,
+    admin: adminSlice,
+    dataADmin: dataAdminSlice
 });
 
 export const store = configureStore({

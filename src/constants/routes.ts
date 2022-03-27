@@ -1,5 +1,5 @@
 import { CorrectNews } from './../pages/correctNews/index';
-import {Main, Sport, Business, Investigations, New, Technology, Weather} from '../pages'
+import {Main, Sport, Business, Investigations, New, Technology, Weather, Admin, CreatePage} from '../pages'
 import {
     MAIN_ROUTE,
     SPORT_ROUTE,
@@ -12,7 +12,9 @@ import {
     TERMS_ROUTE,
     COOKIES_ROUTE,
     NEWS_ROUTE,
-    WEATHER_ROUTE
+    WEATHER_ROUTE,
+    ADMIN_ROUTE,
+    CREATE_ROUTE
 } from './paths'
 import { Metainfo } from '../pages/metainfo';
 
@@ -20,6 +22,14 @@ export const PublicRoutes = [
     {
         path: MAIN_ROUTE,
         Element: Main
+    },
+    {
+        path: CREATE_ROUTE,
+        Element: CreatePage
+    },
+    {
+        path: ADMIN_ROUTE,
+        Element: Admin
     },
     {
         path: WEATHER_ROUTE,

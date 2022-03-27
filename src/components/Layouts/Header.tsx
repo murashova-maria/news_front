@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom';
 
 import logo1 from '../../assets/img/firsticon.png';
@@ -8,8 +8,15 @@ import { BUSINESS_ROUTE, INVESTIGATIONS_ROUTE, MAIN_ROUTE, NEW_ROUTE, SPORT_ROUT
 export const Header: React.FC = () => {
 
     const [isActive, setIsActive] = useState(false);
+    const [numberNews, setNumberNews] = useState(0)
 
-    
+    const news = [
+        'Nunc interdum nunc, vel varius scelerisque. 1',
+        'Nunc interdum nunc, vel varius. 2',
+        'Nunc interdum nunc, vel. 3'
+    ]
+
+
 
     const history = useNavigate()
 
@@ -21,6 +28,14 @@ export const Header: React.FC = () => {
     const close = () => {
         document.querySelector('body')!.classList.remove('lock');
     }
+
+    useEffect(() => {
+        const intervalId = setInterval(() => {
+            setNumberNews(Math.floor(Math.random() * news.length))
+        }, 4000)
+
+        return () => clearInterval(intervalId)
+    }, [])
 
     return (
         <>
@@ -36,7 +51,7 @@ export const Header: React.FC = () => {
                             </div>
                         </div>
 
-                        <div onClick={() => history({pathname: MAIN_ROUTE})} className='header__doubleLogo'>
+                        <div onClick={() => history({ pathname: MAIN_ROUTE })} className='header__doubleLogo'>
                             <img className='header__logo' src={logo1} alt="logo" />
                             <img className='header__logo' src={logo2} alt="logo" />
                         </div>
@@ -82,7 +97,7 @@ export const Header: React.FC = () => {
             <div className="header__container bgcRed">
                 <div className="header__row">
                     <div className="breaking">
-                        <span className='breaking__title'>BREACKING</span> <span className='breaking__tire'>—</span> Nunc interdum nunc, vel varius scelerisque mattis.
+                        <span className='breaking__title'>BREACKING</span> <span className='breaking__tire'>—</span> {news[numberNews]}
                     </div>
                 </div>
             </div>

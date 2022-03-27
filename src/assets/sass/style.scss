@@ -11,6 +11,8 @@
 @import './blocks/correctNews.scss';
 @import './blocks/tabs.scss';
 @import './blocks/metainfo.scss';
+@import './blocks/admin.scss';
+@import './blocks/modal.scss';
 
 .tag {
     &.Investigations {
@@ -72,6 +74,26 @@
     width: 49%;
     margin-right: 20px;
 
+    &.title {
+        width: 100%;
+
+        font-family: $smooch;
+
+
+        & textarea {
+            font-weight: 700;
+            font-size: 64px;
+
+            background: #FFFFFF;
+            /* grey4 */
+
+            border: 1px solid #999999;
+            box-sizing: border-box;
+            box-shadow: inset 0px 8px 25px rgba(0, 0, 0, 0.05);
+            border-radius: 20px;
+        }
+    }
+
     &:last-child {
         margin-right: 0;
 
@@ -81,6 +103,19 @@
         resize: none;
         height: 234px;
         width: 100% !important;
+    }
+
+    &.breaking {
+        width: 100%;
+
+        & textarea {
+            height: 62px;
+            width: 100% !important;
+            color: #EEEEEE;
+            font-weight: 400;
+            font-size: 18px;
+            font-family: $open;
+        }
     }
 }
 
@@ -431,5 +466,232 @@
         span {
             width: 70%;
         }
+    }
+}
+
+.circle {
+    border-radius: 50%;
+    position: fixed;
+    top: -175px;
+    left: -325px;
+
+    &.firstcircle {
+        background-color: #98E7E5;
+        width: 30vw;
+        height: 30vw;
+        z-index: 10;
+    }
+
+    &.secondcircle {
+        background-color: #C9F5F4;
+        width: 35vw;
+        height: 35vw;
+        z-index: 9;
+        top: -195px;
+    }
+
+    &.thirdcircle {
+        background-color: #E9FFFE;
+        width: 40vw;
+        height: 40vw;
+        top: -210px;
+        z-index: 8;
+    }
+
+
+}
+
+.circlebot {
+    border-radius: 50%;
+    position: fixed;
+    bottom: -345px;
+    right: -350px;
+
+    &.fourthcircle {
+        background-color: #E9FFFE;
+        width: 40vw;
+        height: 40vw;
+
+        z-index: 8;
+    }
+}
+
+.blockAdminCard {
+    padding: 20px;
+    background: #FFFFFF;
+    border: 1px solid #C2FFFD;
+    box-sizing: border-box;
+    box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.05);
+    border-radius: 20px;
+}
+
+.btnAdmin {
+    display: flex;
+    align-items: center;
+    border: 1px solid;
+    box-sizing: border-box;
+    border-radius: 13px;
+    padding: 5px 15px;
+
+    font-weight: 400;
+    font-size: 14px;
+    font-family: $gilroy-r;
+
+    margin-right: 15px;
+    margin-top: 20px;
+
+    cursor: pointer;
+
+    img {
+        margin-left: 5px;
+    }
+
+    &:last-child {
+        margin-right: 0;
+    }
+
+    &.red {
+        border-color: #DA191C;
+        color: #DA191C;
+    }
+
+    &.yellow {
+        border-color: #F57C1F;
+        color: #F57C1F;
+    }
+
+    &.green {
+        border-color: #27AE60;
+        color: #27AE60;
+    }
+}
+
+.dropArea {
+    margin-top: 20px;
+    width: 100%;
+    height: 484px;
+    color: #fff;
+    border: 2px dashed white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), #C4C4C4;
+    border-radius: 10px;
+
+    & .preview {
+        max-height: 100%;
+        width: 100%;
+    }
+}
+
+label {
+    height: 34px;
+}
+
+input[type="checkbox"] {
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+}
+
+.checkbox {
+    display: inline-block;
+    height: 28px;
+    width: 28px;
+    background: #fff;
+    border: 2px #ddd solid;
+    border-radius: 5px;
+
+    margin-left: 20px;
+}
+
+.tab {
+    background: #FFFFFF;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
+
+    font-weight: 700;
+    font-size: 14px;
+    font-family: $open;
+    margin-right: 20px;
+    margin-bottom: 10px;
+
+    cursor: pointer;
+
+    padding: 5px 10px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &.Investigations {
+        color: #27AE60;
+    }
+
+    &.Sport {
+        color: #20127F;
+    }
+
+    &.Technology {
+        color: #7A5648;
+    }
+
+    &.New {
+        color: #DA191C;
+    }
+
+    &.Weather {
+        color: #F57C1F;
+    }
+
+    &.Business {
+        color: #913E98;
+    }
+}
+
+.text-editor {
+    border: 1px solid black;
+    padding: 15px;
+    cursor: pointer;
+
+    background: #FFFFFF;
+    /* grey4 */
+
+    border: 1px solid #999999;
+    box-sizing: border-box;
+    box-shadow: inset 0px 8px 25px rgba(0, 0, 0, 0.05);
+    border-radius: 0px 0px 20px 20px;
+}
+
+.public-DraftEditor-content {
+    min-height: 100px;
+}
+
+.tool-panel {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+
+    background: #EEEEEE;
+    /* grey4 */
+
+    border: 1px solid #999999;
+    box-sizing: border-box;
+    border-radius: 20px 20px 0px 0px;
+
+    padding: 12px 30px;
+
+    &__item {
+        flex-shrink: 0;
+        margin-right: 10px;
+
+        &_active {
+            // background: #999999;
+          }
     }
 }
