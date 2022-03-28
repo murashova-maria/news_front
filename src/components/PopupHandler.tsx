@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import useQuery from "../utils/hooks/useQuery";
 import { ModalWrapper } from "./modal/ModalWrapper";
 
@@ -7,6 +7,7 @@ import fals from '../assets/img/false.svg'
 import pending from '../assets/img/pending.svg'
 import { useAppDispatch, useAppSelector } from "../store";
 import { Tab } from "./Tab";
+import { Input } from "./Input/Input";
 
 
 export const PopupHandler: React.FC = () => {
@@ -14,6 +15,7 @@ export const PopupHandler: React.FC = () => {
 
     const dispatch = useAppDispatch()
     const tabs = useAppSelector(state => state.dataADmin.tabs)
+    const [isClickAddSource, setIsClickAddSource] = useState<boolean>(false)
 
     const links = [
         {
@@ -59,9 +61,17 @@ export const PopupHandler: React.FC = () => {
                         }
                     </div>
                     <div className="modal-wrapper__blockBtn">
-                        <div className="modal-wrapper__blockBtn_btn">
-                            Add new source
-                    </div>
+                        {!isClickAddSource
+                            ? <div onClick={() => setIsClickAddSource(true)} className="modal-wrapper__blockBtn_btn">
+                                Add new source
+                                </div>
+                            : <div className='modal-wrapper__blockBtn_inputAndBtn'>
+                                <Input placeholder={'Enter URL'} />
+                                <div onClick={() => setIsClickAddSource(false)} className="modal-wrapper__blockBtn_btn">
+                                    ADD
+                                </div>
+                            </div>
+                        }
                     </div>
                 </ModalWrapper>
             ))}

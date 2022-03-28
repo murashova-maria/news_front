@@ -1,10 +1,12 @@
 import { AnyCnameRecord } from 'dns'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { animated, useSpring } from 'react-spring'
 
-export const Checkbox: React.FC = ({ label }: any) => {
+export const Checkbox = ({ setIsCheckedCreate }: any) => {
 
     const [isChecked, setIsChecked] = useState<boolean>(false)
+
+    
 
     const checkboxAnimationStyle = useSpring({
         backgroundColor: isChecked ? '#F06543' : '#fff',
@@ -16,6 +18,10 @@ export const Checkbox: React.FC = ({ label }: any) => {
     const checkmarkanimationStyle = useSpring({
         x: isChecked ? 0 : checkmarkLength
     })
+    
+    useEffect(() => {
+        setIsCheckedCreate(isChecked)
+    }, [isChecked])
 
     return (
         <label>

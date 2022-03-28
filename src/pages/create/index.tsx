@@ -20,6 +20,9 @@ export const CreatePage: React.FC = () => {
     const [fileFormat, setFileFormat] = useState('')
     const [preview, setPreview] = useState<any>()
 
+    const [isCheckedBreaking, setIsCheckedBreaking] = useState<boolean>(false)
+    const [isCheckedMain, setIsCheckedMain] = useState<boolean>(false)
+
     const dispatch = useAppDispatch()
     const tabs = useAppSelector(state => state.dataADmin.tabs)
 
@@ -101,12 +104,12 @@ export const CreatePage: React.FC = () => {
 
                 <div className="create__left">
                     <div className="create__left_check">
-                        Main item <Checkbox />
+                        Main item <Checkbox setIsCheckedCreate={setIsCheckedMain} />
 
                     </div>
                     <div className="create__left_check breaking">
-                        <div className="create__left_check_top">Breaking news <Checkbox /></div>
-                        <div className="create__left_check_bot"><TextArea breaking={true} placeholder='Enter Cupturn' /></div>
+                        <div className="create__left_check_top">Breaking news <Checkbox setIsCheckedCreate={setIsCheckedBreaking} /></div>
+                        <div className="create__left_check_bot"><TextArea readOnly={!isCheckedBreaking} breaking={true} placeholder='Enter Cupturn' /></div>
                     </div>
                     <div className="create__left_check tabCreate">
                         Tabs
@@ -118,7 +121,7 @@ export const CreatePage: React.FC = () => {
                         </div>
                     </div>
                     <div className="create__left_buttons">
-                        <div className="buttons_monitoring">Close</div>
+                        <div onClick={() => history({ pathname: '/admin' })} className="buttons_monitoring">Close</div>
                         <div className="buttons_create">Publish</div>
                     </div>
                 </div>
