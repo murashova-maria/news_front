@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import { TopCards } from '../../components/Cards/TopCards'
 import { InfoBlock } from '../../components/InfoBlock/InfoBlock'
-import { useAppSelector } from '../../store'
+import { useGlobalState } from '../../store'
 import { INewsItem } from '../../types'
 
 export const Sport: React.FC = () => {
-    const items = useAppSelector(state => state.news.news)
+    const [items] = useGlobalState('news')
     const [newsItems, setNewsItems] = useState<Array<INewsItem>>(items)
     const [topNews, setTopNews] = useState<Array<INewsItem>>([items[1], items[2]])
     return (

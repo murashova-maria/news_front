@@ -5,7 +5,7 @@ import { ModalWrapper } from "./modal/ModalWrapper";
 import done from '../assets/img/done.svg'
 import fals from '../assets/img/false.svg'
 import pending from '../assets/img/pending.svg'
-import { useAppDispatch, useAppSelector } from "../store";
+import { useGlobalState } from "../store";
 import { Tab } from "./Tab";
 import { Input } from "./Input/Input";
 
@@ -13,8 +13,8 @@ import { Input } from "./Input/Input";
 export const PopupHandler: React.FC = () => {
     const query = useQuery();
 
-    const dispatch = useAppDispatch()
-    const tabs = useAppSelector(state => state.dataADmin.tabs)
+    const [tabs, setTabs] = useGlobalState('tabs')
+
     const [isClickAddSource, setIsClickAddSource] = useState<boolean>(false)
 
     const links = [

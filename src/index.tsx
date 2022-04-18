@@ -1,19 +1,16 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import { BrowserRouter } from 'react-router-dom';
-import App from './App';
-import { store } from './store';
-import { TextEditorProvider } from './utils/context';
+import React from "react";
+import ReactDOM from "react-dom";
+import { Provider } from "react-redux";
+import { BrowserRouter } from "react-router-dom";
+import App from "./App";
+import { TextEditorProvider } from "./utils/context";
 
 ReactDOM.render(
-  <Provider store={store}>
-    <BrowserRouter>
+  <BrowserRouter>
     <TextEditorProvider>
       <App />
-      </TextEditorProvider>
-    </BrowserRouter>
-  </Provider>,
+    </TextEditorProvider>
+  </BrowserRouter>,
 
-  document.getElementById('root')
+  document.getElementById("root")
 );

@@ -6,7 +6,6 @@ import orangep from '../../assets/img/orangePlanet.png'
 import violetp from '../../assets/img/violetPlanet.png'
 import brownp from '../../assets/img/brownPlanet.png'
 import { InfoBlockCard } from '../Cards/InfoBlockCard'
-import { useAppSelector } from '../../store'
 
 export const InfoBlock = ({ tag, items, withOutTitle }: any) => {
 

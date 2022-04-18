@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useAppSelector } from '../../store'
+import { useGlobalState } from '../../store'
 import { INewsItem } from '../../types'
 import useQuery from '../../utils/hooks/useQuery'
 import bluePlanet from '../../assets/img/bluePlanet.png'
@@ -12,7 +12,7 @@ export const CorrectNews: React.FC = () => {
 
     const query = useQuery()
 
-    const items = useAppSelector(state => state.news.news)
+    const [items] = useGlobalState('news')
 
     const [news, setNews] = useState<Array<INewsItem>>([])
 
