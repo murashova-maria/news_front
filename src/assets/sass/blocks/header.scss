@@ -66,6 +66,10 @@
         @include adap-font(18, 15);
         padding: 0px clamp(65px, 1vw, 50px) 0px 0px;
         font-style: normal;
+
+        &:first-child {
+            padding: 0px clamp(65px, 1vw, 50px) ;
+        }
     }
 
     &__link {
