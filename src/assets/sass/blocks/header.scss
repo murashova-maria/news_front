@@ -14,7 +14,8 @@
         display: flex;
         align-items: center;
         cursor: pointer;
-       
+        position: absolute;
+        top: 30px;
 
         img {
             margin-right: 10px;
@@ -51,6 +52,7 @@
 .nav {
     display: flex;
     margin: 0 auto;
+    padding: 7px 0;
 
     &__list {
         display: flex;
@@ -92,6 +94,8 @@
 }
 
 .breaking {
+    width: 100%;
+    overflow: hidden;
 
     @include adap-font(24, 21);
     padding: 0px clamp(65px, 1vw, 50px) 0px 0px;
@@ -106,6 +110,29 @@
 
     &__title {
         font-weight: 700;
+
+        &-news {
+            flex-wrap: nowrap;
+            animation: 7s linear 1s infinite reverse slidein;
+
+            @keyframes slidein {
+                0% {
+                    margin-left: 0;
+                    width: 100%;
+                    opacity: 0;
+                }
+
+                25% {
+                    opacity: 1;
+                }
+
+                100% {
+                    margin-left: 100%;
+                    width: 100%;
+                    opacity: 0.8;
+                }
+            }
+        }
     }
 
     &__tire {

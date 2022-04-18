@@ -97,7 +97,13 @@ export const Header: React.FC = () => {
             <div className="header__container bgcRed">
                 <div className="header__row">
                     <div className="breaking">
-                        <span className='breaking__title'>BREACKING</span> <span className='breaking__tire'>—</span> {news[numberNews]}
+
+
+                        <div className='breaking__title-news'>
+                            <span className='breaking__title'>BREACKING</span>
+                            <span className='breaking__tire'>—</span>
+                            {news[numberNews] }
+                        </div>
                     </div>
                 </div>
             </div>
