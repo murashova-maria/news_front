@@ -4,7 +4,7 @@ import { StatusCodes } from "http-status-codes";
 import merge from "lodash.merge";
 
 const isAdmin = sessionStorage.getItem("isAdmin");
-const API_URL = Boolean(isAdmin)
+const API_URL = isAdmin === 'true'
   ? "https://tac.stoi.co/api"
   : "https://tacnews.org/api";
 

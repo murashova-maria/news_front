@@ -9,7 +9,7 @@ export const TopCards: React.FC<IProps> = React.memo(({ item, hasNewsId }) => {
     const history = useNavigate()
 
     return (
-        <div onClick={() => history({ pathname: `/news?newsid=28` })} className={hasNewsId ? `littleCard ${item?.tab} hasNewsId` : `littleCard ${item?.tab}`}>
+        <div onClick={() => history({ pathname: `/news?newsid=${item?.id}` })} className={hasNewsId ? `littleCard ${item?.tab} hasNewsId` : `littleCard ${item?.tab}`}>
             <div className={hasNewsId ? "littleCard__img hasNewsId" : "littleCard__img"}>
                 <div className={`tag ${item?.tab}`}>{item?.tab}</div>
                 <img src={item?.media_link} alt="newsItems" />
