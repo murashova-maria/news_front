@@ -48,6 +48,13 @@ export const Main: React.FC = () => {
       })();
 }, []);
 
+  // useEffect(() => {
+  //   if (!tabs) return;
+  //   for (let tab of tabs){
+
+  //   }
+  // }, [tabs])
+
   return (
     <>
       <div className='main__section0'>
