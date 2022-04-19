@@ -1,8 +1,12 @@
 import React from "react";
 import { useGlobalState } from "../../store";
+import useQuery from "../../utils/hooks/useQuery";
 
 export const Tab = ({ tab }: any) => {
+  const query = useQuery();
   const [tabs, setTabs] = useGlobalState("tabs");
+  const isSelect = tabs.find((el) => !el.has);
+  const isPopup = query.get("popup") === "tabs";
 
   const changeTab = (tab: any) => {
     const newArr = tabs.map((el: any) => {
@@ -11,12 +15,15 @@ export const Tab = ({ tab }: any) => {
       }
       return el;
     });
-    setTabs(newArr);
+    if (!isSelect || isPopup) setTabs(newArr);
   };
 
   return (
-    <div onClick={() => changeTab(tab)} className={`tab ${tab}`}>
+    <span
+      onClick={() => changeTab(tab)}
+      className={`tab ${tab} ${isSelect && !isPopup ? "disabled" : ""}`}
+    >
       {tab}
-    </div>
+    </span>
   );
 };

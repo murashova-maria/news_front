@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { BrowserRouter, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { Footer, Header } from "./components/index";
 
 import "./assets/sass/style.scss";
@@ -8,11 +8,13 @@ import { PopupHandler } from "./components/PopupHandler";
 import { ToastContainer } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
+import { useGlobalState } from "./store";
 
 const App: React.FC = () => {
   const path = useLocation().pathname;
 
-  const [isAdmin, setIsAdmin] = useState<boolean>(false);
+  const [isAdmin, setIsAdmin] = useGlobalState("isAdmin");
+  // const [isAdmin, setIsAdmin] = useState<boolean>(false);
   const [isCreate, setIsCreate] = useState<boolean>(false);
 
   const checkAdmin = () => {
@@ -20,15 +22,13 @@ const App: React.FC = () => {
     const create = path.split("/").some((el) => el === "create");
     setIsAdmin(admin);
     setIsCreate(create);
+
+    sessionStorage.setItem("isAdmin", isAdmin.toString());
   };
 
   useEffect(() => {
     checkAdmin();
   }, [path]);
-
-  useEffect(() => {
-    console.log("isAdmin", isAdmin);
-  }, [isAdmin]);
 
   return (
     <div className={isCreate ? "wrapper overflowX" : "wrapper"}>
@@ -39,7 +39,7 @@ const App: React.FC = () => {
         <div id="main" className={!isAdmin ? "main" : "main h100vh"}>
           <AppRouter />
         </div>
-        <span className="ad-block"> </span>
+        {!isAdmin && <span className="ad-block"> </span>}
       </div>
 
       {!isAdmin && <div className="main__section2">Advertisement</div>}

@@ -65,7 +65,8 @@
 
   &__content {
     padding: 0 40px;
-
+    max-height: 500px;
+    overflow: auto;
 
     &_item {
       font-family: $gilroy-r;

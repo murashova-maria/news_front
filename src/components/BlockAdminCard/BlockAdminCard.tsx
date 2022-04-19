@@ -1,12 +1,23 @@
-import React from 'react'
-import { AdminCard } from './AdminCard/AdminCard'
+import React from "react";
+import { AdminCard } from "./AdminCard/AdminCard";
+import { IPropsAdmin, Status } from "../../types";
 
-export const BlockAdminCard = ({items} : any) => {
-    return (
-        <div className='blockAdminCard'>
-            {items.map((el : any) => (
-                <AdminCard item={el} />
-            ))}
-        </div>
-    )
+interface IBlockAdminCard {
+  items: any;
+  status: string;
+  handleClick: (id: number, status: Status) => void;
 }
+
+export const BlockAdminCard = ({
+  items,
+  status,
+  handleClick,
+}: IBlockAdminCard) => {
+  return (
+    <div className="blockAdminCard">
+      {items.map((el: any) => (
+        <AdminCard item={{ ...el, status }} handleClick={handleClick} />
+      ))}
+    </div>
+  );
+};

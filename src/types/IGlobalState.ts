@@ -1,8 +1,9 @@
-import { IAdminItem, INewsItem, ITabsItem } from "./index";
+import { AdminEditNews, IAdminItem, INewsItem, ITabsItem } from "./index";
 
 export interface IGlobalState {
-  isLoggedIn: boolean
+  isAdmin: boolean;
+  isLoggedIn: boolean;
   news: Array<INewsItem>;
-  adminNews: Array<IAdminItem>;
+  adminEditNews: AdminEditNews | null;
   tabs: Array<ITabsItem>;
 }

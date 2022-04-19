@@ -4,15 +4,32 @@ import { TextArea } from "../../components/TextArea/TextArea";
 
 import dropIcon from "../../assets/img/dropIcon.png";
 import iconAuthor from "../../assets/img/iconAuthor.svg";
-import { Checkbox, TextEditor, ToolPanel } from "../../components";
-import { Tabs } from "../metainfo/Tabs/tabs";
-import { Tab } from "../../components/Tab";
-import addTab from "../../assets/img/addTab.svg";
+import { Checkbox, Dropdown } from "../../components";
+import { Base64 } from "js-base64";
 import { useNavigate } from "react-router";
 import { useGlobalState } from "../../store";
+import { useHttp } from "../../hooks/useHttp";
+import { CreatePost } from "../../types/api/admin";
+import { TabType } from "../../types/api/subdomainTacnews";
+import useQuery from "../../utils/hooks/useQuery";
+import { Box, Input } from "@mui/material";
 
 export const CreatePage: React.FC = () => {
   const history = useNavigate();
+  const [tabs, setTabs] = useGlobalState("tabs");
+  const [tab, setTab] = useState<number>(0);
+  const [adminEditNews, setAdminEditNews] = useGlobalState("adminEditNews");
+
+  const [data, setData] = useState<CreatePost>({
+    title: "",
+    text: "",
+    link: "",
+    copyright_label: "",
+    copyright_link: "",
+    by: "",
+    tab: 0,
+    media: "",
+  });
 
   const [drag, setDrag] = useState<boolean>(false);
   const [selectedFile, setSelectedFile] = useState(null);
@@ -22,7 +39,8 @@ export const CreatePage: React.FC = () => {
   const [isCheckedBreaking, setIsCheckedBreaking] = useState<boolean>(false);
   const [isCheckedMain, setIsCheckedMain] = useState<boolean>(false);
 
-  const [tabs] = useGlobalState("tabs");
+  const { request } = useHttp();
+  const query = useQuery();
 
   const dragStartHandler = (e: any) => {
     e.preventDefault();
@@ -45,13 +63,45 @@ export const CreatePage: React.FC = () => {
       setFileFormat(
         files[0].name.split(".")[files[0].name.split(".").length - 1]
       );
-      console.log(files[0]);
     } else {
       toast.error("Only PNG, JPG are supported");
     }
 
     setDrag(false);
   };
+
+  useEffect(() => {
+    (async function () {
+      const respTabs: Array<TabType> | null = await request({
+        path: "/tabs/",
+        method: "GET",
+      });
+      if (respTabs) {
+        const newTabs = respTabs.map((item) => ({
+          id: item.id,
+          tab: item.name,
+          has: true,
+        }));
+        setTabs(newTabs);
+      }
+    })();
+
+    if (query.get("edit") === "true" && adminEditNews) {
+      setData(() => ({
+        title: adminEditNews.title,
+        text: adminEditNews.text,
+        copyright_label: adminEditNews.copyright_label,
+        copyright_link: adminEditNews.copyright_link,
+        link: adminEditNews.link,
+        by: adminEditNews.by,
+        tab: adminEditNews.tab,
+        media: adminEditNews.media_link,
+      }));
+      setPreview(adminEditNews.media_link);
+    } else if (query.get("edit") === "true" && !adminEditNews) {
+      history({ pathname: "/admin" });
+    }
+  }, []);
 
   useEffect(() => {
     if (selectedFile) {
@@ -65,6 +115,41 @@ export const CreatePage: React.FC = () => {
     }
   }, [selectedFile]);
 
+  const handleClick = async () => {
+    if (data) {
+      const resp: any | null = await request({
+        path: "/save/",
+        method: "PUT",
+        body: {
+          title: data.title,
+          text: data.text,
+          copyright_label: data.copyright_label,
+          copyright_link: "",
+          by: data.by,
+          main: false,
+          breacking: isCheckedBreaking,
+          tab: tab,
+          published: false,
+          media: selectedFile ?? "",
+          secondary_main: isCheckedMain,
+        },
+      });
+
+      if (resp?.error) return toast.error(resp.error);
+
+      toast.success("Success!");
+      history({ pathname: "/admin" });
+    }
+  };
+
+  const newTabs: Array<{ value: string; name: string }> = tabs.reduce(
+    (arr: any, next) => {
+      arr.push({ value: next.id.toString(), name: next.tab });
+      return arr;
+    },
+    []
+  );
+
   return (
     <>
       <div className="circle firstcircle"></div>
@@ -73,7 +158,14 @@ export const CreatePage: React.FC = () => {
       <div className="circlebot fourthcircle"></div>
       <div className="create">
         <div className="create__right">
-          <TextArea title={true} />
+          <TextArea
+            placeholder="Title"
+            title={true}
+            value={data.title}
+            onChange={(event: any) =>
+              setData((prev) => ({ ...prev, title: event.target.value }))
+            }
+          />
           {drag ? (
             <div
               onDragStart={(e) => dragStartHandler(e)}
@@ -93,17 +185,61 @@ export const CreatePage: React.FC = () => {
             >
               {preview ? (
                 <img src={preview} alt="preview" className="preview" />
+              ) : data.media ? (
+                <img src={data.media} alt="dropIcon" />
               ) : (
                 <img src={dropIcon} alt="dropIcon" />
               )}
             </div>
           )}
           <div className="create__right_by">
-            <img src={iconAuthor} alt="iconAuthor" />
-            By
+            <a href={data.link} target="_blank" style={{ display: "flex" }}>
+              <img src={iconAuthor} alt="iconAuthor" />
+            </a>
+            <input
+              value={data.by}
+              onChange={(event) =>
+                setData((prev) => ({ ...prev, by: event.target.value }))
+              }
+              type="text"
+              placeholder="By"
+            />
           </div>
-          <ToolPanel />
-          <TextEditor />
+          <div className="create__right_by">
+            <a href={data.link} target="_blank" style={{ display: "flex" }}>
+              <img src={iconAuthor} alt="iconAuthor" />
+            </a>
+            <input
+              value={data.link}
+              onChange={(event) =>
+                setData((prev) => ({ ...prev, link: event.target.value }))
+              }
+              type="text"
+              placeholder="link"
+            />
+          </div>
+          <div className="create__right_copyright">
+            <img src={iconAuthor} alt="iconAuthor" />
+            <input
+              value={data.copyright_label}
+              onChange={(event) =>
+                setData((prev) => ({
+                  ...prev,
+                  copyright_label: event.target.value,
+                }))
+              }
+              type="text"
+              placeholder="copyright"
+            />
+          </div>
+          <TextArea
+            textarea={true}
+            value={data.text}
+            placeholder="Enter texts..."
+            onChange={(event: any) =>
+              setData((prev) => ({ ...prev, text: event.target.value }))
+            }
+          />
         </div>
 
         <div className="create__left">
@@ -126,16 +262,10 @@ export const CreatePage: React.FC = () => {
           <div className="create__left_check tabCreate">
             Tabs
             <div className="create__left_check_block">
-              {tabs.map(
-                (el: any, i: any) =>
-                  el.has && <Tab tabs={tabs} key={i} tab={el.tab} />
-              )}
-              <img
-                src={addTab}
-                alt="addTab"
-                onClick={() =>
-                  history({ pathname: "/admin/create?popup=tabs" })
-                }
+              <Dropdown
+                label="Tabs"
+                options={newTabs}
+                handleChange={(value) => setTab(Number(value))}
               />
             </div>
           </div>
@@ -146,7 +276,9 @@ export const CreatePage: React.FC = () => {
             >
               Close
             </div>
-            <div className="buttons_create">Publish</div>
+            <span onClick={handleClick} className="buttons_create">
+              Publish
+            </span>
           </div>
         </div>
       </div>

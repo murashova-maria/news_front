@@ -16,6 +16,7 @@ import {
 } from "../../constants/paths";
 import { useHttp } from "../../hooks/useHttp";
 import { BreackingType, TabType } from "../../types/api/subdomainTacnews";
+import { useGlobalState } from "../../store";
 
 type routsTabs = {
   1: string;
@@ -27,6 +28,8 @@ type routsTabs = {
 };
 
 export const Header: React.FC = () => {
+  const [isAdmin] = useGlobalState("isAdmin");
+
   const [isActive, setIsActive] = useState(false);
   const [numberNews, setNumberNews] = useState(0);
   const [breacking, setBreacking] = useState<BreackingType[]>([]);
@@ -45,22 +48,23 @@ export const Header: React.FC = () => {
   };
 
   useEffect(() => {
-    (async function () {
-      const resp: BreackingType[] | null = await request({
-        path: "/breacking/",
-        method: "GET",
-      });
-      if (resp) setBreacking(resp);
-    })();
+    if (!isAdmin) {
+      (async function () {
+        const resp: BreackingType[] | null = await request({
+          path: "/breacking/",
+          method: "GET",
+        });
+        if (resp) setBreacking(resp);
+      })();
 
-    (async function () {
-      const resp: TabType[] | null = await request({
-        path: "/tabs/",
-        method: "GET",
-      });
-      if (resp) setTabs(resp);
-    })();
-
+      (async function () {
+        const resp: TabType[] | null = await request({
+          path: "/tabs/",
+          method: "GET",
+        });
+        if (resp) setTabs(resp);
+      })();
+    }
     const intervalId = setInterval(() => {
       setNumberNews(Math.floor(Math.random() * breacking.length));
     }, 4000);
