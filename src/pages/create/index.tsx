@@ -38,6 +38,7 @@ export const CreatePage: React.FC = () => {
 
   const [isCheckedBreaking, setIsCheckedBreaking] = useState<boolean>(false);
   const [isCheckedMain, setIsCheckedMain] = useState<boolean>(false);
+  const [isCheckedSecondary, setIsCheckedSecondary] = useState<boolean>(false);
 
   const { request } = useHttp();
   const query = useQuery();
@@ -126,12 +127,12 @@ export const CreatePage: React.FC = () => {
           copyright_label: data.copyright_label,
           copyright_link: "",
           by: data.by,
-          main: false,
+          main: isCheckedMain,
           breacking: isCheckedBreaking,
           tab: tab,
-          published: false,
+          published: true,
           media: selectedFile ?? "",
-          secondary_main: isCheckedMain,
+          secondary_main: isCheckedSecondary,
         },
       });
 
@@ -244,7 +245,19 @@ export const CreatePage: React.FC = () => {
 
         <div className="create__left">
           <div className="create__left_check">
-            Main item <Checkbox setIsCheckedCreate={setIsCheckedMain} />
+            Main item{" "}
+            <Checkbox
+              disabled={isCheckedSecondary}
+              setIsCheckedCreate={setIsCheckedMain}
+            />
+          </div>
+          <br />
+          <div className="create__left_check">
+            Secondary item
+            <Checkbox
+              disabled={isCheckedMain}
+              setIsCheckedCreate={setIsCheckedSecondary}
+            />
           </div>
           <div className="create__left_check breaking">
             <div className="create__left_check_top">
