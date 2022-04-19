@@ -12,6 +12,7 @@ import {
   SPORT_ROUTE,
   TECHNOLOGY_ROUTE,
   WEATHER_ROUTE,
+  TAB_NEWS,
 } from "../../constants/paths";
 import { useHttp } from "../../hooks/useHttp";
 import { BreackingType, TabType } from "../../types/api/subdomainTacnews";
@@ -99,7 +100,7 @@ export const Header: React.FC = () => {
                   <li key={id} onClick={close} className="nav__item">
                     <NavLink
                       onClick={() => setIsActive(false)}
-                      to={RoutsTabs[id as keyof routsTabs]}
+                      to={TAB_NEWS + '?tab=' + id}
                       className="nav__link"
                     >
                       {name}

@@ -14,7 +14,7 @@ export const InfoBlock = ({ tag, items, withOutTitle }: any) => {
 
     useEffect(() => {
         switch (actualTag) {
-            case 'New':
+            case 'News':
                 setColorPlanet(redp)
                 break
             case 'Sport':

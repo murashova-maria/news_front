@@ -5,6 +5,7 @@ import { InfoBlock } from "../../components/InfoBlock/InfoBlock";
 import { useGlobalState } from "../../store";
 import { INewsItem } from "../../types";
 import { useHttp } from "../../hooks/useHttp";
+import { TabNewsType, MainType, TabType } from "../../types/api/subdomainTacnews";
 
 export const Main: React.FC = () => {
   const [items] = useGlobalState("news");
@@ -13,61 +14,67 @@ export const Main: React.FC = () => {
     items[1],
     items[2],
   ]);
+  const [main, setMain] = useState<MainType>();
+  const [secondaryMain, setSecondaryMain] = useState<MainType[]>([]);
+  const [tab, setTab] = useState(0);
+  const [tabs, setTabs] = useState<TabType[]>([]);
 
   const { request } = useHttp();
 
   const history = useNavigate();
 
   useEffect(() => {
-    const fetchData = async () => {
-      const resp = await request({
-        path: "/signin/",
-        method: "POST",
-        body: {
-          username: "News_admin ",
-          password: "UXWY4GikDkCG",
-        },
-      });
-    };
-    fetchData();
-  }, []);
+    if (tab) setTab(Number(tab));
+    (async function () {
+        const resp: MainType | null = await request({
+          path: "/main/",
+          method: "GET",
+        });
+        if (resp) setMain(resp);
+      })();
+    (async function () {
+        const resp: MainType[] | null = await request({
+          path: "/secondary_main/",
+          method: "GET",
+        });
+        if (resp) setSecondaryMain(resp);
+      })();
+    (async function () {
+        const resp: TabType[] | null = await request({
+          path: "/tabs/",
+          method: "GET",
+        });
+        if (resp) setTabs(resp);
+      })();
+}, []);
 
   return (
     <>
-      <div className="main__section0">
-        <div className="main__section0_left">
-          <div
-            onClick={() => history({ pathname: `/news?newsid=28` })}
-            className={`bigCard ${newsItems[0].tag[0]}`}
-          >
-            <div className="bigCard__img">
-              <div className={`tag ${newsItems[0].tag[0]}`}>
-                {newsItems[0].tag[0]}
-              </div>
-              <img src={newsItems[0].img} alt="newsItems" />
-              <div className="bigCard__img_title">{newsItems[0].title}</div>
-            </div>
-            <div className="bigCard__desc">
-              <div className="bigCard__desc_top">
-                <div className="bigCard__desc_top_author">
-                  {newsItems[0].author}
+      <div className='main__section0'>
+                <div className="main__section0_left">
+                    <div className={`bigCard ${main?.tab}`}>
+                        <div className="bigCard__img">
+                            <div className={`tag ${main?.tab}`}>{main?.tab}</div>
+                            <img src={main?.media_link} alt="newsItems" />
+                            <div className="bigCard__img_title">
+                                {main?.title}
+                            </div>
+                        </div>
+                        <div className="bigCard__desc">
+                            <div className="bigCard__desc_top">
+                                <div className="bigCard__desc_top_author">{main?.by}</div>
+                                <div className="bigCard__desc_top_date">{main?.date}</div>
+                            </div>
+                            <div className="bigCard__desc_bot">
+                                {main?.text}
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div className="bigCard__desc_top_date">
-                  {newsItems[0].date}
+                <div className="main__section0_right">
+                    {secondaryMain.map(el => <TopCards key={el.id} hasNewsId={false} item={el} />)}
                 </div>
-              </div>
-              <div className="bigCard__desc_bot">
-                {newsItems[0].description}
-              </div>
             </div>
-          </div>
-        </div>
-        <div className="main__section0_right">
-          {topNews.map((el) => (
-            <TopCards key={el.id} hasNewsId={false} item={el} />
-          ))}
-        </div>
-      </div>
       <div className="main__section1">
         <InfoBlock
           tag={"New"}

@@ -39,9 +39,9 @@ export const Investigations: React.FC = () => {
           </div>
         </div>
         <div className="main__section0_right">
-          {topNews.map((el) => (
+          {/* {topNews.map((el) => (
             <TopCards key={el.id} hasNewsId={false} item={el} />
-          ))}
+          ))} */}
         </div>
       </div>
       <div className="main__section1">

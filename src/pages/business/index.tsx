@@ -34,7 +34,7 @@ export const Business: React.FC = () => {
                     </div>
                 </div>
                 <div className="main__section0_right">
-                    {topNews.map(el => <TopCards key={el.id} hasNewsId={false} item={el} />)}
+                    {/* {topNews.map(el => <TopCards key={el.id} hasNewsId={false} item={el} />)} */}
                 </div>
             </div>
             <div className="main__section1">

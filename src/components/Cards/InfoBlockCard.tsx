@@ -1,6 +1,7 @@
 import React from 'react'
 import { useLocation, useNavigate } from 'react-router'
-import { IProps } from '../../types'
+// import { IProps } from '../../types'
+import { IProps } from "../../types/api/subdomainTacnews";
 
 export const InfoBlockCard: React.FC<IProps> = React.memo(({ item, hasNewsId }) => {
 
@@ -8,17 +9,17 @@ export const InfoBlockCard: React.FC<IProps> = React.memo(({ item, hasNewsId }) 
     const path = useLocation().pathname
 
     return (
-        <div onClick={() => history({pathname:`/news?newsid=28`})} className={`infoBlockCard ${item.tag}`}>
+        <div onClick={() => history({pathname:`/news?newsid=28`})} className={`infoBlockCard ${item.tab}`}>
             <div className="infoBlockCard__left">
-                <img src={item.img} alt="item" />
-                <div className={`infoBlockCard__left_tag tag ${item.tag[0]}`}>{item.tag[0]}</div>
+                <img src={item.media_link} alt="item" />
+                <div className={`infoBlockCard__left_tag tag ${item.tab}`}>{item.tab}</div>
             </div>
             <div className="infoBlockCard__right">
                 <div className="infoBlockCard__right_top">
                     {item.title}
                 </div>
                 <div className="infoBlockCard__right_bot">
-                    <div className="infoBlockCard__right_bot_author">{item.author}</div>
+                    <div className="infoBlockCard__right_bot_author">{item.by}</div>
                     <div className="infoBlockCard__right_bot_date">{item.date}</div>
                 </div>
             </div>
