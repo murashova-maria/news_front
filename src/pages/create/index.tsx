@@ -10,9 +10,25 @@ import { Tab } from "../../components/Tab";
 import addTab from "../../assets/img/addTab.svg";
 import { useNavigate } from "react-router";
 import { useGlobalState } from "../../store";
+import { useHttp } from "../../hooks/useHttp";
+import { CreatePost, IPublishedItemAPI } from "../../types/api/admin";
+import { TabType } from "../../types/api/subdomainTacnews";
+import useQuery from "../../utils/hooks/useQuery";
 
 export const CreatePage: React.FC = () => {
   const history = useNavigate();
+  const [tabs, setTabs] = useGlobalState("tabs");
+  const [adminEditNews, setAdminEditNews] = useGlobalState("adminEditNews");
+
+  const [data, setData] = useState<CreatePost>({
+    title: "",
+    text: "",
+    copyright_label: "",
+    copyright_link: "",
+    by: "",
+    tab: 0,
+    media: "",
+  });
 
   const [drag, setDrag] = useState<boolean>(false);
   const [selectedFile, setSelectedFile] = useState(null);
@@ -22,7 +38,8 @@ export const CreatePage: React.FC = () => {
   const [isCheckedBreaking, setIsCheckedBreaking] = useState<boolean>(false);
   const [isCheckedMain, setIsCheckedMain] = useState<boolean>(false);
 
-  const [tabs] = useGlobalState("tabs");
+  const { request } = useHttp();
+  const query = useQuery();
 
   const dragStartHandler = (e: any) => {
     e.preventDefault();
@@ -54,6 +71,38 @@ export const CreatePage: React.FC = () => {
   };
 
   useEffect(() => {
+    (async function () {
+      const respTabs: Array<TabType> | null = await request({
+        path: "/tabs/",
+        method: "GET",
+      });
+      if (respTabs) {
+        const newTabs = respTabs.map((item) => ({
+          id: item.id,
+          tab: item.name,
+          has: true,
+        }));
+        setTabs(newTabs);
+      }
+    })();
+
+    if (query.get("edit") === "true" && adminEditNews) {
+      setData((prev) => ({
+        title: adminEditNews.title,
+        text: adminEditNews.text,
+        copyright_label: adminEditNews.copyright_label,
+        copyright_link: adminEditNews.copyright_link,
+        by: adminEditNews.by,
+        tab: adminEditNews.tab,
+        media: adminEditNews.media_link,
+      }));
+      setPreview(adminEditNews.media_link);
+    } else if (query.get("edit") === "true" && !adminEditNews) {
+      history({ pathname: "/admin" });
+    }
+  }, []);
+
+  useEffect(() => {
     if (selectedFile) {
       const reader: any = new FileReader();
       reader.onloadend = () => {
@@ -65,6 +114,29 @@ export const CreatePage: React.FC = () => {
     }
   }, [selectedFile]);
 
+  const handleClick = async () => {
+    if (data) {
+      console.log(data);
+      const resp: any | null = await request({
+        path: "/save/",
+        method: "PUT",
+        body: {
+          title: data.title,
+          text: data.text,
+          copyright_label: "",
+          copyright_link: "",
+          by: data.by,
+          main: false,
+          breacking: isCheckedBreaking,
+          tab: tabs.find((el) => !el.has)?.id ?? 0,
+          published: false,
+          media: selectedFile ?? "",
+          secondary_main: isCheckedMain,
+        },
+      });
+    }
+  };
+
   return (
     <>
       <div className="circle firstcircle"></div>
@@ -73,7 +145,13 @@ export const CreatePage: React.FC = () => {
       <div className="circlebot fourthcircle"></div>
       <div className="create">
         <div className="create__right">
-          <TextArea title={true} />
+          <TextArea
+            title={true}
+            value={data.title}
+            onChange={(event: any) =>
+              setData((prev) => ({ ...prev, title: event.target.value }))
+            }
+          />
           {drag ? (
             <div
               onDragStart={(e) => dragStartHandler(e)}
@@ -93,6 +171,8 @@ export const CreatePage: React.FC = () => {
             >
               {preview ? (
                 <img src={preview} alt="preview" className="preview" />
+              ) : data.media ? (
+                <img src={data.media} alt="dropIcon" />
               ) : (
                 <img src={dropIcon} alt="dropIcon" />
               )}
@@ -100,10 +180,20 @@ export const CreatePage: React.FC = () => {
           )}
           <div className="create__right_by">
             <img src={iconAuthor} alt="iconAuthor" />
-            By
+            <input
+              value={data.by}
+              onChange={(event) =>
+                setData((prev) => ({ ...prev, by: event.target.value }))
+              }
+              type="text"
+              placeholder="By"
+            />
           </div>
           <ToolPanel />
-          <TextEditor />
+          <TextEditor
+            value={data.text}
+            onChange={(text: string) => setData((prev) => ({ ...prev, text }))}
+          />
         </div>
 
         <div className="create__left">
@@ -126,10 +216,7 @@ export const CreatePage: React.FC = () => {
           <div className="create__left_check tabCreate">
             Tabs
             <div className="create__left_check_block">
-              {tabs.map(
-                (el: any, i: any) =>
-                  el.has && <Tab tabs={tabs} key={i} tab={el.tab} />
-              )}
+              {tabs.map((el) => el.has && <Tab key={el.id} tab={el.tab} />)}
               <img
                 src={addTab}
                 alt="addTab"
@@ -146,7 +233,9 @@ export const CreatePage: React.FC = () => {
             >
               Close
             </div>
-            <div className="buttons_create">Publish</div>
+            <span onClick={handleClick} className="buttons_create">
+              Publish
+            </span>
           </div>
         </div>
       </div>

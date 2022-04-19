@@ -1,8 +1,18 @@
 import { BodyType, RequestType } from "../../types/IUseHttp";
 import { StatusCodes } from "http-status-codes";
+
 import merge from "lodash.merge";
 
-const API_URL = "https://tacnews.org/api";
+const isAdmin = sessionStorage.getItem("isAdmin");
+const API_URL = Boolean(isAdmin)
+  ? "https://tac.stoi.co/api"
+  : "https://tacnews.org/api";
+
+const token = sessionStorage.getItem("token");
+
+if (!isAdmin && token) {
+  sessionStorage.removeItem("token");
+}
 
 export const request: RequestType = async ({
   path,
@@ -17,6 +27,8 @@ export const request: RequestType = async ({
     "accept-language": "en-US,en;q=0.9",
     "sec-fetch-site": "same-origin",
   };
+
+  if (isAdmin) headers[`Authorization`] = `Token ${token}`;
 
   if (method === "GET") {
     // headers[`sec-fetch-dest`] = "document";
