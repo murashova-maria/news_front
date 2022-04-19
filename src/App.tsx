@@ -32,7 +32,7 @@ const App: React.FC = () => {
 
   return (
     <div className={isCreate ? "wrapper overflowX" : "wrapper"}>
-      {!isAdmin && isCreate && <Header />}
+      {!isAdmin && <Header />}
       <PopupHandler />
       <ToastContainer />
       <div className="wrapper__content">

@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { BlockAdminCard } from "../../components";
-import { IAdminItem, INewsItem, Status } from "../../types";
-import { useGlobalState } from "../../store";
-import { BreackingType, TabType } from "../../types/api/subdomainTacnews";
+import { INewsItem, Status } from "../../types";
 import { useHttp } from "../../hooks/useHttp";
 import { INewsItemAPI, IPublishedItemAPI } from "../../types/api/admin";
 
@@ -14,6 +12,7 @@ export const Admin: React.FC = () => {
 
   const history = useNavigate();
   const { request } = useHttp();
+  const token = sessionStorage.getItem("token");
 
   const getDeclined = async () => {
     const respDeclined: Array<IPublishedItemAPI> | null = await request({
@@ -77,7 +76,6 @@ export const Admin: React.FC = () => {
 
   useEffect(() => {
     (async function () {
-      const token = sessionStorage.getItem("token");
       if (!token) {
         const resp: { token: string } | null = await request({
           path: "/signin/",
@@ -89,6 +87,7 @@ export const Admin: React.FC = () => {
     })();
 
     (async function () {
+      if (!token) history({ pathname: "admin/login" });
       await getNews();
       await getDeclined();
       await getPublished();

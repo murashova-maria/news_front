@@ -12,6 +12,7 @@ export const COOKIES_ROUTE = "/cookies";
 export const NEWS_ROUTE = "/news";
 export const ADMIN_ROUTE = "/admin";
 export const CREATE_ROUTE = "/admin/create";
+export const LOGIN_ADMIN = "/admin/login";
 
 export const RoutsTabs = {
   1: NEW_ROUTE,

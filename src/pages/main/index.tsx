@@ -4,33 +4,13 @@ import { TopCards } from "../../components/Cards/TopCards";
 import { InfoBlock } from "../../components/InfoBlock/InfoBlock";
 import { useGlobalState } from "../../store";
 import { INewsItem } from "../../types";
-import { useHttp } from "../../hooks/useHttp";
 
 export const Main: React.FC = () => {
   const [items] = useGlobalState("news");
   const [newsItems, setNewsItems] = useState<Array<INewsItem>>(items);
-  const [topNews, setTopNews] = useState<Array<INewsItem>>([
-    items[1],
-    items[2],
-  ]);
-
-  const { request } = useHttp();
+  const [topNews, setTopNews] = useState<Array<INewsItem>>([items[1]]);
 
   const history = useNavigate();
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const resp = await request({
-        path: "/signin/",
-        method: "POST",
-        body: {
-          username: "News_admin ",
-          password: "UXWY4GikDkCG",
-        },
-      });
-    };
-    fetchData();
-  }, []);
 
   return (
     <>
