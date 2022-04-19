@@ -4,25 +4,26 @@ import { TextArea } from "../../components/TextArea/TextArea";
 
 import dropIcon from "../../assets/img/dropIcon.png";
 import iconAuthor from "../../assets/img/iconAuthor.svg";
-import { Checkbox, TextEditor, ToolPanel } from "../../components";
-import { Tabs } from "../metainfo/Tabs/tabs";
-import { Tab } from "../../components/Tab";
-import addTab from "../../assets/img/addTab.svg";
+import { Checkbox, Dropdown } from "../../components";
+import { Base64 } from "js-base64";
 import { useNavigate } from "react-router";
 import { useGlobalState } from "../../store";
 import { useHttp } from "../../hooks/useHttp";
-import { CreatePost, IPublishedItemAPI } from "../../types/api/admin";
+import { CreatePost } from "../../types/api/admin";
 import { TabType } from "../../types/api/subdomainTacnews";
 import useQuery from "../../utils/hooks/useQuery";
+import { Box, Input } from "@mui/material";
 
 export const CreatePage: React.FC = () => {
   const history = useNavigate();
   const [tabs, setTabs] = useGlobalState("tabs");
+  const [tab, setTab] = useState<number>(0);
   const [adminEditNews, setAdminEditNews] = useGlobalState("adminEditNews");
 
   const [data, setData] = useState<CreatePost>({
     title: "",
     text: "",
+    link: "",
     copyright_label: "",
     copyright_link: "",
     by: "",
@@ -62,7 +63,6 @@ export const CreatePage: React.FC = () => {
       setFileFormat(
         files[0].name.split(".")[files[0].name.split(".").length - 1]
       );
-      console.log(files[0]);
     } else {
       toast.error("Only PNG, JPG are supported");
     }
@@ -87,11 +87,12 @@ export const CreatePage: React.FC = () => {
     })();
 
     if (query.get("edit") === "true" && adminEditNews) {
-      setData((prev) => ({
+      setData(() => ({
         title: adminEditNews.title,
         text: adminEditNews.text,
         copyright_label: adminEditNews.copyright_label,
         copyright_link: adminEditNews.copyright_link,
+        link: adminEditNews.link,
         by: adminEditNews.by,
         tab: adminEditNews.tab,
         media: adminEditNews.media_link,
@@ -116,26 +117,38 @@ export const CreatePage: React.FC = () => {
 
   const handleClick = async () => {
     if (data) {
-      console.log(data);
       const resp: any | null = await request({
         path: "/save/",
         method: "PUT",
         body: {
           title: data.title,
           text: data.text,
-          copyright_label: "",
+          copyright_label: data.copyright_label,
           copyright_link: "",
           by: data.by,
           main: false,
           breacking: isCheckedBreaking,
-          tab: tabs.find((el) => !el.has)?.id ?? 0,
+          tab: tab,
           published: false,
           media: selectedFile ?? "",
           secondary_main: isCheckedMain,
         },
       });
+
+      if (resp?.error) return toast.error(resp.error);
+
+      toast.success("Success!");
+      history({ pathname: "/admin" });
     }
   };
+
+  const newTabs: Array<{ value: string; name: string }> = tabs.reduce(
+    (arr: any, next) => {
+      arr.push({ value: next.id.toString(), name: next.tab });
+      return arr;
+    },
+    []
+  );
 
   return (
     <>
@@ -146,6 +159,7 @@ export const CreatePage: React.FC = () => {
       <div className="create">
         <div className="create__right">
           <TextArea
+            placeholder="Title"
             title={true}
             value={data.title}
             onChange={(event: any) =>
@@ -179,7 +193,9 @@ export const CreatePage: React.FC = () => {
             </div>
           )}
           <div className="create__right_by">
-            <img src={iconAuthor} alt="iconAuthor" />
+            <a href={data.link} target="_blank" style={{ display: "flex" }}>
+              <img src={iconAuthor} alt="iconAuthor" />
+            </a>
             <input
               value={data.by}
               onChange={(event) =>
@@ -189,10 +205,40 @@ export const CreatePage: React.FC = () => {
               placeholder="By"
             />
           </div>
-          <ToolPanel />
-          <TextEditor
+          <div className="create__right_by">
+            <a href={data.link} target="_blank" style={{ display: "flex" }}>
+              <img src={iconAuthor} alt="iconAuthor" />
+            </a>
+            <input
+              value={data.link}
+              onChange={(event) =>
+                setData((prev) => ({ ...prev, link: event.target.value }))
+              }
+              type="text"
+              placeholder="link"
+            />
+          </div>
+          <div className="create__right_copyright">
+            <img src={iconAuthor} alt="iconAuthor" />
+            <input
+              value={data.copyright_label}
+              onChange={(event) =>
+                setData((prev) => ({
+                  ...prev,
+                  copyright_label: event.target.value,
+                }))
+              }
+              type="text"
+              placeholder="copyright"
+            />
+          </div>
+          <TextArea
+            textarea={true}
             value={data.text}
-            onChange={(text: string) => setData((prev) => ({ ...prev, text }))}
+            placeholder="Enter texts..."
+            onChange={(event: any) =>
+              setData((prev) => ({ ...prev, text: event.target.value }))
+            }
           />
         </div>
 
@@ -216,13 +262,10 @@ export const CreatePage: React.FC = () => {
           <div className="create__left_check tabCreate">
             Tabs
             <div className="create__left_check_block">
-              {tabs.map((el) => el.has && <Tab key={el.id} tab={el.tab} />)}
-              <img
-                src={addTab}
-                alt="addTab"
-                onClick={() =>
-                  history({ pathname: "/admin/create?popup=tabs" })
-                }
+              <Dropdown
+                label="Tabs"
+                options={newTabs}
+                handleChange={(value) => setTab(Number(value))}
               />
             </div>
           </div>

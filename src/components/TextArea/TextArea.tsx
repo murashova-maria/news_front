@@ -6,7 +6,9 @@ export const TextArea = (props: any) => {
       className={
         props.title
           ? "text-field title"
-          : `text-field ${props.breaking ? "breaking" : ""}`
+          : `text-field ${props.breaking ? "breaking" : ""} ${
+              props.textarea ? "textarea" : ""
+            }`
       }
     >
       <textarea

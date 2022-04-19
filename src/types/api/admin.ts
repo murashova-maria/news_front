@@ -10,6 +10,7 @@ export interface INewsItemAPI {
 }
 
 export interface CreatePost {
+  link: string;
   title: string;
   text: string;
   copyright_label: string;
