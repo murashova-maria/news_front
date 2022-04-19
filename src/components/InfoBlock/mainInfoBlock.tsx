@@ -7,10 +7,16 @@ import violetp from '../../assets/img/violetPlanet.png'
 import brownp from '../../assets/img/brownPlanet.png'
 import { InfoBlockCard } from '../Cards/InfoBlockCard'
 
-export const InfoBlock = ({ tag, items, withOutTitle }: any) => {
+import { useHttp } from "../../hooks/useHttp";
+import { TabNewsType, TabType } from "../../types/api/subdomainTacnews";
 
-    const [colorPlanet, setColorPlanet] = useState<string>(tag)
-    const actualTag = tag
+export const MainInfoBlock = ({tag, items, withOutTitle }: any) => {
+
+    const [colorPlanet, setColorPlanet] = useState<string>(tag.name)
+    const [tabNews, setTabNews] = useState<TabNewsType[]>([])
+    const actualTag = tag.name
+
+    const { request } = useHttp();
 
     useEffect(() => {
         switch (actualTag) {
@@ -35,16 +41,28 @@ export const InfoBlock = ({ tag, items, withOutTitle }: any) => {
         }
     }, [actualTag])
 
+    useEffect(() => {
+        (async function () {
+            const resp: TabNewsType[] | null = await request({
+              path: "/tab_news/" + tag.id + '/?limit=4',
+              method: "GET",
+            });
+            if (resp) setTabNews(resp)
+          })();
+    }, [])
+
     return (
+        tabNews.length>0 ? 
         <div className='infoBlock'>
-            {!withOutTitle && <div className="infoBlock__title">{tag}</div>}
+            {!withOutTitle && <div className="infoBlock__title">{tag.name}</div>}
             <div className="infoBlock__items">
                 <img className='colorPlanet' src={colorPlanet} alt="colorPlanet" />
-                {items.map((el: any) => <InfoBlockCard key={el.id} hasNewsId={false} item={el} />)}
+                {tabNews.map((el: any) => <InfoBlockCard key={el.id} hasNewsId={false} item={el} />)}
             </div>
             {!withOutTitle && <div className='btnNews'>
                 SHOW MORE
             </div>}
         </div>
+        : null
     )
 }

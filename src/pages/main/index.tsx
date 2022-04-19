@@ -1,19 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { TopCards } from "../../components/Cards/TopCards";
-import { InfoBlock } from "../../components/InfoBlock/InfoBlock";
-import { useGlobalState } from "../../store";
-import { INewsItem } from "../../types";
+import { MainInfoBlock } from "../../components/InfoBlock/mainInfoBlock";
 import { useHttp } from "../../hooks/useHttp";
 import { TabNewsType, MainType, TabType } from "../../types/api/subdomainTacnews";
 
 export const Main: React.FC = () => {
-  const [items] = useGlobalState("news");
-  const [newsItems, setNewsItems] = useState<Array<INewsItem>>(items);
-  const [topNews, setTopNews] = useState<Array<INewsItem>>([
-    items[1],
-    items[2],
-  ]);
   const [main, setMain] = useState<MainType>();
   const [secondaryMain, setSecondaryMain] = useState<MainType[]>([]);
   const [tab, setTab] = useState(0);
@@ -48,18 +40,21 @@ export const Main: React.FC = () => {
       })();
 }, []);
 
-  // useEffect(() => {
-  //   if (!tabs) return;
-  //   for (let tab of tabs){
 
-  //   }
-  // }, [tabs])
+  const blocs = tabs.map(el => {
+    return (
+      <MainInfoBlock
+          key={el.id}
+          tag={el}
+        />
+    )
+  })
 
   return (
     <>
       <div className='main__section0'>
                 <div className="main__section0_left">
-                    <div className={`bigCard ${main?.tab}`}>
+                    <div className={`bigCard ${main?.tab}`} onClick={() => history({pathname:`/news?newsid=28`})}>
                         <div className="bigCard__img">
                             <div className={`tag ${main?.tab}`}>{main?.tab}</div>
                             <img src={main?.media_link} alt="newsItems" />
@@ -83,44 +78,7 @@ export const Main: React.FC = () => {
                 </div>
             </div>
       <div className="main__section1">
-        <InfoBlock
-          tag={"New"}
-          items={newsItems
-            .filter((el) => el.tag[0] === "New" && !el.mainNews)
-            .slice(0, 4)}
-        />
-        <InfoBlock
-          tag={"Sport"}
-          items={newsItems
-            .filter((el) => el.tag[0] === "Sport" && !el.mainNews)
-            .slice(0, 4)}
-        />
-        <InfoBlock
-          tag={"Investigations"}
-          items={newsItems
-            .filter((el) => el.tag[0] === "Investigations" && !el.mainNews)
-            .slice(0, 4)}
-        />
-        <InfoBlock
-          tag={"Weather"}
-          items={newsItems
-            .filter((el) => el.tag[0] === "Weather" && !el.mainNews)
-            .slice(0, 4)}
-        />
-        <InfoBlock
-          tag={"Business & Economy"}
-          items={newsItems
-            .filter((el) => el.tag[0] === "Business & Economy" && !el.mainNews)
-            .slice(0, 4)}
-        />
-        <InfoBlock
-          tag={"Technology & Science"}
-          items={newsItems
-            .filter(
-              (el) => el.tag[0] === "Technology & Science" && !el.mainNews
-            )
-            .slice(0, 4)}
-        />
+        {tabs ? blocs : null}
       </div>
     </>
   );
