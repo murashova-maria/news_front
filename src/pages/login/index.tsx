@@ -25,32 +25,26 @@ export const SignIn = () => {
     const data = new FormData(event.currentTarget);
     const username = data.get("login");
     const password = data.get("password");
-
-    (async function () {
-      const resp: { token: string; non_field_errors?: [string] } | null =
-        await request({
-          path: "/signin/",
-          method: "POST",
-          body: {
-            username: "News_admin",
-            password: "UXWY4GikDkCG",
-            // username: username.toString(),
-            // password: password.toString(),
-          },
-        });
-      if (resp?.non_field_errors) toast.error(resp.non_field_errors[0]);
-      if (resp?.token) {
-        setLogin(true);
-        sessionStorage.setItem("token", resp.token);
-        sessionStorage.setItem("login", "true");
-        history({ pathname: ADMIN_ROUTE });
-      }
-    })();
-
-    console.log({
-      email: data.get("login"),
-      password: data.get("password"),
-    });
+    if (username && password) {
+      (async function () {
+        const resp: { token: string; non_field_errors?: [string] } | null =
+          await request({
+            path: "/signin/",
+            method: "POST",
+            body: {
+              username: username.toString(),
+              password: password.toString(),
+            },
+          });
+        if (resp?.non_field_errors) toast.error(resp.non_field_errors[0]);
+        if (resp?.token) {
+          setLogin(true);
+          sessionStorage.setItem("token", resp.token);
+          sessionStorage.setItem("login", "true");
+          history({ pathname: ADMIN_ROUTE });
+        }
+      })();
+    }
   };
 
   return (
