@@ -20,20 +20,22 @@ export const SignIn = () => {
   const history = useNavigate();
   const [, setLogin] = useGlobalState("isLogin");
 
+  const [fetchData, setData] = useState({
+    login: '',
+    password: ''
+  })
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    const username = data.get("login");
-    const password = data.get("password");
-    if (username && password) {
+    if (fetchData.login && fetchData.password) {
       (async function () {
         const resp: { token: string; non_field_errors?: [string] } | null =
           await request({
             path: "/signin/",
             method: "POST",
             body: {
-              username: username.toString(),
-              password: password.toString(),
+              username: fetchData.login,
+              password: fetchData.password,
             },
           });
         if (resp?.non_field_errors) toast.error(resp.non_field_errors[0]);
@@ -42,6 +44,7 @@ export const SignIn = () => {
           sessionStorage.setItem("token", resp.token);
           sessionStorage.setItem("login", "true");
           history({ pathname: ADMIN_ROUTE });
+          window.location.reload();
         }
       })();
     }
@@ -58,44 +61,34 @@ export const SignIn = () => {
           alignItems: "center",
         }}
       >
-        <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-          {/*<LockOutlinedIcon />*/}
-        </Avatar>
-        <Typography component="h1" variant="h5">
+        <h2 className='single-in__title'>
           Sign in
-        </Typography>
-        <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+        </h2>
+        <Box className='single-in__box' component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 4 }}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
-              <TextField
-                required
-                fullWidth
-                id="login"
-                label="Login"
-                name="login"
-                autoComplete="login"
-              />
+              <label className='single-in__label'>Log in</label>
+              <input
+                  value={fetchData.login}
+                  onChange={(event) => setData((prev) => ({...prev, login: event.target.value }))}
+                  placeholder='login'
+                  className='single-in__input'
+                  type="text" />
             </Grid>
             <Grid item xs={12}>
-              <TextField
-                required
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                autoComplete="new-password"
-              />
+              <label className='single-in__label'>Password</label>
+              <input
+                  value={fetchData.password}
+                  onChange={(event) => setData((prev) => ({...prev, password: event.target.value }))}
+                  placeholder='password'
+                  className='single-in__input'
+                  type="text" />
             </Grid>
           </Grid>
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            sx={{ mt: 3, mb: 2 }}
-          >
+          <button className={`single-in__submit ${!fetchData.login || !fetchData.password ? 'disabled' : ''}`}
+                  disabled={!fetchData.login || !fetchData.password} type="submit">
             Sign Up
-          </Button>
+          </button>
         </Box>
       </Box>
     </Container>
