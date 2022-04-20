@@ -44,6 +44,7 @@ export const SignIn = () => {
           sessionStorage.setItem("token", resp.token);
           sessionStorage.setItem("login", "true");
           history({ pathname: ADMIN_ROUTE });
+          window.location.reload();
         }
       })();
     }

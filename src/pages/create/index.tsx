@@ -73,6 +73,21 @@ export const CreatePage: React.FC = () => {
   };
 
   useEffect(() => {
+    (async function () {
+      const respTabs: Array<TabType> | null = await request({
+        path: "/tabs/",
+        method: "GET",
+      });
+      if (respTabs) {
+        const newTabs = respTabs.map((item) => ({
+          id: item.id,
+          tab: item.name,
+          has: true,
+        }));
+        setTabs(newTabs);
+      }
+    })();
+
     if (query.get("edit") === "true" && adminEditNews) {
       setData(() => ({
         title: adminEditNews.title,
