@@ -9,6 +9,7 @@ import { InfoBlockCard } from '../Cards/InfoBlockCard'
 
 import { useHttp } from "../../hooks/useHttp";
 import { TabNewsType, TabType } from "../../types/api/subdomainTacnews";
+import { useNavigate } from 'react-router'
 
 export const MainInfoBlock = ({tag, items, withOutTitle }: any) => {
 
@@ -17,6 +18,7 @@ export const MainInfoBlock = ({tag, items, withOutTitle }: any) => {
     const actualTag = tag.name
 
     const { request } = useHttp();
+    const history = useNavigate();
 
     useEffect(() => {
         switch (actualTag) {
@@ -59,7 +61,7 @@ export const MainInfoBlock = ({tag, items, withOutTitle }: any) => {
                 <img className='colorPlanet' src={colorPlanet} alt="colorPlanet" />
                 {tabNews.map((el: any) => <InfoBlockCard key={el.id} hasNewsId={false} item={el} />)}
             </div>
-            {!withOutTitle && <div className='btnNews'>
+            {!withOutTitle && <div className='btnNews' onClick={() => history({pathname:`/tab_news?tab=${tag.id}`})}>
                 SHOW MORE
             </div>}
         </div>

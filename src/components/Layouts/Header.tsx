@@ -4,28 +4,13 @@ import { NavLink, useNavigate } from "react-router-dom";
 import logo1 from "../../assets/img/firsticon.png";
 import logo2 from "../../assets/img/TAC.png";
 import {
-  BUSINESS_ROUTE,
-  INVESTIGATIONS_ROUTE,
   MAIN_ROUTE,
-  NEW_ROUTE,
-  RoutsTabs,
-  SPORT_ROUTE,
-  TECHNOLOGY_ROUTE,
-  WEATHER_ROUTE,
   TAB_NEWS,
 } from "../../constants/paths";
 import { useHttp } from "../../hooks/useHttp";
 import { BreackingType, TabType } from "../../types/api/subdomainTacnews";
 import { useGlobalState } from "../../store";
 
-type routsTabs = {
-  1: string;
-  2: string;
-  3: string;
-  4: string;
-  5: string;
-  6: string;
-};
 
 export const Header: React.FC = () => {
   const [isAdmin] = useGlobalState("isAdmin");
@@ -72,7 +57,6 @@ export const Header: React.FC = () => {
     return () => clearInterval(intervalId);
   }, []);
 
-  console.log("tabs", tabs);
 
   return (
     <>

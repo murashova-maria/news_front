@@ -40,4 +40,5 @@ export interface ExpandType {
   tab: string;
   by: string;
   date: string;
+  link: string;
 }

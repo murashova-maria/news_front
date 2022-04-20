@@ -1,11 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { useGlobalState } from '../../store'
-import { INewsItem } from '../../types'
-import useQuery from '../../utils/hooks/useQuery'
 import bluePlanet from '../../assets/img/bluePlanet.png'
 import iconAuthor from '../../assets/img/iconAuthor.svg'
 import iconDate from '../../assets/img/iconDate.svg'
-import { InfoBlockCard } from '../../components/Cards/InfoBlockCard'
 import { TopCards } from '../../components/Cards/TopCards'
 import { ExpandType } from "../../types/api/subdomainTacnews";
 import { useHttp } from "../../hooks/useHttp";
@@ -13,35 +9,12 @@ import { useLocation } from "react-router-dom";
 
 export const CorrectNews: React.FC = () => {
 
-    const query = useQuery()
-
-    const [items] = useGlobalState('news')
-
-    const [news, setNews] = useState<Array<INewsItem>>([])
-
-    const [randNews, setRandNews] = useState<Array<INewsItem>>([])
     const [item, setItem] = useState<ExpandType>()
     const [like, setLike] = useState<ExpandType[]>([])
 
     const { request } = useHttp();
     const location = useLocation();
 
-    useEffect(() => {
-        setNews(items.filter((el: any) => String(el.id) === query.get('newsid')))
-
-    }, [items])
-
-    useEffect(() => {
-        const newNews = items.filter((el: any) => el.tag[0] === 'New' && !el.mainNews)
-        const weatherNews = items.filter((el: any) => el.tag[0] === 'Weather' && !el.mainNews)
-        const sportNews = items.filter((el: any) => el.tag[0] === 'Sport' && !el.mainNews)
-        const technologyNews = items.filter((el: any) => el.tag[0] === 'Technology & Science' && !el.mainNews)
-        const businessNews = items.filter((el: any) => el.tag[0] === 'Business & Economy' && !el.mainNews)
-
-        const rand = Math.floor(Math.random() * newNews.length)
-
-        setRandNews([newNews[rand], weatherNews[rand], sportNews[rand], technologyNews[rand], businessNews[rand]])
-    }, [items])
 
     useEffect(() => {
         const query = new URLSearchParams(location.search);
@@ -69,7 +42,7 @@ export const CorrectNews: React.FC = () => {
             {item ? 
             <div className="correctnews__left">
                 <div className="correctnews__left_tags">
-                    <div className={`tagNews tag ${item?.tab}`}>{item?.tab}</div>)
+                    <div className={`tagNews tag ${item?.tab.replace('&', '')}`}>{item?.tab}</div>
                 </div>
                 <div className="correctnews__left_photo">
                     <div className="correctnews__left_photo_title">
@@ -81,7 +54,7 @@ export const CorrectNews: React.FC = () => {
                         <div className="correctnews__left_photo_block_info">
                             <div className="correctnews__left_photo_block_info_item">
                                 <img className='iconPhoto' src={iconAuthor} alt="iconAuthor" />
-                                {item?.by}
+                                <a href={item.link}>{item?.by}</a>
                             </div>
                             <div className="correctnews__left_photo_block_info_item">
                                 <img className='iconPhoto' src={iconDate} alt="iconAuthor" />
