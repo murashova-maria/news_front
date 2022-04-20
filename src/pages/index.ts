@@ -10,4 +10,4 @@ export { Metainfo } from "./metainfo";
 export { CorrectNews } from "./correctNews";
 export { Admin } from "./admin";
 export { CreatePage } from "./create";
-export { Login } from "./login";
+export { SignIn } from "./login";

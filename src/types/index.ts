@@ -18,7 +18,7 @@ export interface AdminEditNews {
   by: string;
   copyright_label: string;
   copyright_link: string;
-  cupturn: null;
+  cupturn: string;
   date: string;
   id: 16;
   original: Original;

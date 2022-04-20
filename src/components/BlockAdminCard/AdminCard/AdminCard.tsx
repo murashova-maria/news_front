@@ -15,7 +15,7 @@ import { useGlobalState } from "../../../store";
 export const AdminCard: React.FC<IPropsAdmin> = React.memo(
   ({ item, handleClick }) => {
     const history = useNavigate();
-    const { loading, request } = useHttp();
+    const { request } = useHttp();
     const [, setAdminEditNews] = useGlobalState("adminEditNews");
 
     const handleNewsDecline = async (id: number) => {

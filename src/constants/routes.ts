@@ -9,7 +9,7 @@ import {
   Weather,
   Admin,
   CreatePage,
-  Login,
+  SignIn,
 } from "../pages";
 import {
   MAIN_ROUTE,
@@ -89,7 +89,7 @@ export const PublicRoutes = [
   },
   {
     path: LOGIN_ADMIN,
-    Element: Login,
+    Element: SignIn,
   },
 ];
 export const PrivateRoutes = [

@@ -131,6 +131,21 @@
     position: relative;
     z-index: 1000;
 
+    &__wrapper{
+        display: flex;
+        flex-direction: column;
+
+        &__upload-button {
+            padding: 20px 0 !important;
+            background: #FFFFFF !important;
+            color: #58C7DA !important;
+            border: 2px solid #58C7DA !important;
+            box-shadow: 0px 10px 20px rgba(88, 199, 218, 0.2);
+            border-radius: 36px !important;
+        }
+    }
+
+
     &__right {
         width: 70%;
         margin-right: 20px;

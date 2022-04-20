@@ -36,7 +36,7 @@ import tech4 from "../assets/img/tech4.jpg";
 import newsMain from "../assets/img/newsTestMain.jpg";
 
 const initialState: IGlobalState = {
-  isAdmin: false,
+  isLogin: false,
   isLoggedIn: false,
   news: [
     {

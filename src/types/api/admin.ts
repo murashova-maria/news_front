@@ -18,6 +18,7 @@ export interface CreatePost {
   by: string;
   tab: number;
   media: string;
+  cupturn: string;
 }
 
 export interface IPublishedItemAPI {

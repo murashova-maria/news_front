@@ -12,18 +12,15 @@ import { useGlobalState } from "./store";
 
 const App: React.FC = () => {
   const path = useLocation().pathname;
-
-  const [isAdmin, setIsAdmin] = useGlobalState("isAdmin");
-  // const [isAdmin, setIsAdmin] = useState<boolean>(false);
+  const [isAdmin, setIsAdmin] = useState(false);
   const [isCreate, setIsCreate] = useState<boolean>(false);
 
   const checkAdmin = () => {
     const admin = path.split("/").some((el) => el === "admin");
     const create = path.split("/").some((el) => el === "create");
-    setIsAdmin(admin);
     setIsCreate(create);
-
-    sessionStorage.setItem("isAdmin", isAdmin.toString());
+    setIsAdmin(admin);
+    sessionStorage.setItem("isAdmin", admin.toString());
   };
 
   useEffect(() => {
