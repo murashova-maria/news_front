@@ -36,9 +36,9 @@ export const Admin: React.FC = () => {
     }
   };
 
-  const getNews = async () => {
+  const getNews = async (offset?: number) => {
     const respNews: Array<INewsItemAPI> | null = await request({
-      path: "/news/",
+      path: `/news${offset ? '?offset=' + offset : ''}/`,
       method: "GET",
     });
     if (respNews) {
@@ -124,6 +124,7 @@ export const Admin: React.FC = () => {
             items={newsItems}
             status="newItem"
             handleClick={(_, status) => onNewItem(status)}
+            featchItems={(offset) => getNews(offset)}
           />
         </div>
         <div className="adminNews__block">

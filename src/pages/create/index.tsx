@@ -5,7 +5,6 @@ import { TextArea } from "../../components/TextArea/TextArea";
 import dropIcon from "../../assets/img/dropIcon.png";
 import iconAuthor from "../../assets/img/iconAuthor.svg";
 import { Checkbox, Dropdown } from "../../components";
-import { Base64 } from "js-base64";
 import { useNavigate } from "react-router";
 import { useGlobalState } from "../../store";
 import { useHttp } from "../../hooks/useHttp";

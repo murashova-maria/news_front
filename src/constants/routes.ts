@@ -1,5 +1,8 @@
 // import {Main, Sport, Business, Investigations, New, Technology, Weather, Admin, CreatePage} from '../pages'
+import { ADMIN_PANEL } from '../config'
 import {Main, TabNews, Admin, CreatePage, SignIn, CorrectNews} from '../pages'
+import { Navigate, Route, Routes, useNavigate } from "react-router";
+
 import {
     MAIN_ROUTE,
     SPORT_ROUTE,
@@ -26,7 +29,7 @@ export const PublicRoutes = [
     },
     {
         path: ADMIN_ROUTE,
-        Element: Admin
+        Element: ADMIN_PANEL ? Admin : '' 
     },
     {
         path: ABOUT_ROUTE,
@@ -50,7 +53,7 @@ export const PublicRoutes = [
     },
     {
         path: LOGIN_ADMIN,
-        Element: SignIn
+        Element: ADMIN_PANEL ? SignIn : ''
     },
     {
         path: NEWS_ROUTE,

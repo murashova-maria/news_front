@@ -1,18 +1,9 @@
 import { BodyType, RequestType } from "../../types/IUseHttp";
 import { StatusCodes } from "http-status-codes";
-
 import merge from "lodash.merge";
-
-const isAdmin = sessionStorage.getItem("isAdmin");
-const API_URL = isAdmin === 'true'
-  ? "https://tac.stoi.co/api"
-  : "https://tacnews.org/api";
+import {API_URL, ADMIN_PANEL} from '../../config.js'
 
 const token = sessionStorage.getItem("token");
-
-if (!isAdmin && token) {
-  sessionStorage.removeItem("token");
-}
 
 export const request: RequestType = async ({
   path,
@@ -28,7 +19,7 @@ export const request: RequestType = async ({
     "sec-fetch-site": "same-origin",
   };
 
-  if (isAdmin) headers[`Authorization`] = `Token ${token}`;
+  if (ADMIN_PANEL) headers[`Authorization`] = `Token ${token}`;
 
   if (method === "GET") {
     // headers[`sec-fetch-dest`] = "document";
@@ -56,7 +47,7 @@ export const request: RequestType = async ({
     body: formatBody(body),
   };
 
-  const link = formatPath(path, host, query);
+  const link = formatPath(path, host as string, query);
   const options = merge(defaultOptions, userOptions);
   const response = await fetch(link, options);
 
