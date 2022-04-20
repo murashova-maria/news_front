@@ -15,6 +15,7 @@ const AppRouter: React.FC = () => {
 
   useEffect(() => {
     const admin = path.split("/").some((el) => el === "admin");
+    sessionStorage.setItem("isAdmin", admin.toString());
     setIsAdmin(admin);
   }, [path]);
 

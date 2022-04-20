@@ -20,7 +20,6 @@ const App: React.FC = () => {
     const create = path.split("/").some((el) => el === "create");
     setIsCreate(create);
     setIsAdmin(admin);
-    sessionStorage.setItem("isAdmin", admin.toString());
   };
 
   useEffect(() => {
