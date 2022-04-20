@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { TextArea } from "../../components/TextArea/TextArea";
 
@@ -12,7 +12,7 @@ import { useHttp } from "../../hooks/useHttp";
 import { CreatePost } from "../../types/api/admin";
 import { TabType } from "../../types/api/subdomainTacnews";
 import useQuery from "../../utils/hooks/useQuery";
-import { Box, Input } from "@mui/material";
+import { Button } from "@mui/material";
 
 export const CreatePage: React.FC = () => {
   const history = useNavigate();
@@ -29,6 +29,7 @@ export const CreatePage: React.FC = () => {
     by: "",
     tab: 0,
     media: "",
+    cupturn: "",
   });
 
   const [drag, setDrag] = useState<boolean>(false);
@@ -38,6 +39,7 @@ export const CreatePage: React.FC = () => {
 
   const [isCheckedBreaking, setIsCheckedBreaking] = useState<boolean>(false);
   const [isCheckedMain, setIsCheckedMain] = useState<boolean>(false);
+  const [isCheckedSecondary, setIsCheckedSecondary] = useState<boolean>(false);
 
   const { request } = useHttp();
   const query = useQuery();
@@ -52,9 +54,9 @@ export const CreatePage: React.FC = () => {
     setDrag(false);
   };
 
-  const onDropHandler = (e: any) => {
-    e.preventDefault();
-    let files = [...e.dataTransfer.files];
+  const onDropHandler = (e: any, type?: "file" | "picture") => {
+    if (type !== "file") e.preventDefault();
+    let files = type === "file" ? [e] : [...e.dataTransfer.files];
     if (
       files[0].name.split(".")[files[0].name.split(".").length - 1] === "png" ||
       files[0].name.split(".")[files[0].name.split(".").length - 1] === "jpg"
@@ -71,21 +73,6 @@ export const CreatePage: React.FC = () => {
   };
 
   useEffect(() => {
-    (async function () {
-      const respTabs: Array<TabType> | null = await request({
-        path: "/tabs/",
-        method: "GET",
-      });
-      if (respTabs) {
-        const newTabs = respTabs.map((item) => ({
-          id: item.id,
-          tab: item.name,
-          has: true,
-        }));
-        setTabs(newTabs);
-      }
-    })();
-
     if (query.get("edit") === "true" && adminEditNews) {
       setData(() => ({
         title: adminEditNews.title,
@@ -96,6 +83,7 @@ export const CreatePage: React.FC = () => {
         by: adminEditNews.by,
         tab: adminEditNews.tab,
         media: adminEditNews.media_link,
+        cupturn: adminEditNews.cupturn,
       }));
       setPreview(adminEditNews.media_link);
     } else if (query.get("edit") === "true" && !adminEditNews) {
@@ -126,12 +114,13 @@ export const CreatePage: React.FC = () => {
           copyright_label: data.copyright_label,
           copyright_link: "",
           by: data.by,
-          main: false,
+          main: isCheckedMain,
           breacking: isCheckedBreaking,
           tab: tab,
-          published: false,
+          published: true,
           media: selectedFile ?? "",
-          secondary_main: isCheckedMain,
+          secondary_main: isCheckedSecondary,
+          cupturn: data.cupturn,
         },
       });
 
@@ -150,6 +139,13 @@ export const CreatePage: React.FC = () => {
     []
   );
 
+  const handleLoadFile =
+    (type: "file" | "picture") =>
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      const file = event.target.files && event.target.files[0];
+      onDropHandler(file, type);
+    };
+
   return (
     <>
       <div className="circle firstcircle"></div>
@@ -167,7 +163,8 @@ export const CreatePage: React.FC = () => {
             }
           />
           {drag ? (
-            <div
+            <span
+              onClick={(e) => dragStartHandler(e)}
               onDragStart={(e) => dragStartHandler(e)}
               onDragLeave={(e) => dragLeaveHandler(e)}
               onDragOver={(e) => dragStartHandler(e)}
@@ -175,7 +172,7 @@ export const CreatePage: React.FC = () => {
               className="dropArea"
             >
               Drag and drop files to upload them
-            </div>
+            </span>
           ) : (
             <div
               onDragStart={(e) => dragStartHandler(e)}
@@ -188,7 +185,21 @@ export const CreatePage: React.FC = () => {
               ) : data.media ? (
                 <img src={data.media} alt="dropIcon" />
               ) : (
-                <img src={dropIcon} alt="dropIcon" />
+                <div className="create__wrapper">
+                  <img src={dropIcon} alt="dropIcon" />
+                  <Button
+                    className="create__wrapper__upload-button"
+                    component="label"
+                  >
+                    {"Select picture"}
+                    <input
+                      type="file"
+                      accept="image/jpeg"
+                      hidden
+                      onChange={handleLoadFile("file")}
+                    />
+                  </Button>
+                </div>
               )}
             </div>
           )}
@@ -234,8 +245,8 @@ export const CreatePage: React.FC = () => {
           </div>
           <TextArea
             textarea={true}
-            value={data.text}
             placeholder="Enter texts..."
+            value={data.text}
             onChange={(event: any) =>
               setData((prev) => ({ ...prev, text: event.target.value }))
             }
@@ -244,7 +255,19 @@ export const CreatePage: React.FC = () => {
 
         <div className="create__left">
           <div className="create__left_check">
-            Main item <Checkbox setIsCheckedCreate={setIsCheckedMain} />
+            Main item{" "}
+            <Checkbox
+              disabled={isCheckedSecondary}
+              setIsCheckedCreate={setIsCheckedMain}
+            />
+          </div>
+          <br />
+          <div className="create__left_check">
+            Secondary item
+            <Checkbox
+              disabled={isCheckedMain}
+              setIsCheckedCreate={setIsCheckedSecondary}
+            />
           </div>
           <div className="create__left_check breaking">
             <div className="create__left_check_top">
@@ -253,6 +276,10 @@ export const CreatePage: React.FC = () => {
             </div>
             <div className="create__left_check_bot">
               <TextArea
+                value={data.cupturn}
+                onChange={(event: any) =>
+                  setData((prev) => ({ ...prev, cupturn: event.target.value }))
+                }
                 readOnly={!isCheckedBreaking}
                 breaking={true}
                 placeholder="Enter Cupturn"

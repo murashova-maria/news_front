@@ -1,7 +1,7 @@
 import { AdminEditNews, IAdminItem, INewsItem, ITabsItem } from "./index";
 
 export interface IGlobalState {
-  isAdmin: boolean;
+  isLogin: boolean;
   isLoggedIn: boolean;
   news: Array<INewsItem>;
   adminEditNews: AdminEditNews | null;

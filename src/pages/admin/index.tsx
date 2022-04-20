@@ -4,15 +4,17 @@ import { BlockAdminCard } from "../../components";
 import { INewsItem, Status } from "../../types";
 import { useHttp } from "../../hooks/useHttp";
 import { INewsItemAPI, IPublishedItemAPI } from "../../types/api/admin";
+import { useGlobalState } from "../../store";
 
 export const Admin: React.FC = () => {
+  const token = sessionStorage.getItem("token");
+  const [isLogin, setLogin] = useGlobalState("isLogin");
   const [newsItems, setNewsItems] = useState<Array<INewsItem>>([]);
   const [declinedItems, setDeclined] = useState<Array<any>>([]);
   const [publishedItems, setPublished] = useState<Array<any>>([]);
 
   const history = useNavigate();
   const { request } = useHttp();
-  const token = sessionStorage.getItem("token");
 
   const getDeclined = async () => {
     const respDeclined: Array<IPublishedItemAPI> | null = await request({
@@ -76,23 +78,13 @@ export const Admin: React.FC = () => {
 
   useEffect(() => {
     (async function () {
-      if (!token) {
-        const resp: { token: string } | null = await request({
-          path: "/signin/",
-          method: "POST",
-          body: { username: "News_admin", password: "UXWY4GikDkCG" },
-        });
-        if (resp) sessionStorage.setItem("token", resp.token);
+      if (token || (token && isLogin)) {
+        await getNews();
+        await getDeclined();
+        await getPublished();
       }
     })();
-
-    (async function () {
-      if (!token) history({ pathname: "admin/login" });
-      await getNews();
-      await getDeclined();
-      await getPublished();
-    })();
-  }, []);
+  }, [isLogin]);
 
   const onNewItem = async (status: Status) => {
     await getNews();

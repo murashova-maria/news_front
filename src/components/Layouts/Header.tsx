@@ -28,7 +28,7 @@ type routsTabs = {
 };
 
 export const Header: React.FC = () => {
-  const [isAdmin] = useGlobalState("isAdmin");
+  const [isLogin] = useGlobalState("isLogin");
 
   const [isActive, setIsActive] = useState(false);
   const [numberNews, setNumberNews] = useState(0);
@@ -48,7 +48,7 @@ export const Header: React.FC = () => {
   };
 
   useEffect(() => {
-    if (!isAdmin) {
+    if (!isLogin) {
       (async function () {
         const resp: BreackingType[] | null = await request({
           path: "/breacking/",

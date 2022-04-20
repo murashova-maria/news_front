@@ -11,6 +11,7 @@ import {
     ADMIN_ROUTE,
     CREATE_ROUTE,
     TAB_NEWS,
+  LOGIN_ADMIN,
 } from './paths'
 import { Metainfo } from '../pages/metainfo';
 
