@@ -9,6 +9,8 @@ const API_URL = Boolean(isAdmin)
   : "https://tacnews.org/api";
 
 const token = sessionStorage.getItem("token");
+console.log('token', token)
+
 
 if (!isAdmin && token) {
   sessionStorage.removeItem("token");

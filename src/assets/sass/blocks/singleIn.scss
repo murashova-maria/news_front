@@ -1,4 +1,84 @@
-.sign-in{
-  background: #000;
+.single-in{
   margin: 0 auto;
+
+  &__title{
+    font-size: 36px;
+    line-height: 45px;
+    font-weight: bold;
+    font-style: normal;
+    color: rgb(37, 50, 56);
+  }
+
+  &__box{
+    width: 500px;
+    background: rgb(255, 255, 255);
+    border: 1px solid rgb(194, 255, 253);
+    box-sizing: border-box;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 8px 25px;
+    border-radius: 20px;
+    padding: 40px 60px;
+    display: flex;
+    -webkit-box-pack: start;
+    place-content: center flex-start;
+    -webkit-box-align: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  &__label {
+    margin-left: 20px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 17px;
+    color: rgb(69, 91, 102);
+    margin-bottom: 5px;
+  }
+
+  &__input {
+    background: rgb(255, 255, 255);
+    border: 1px solid rgb(208, 217, 222);
+    box-sizing: border-box;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 4px 15px inset;
+    border-radius: 125px;
+    padding: 19px 20px;
+    width: 100%;
+    transition: all 0.25s ease 0s;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 22px;
+    color: rgb(69, 91, 102);
+  }
+
+  &__submit {
+    display: flex;
+    margin-top: 20px;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 40px;
+    background: rgb(240, 101, 67);
+    box-shadow: rgba(240, 101, 67, 0.2) 0px 10px 20px;
+    border-radius: 36px;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 22px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: rgb(255, 255, 255);
+    box-sizing: border-box;
+    transition: all 0.25s ease 0s;
+    border: none;
+    width: 100%;
+    max-width: 454px;
+
+
+
+    &.disabled {
+      background-color: rgb(208, 217, 222);
+      box-shadow: none;
+      cursor: not-allowed;
+    }
+  }
 }
