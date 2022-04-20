@@ -19,13 +19,16 @@ export const BlockAdminCard = ({
 }: IBlockAdminCard) => {
   const [offset, setOffset] = useState<number>(5);
   const next = () => {
+    console.log('sss');
+    
     if(featchItems) featchItems(offset)
     setOffset((prev) => prev + 5)
   }
 
   return (
-    <Box className="blockAdminCard" id={status} height={100}>
+    <div className="blockAdminCard" id={status} >
       <InfiniteScroll
+          height={900}
           dataLength={items.length} //This is important field to render the next data
           next={next}
           hasMore={true}
@@ -41,6 +44,6 @@ export const BlockAdminCard = ({
         <AdminCard item={{ ...el, status }} handleClick={handleClick} />
       ))}
       </InfiniteScroll>
-    </Box>
+    </div>
   );
 };

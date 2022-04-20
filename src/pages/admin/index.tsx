@@ -38,8 +38,11 @@ export const Admin: React.FC = () => {
 
   const getNews = async (offset?: number) => {
     const respNews: Array<INewsItemAPI> | null = await request({
-      path: `/news${offset ? '?offset=' + offset : ''}/`,
+      path: `/news`,
       method: "GET",
+      query: {
+        offset: offset ?? 0
+      }
     });
     if (respNews) {
       const newItems = respNews.map((item) => ({
@@ -86,8 +89,8 @@ export const Admin: React.FC = () => {
     })();
   }, [isLogin]);
 
-  const onNewItem = async (status: Status) => {
-    await getNews();
+  const onNewItem = async (status: Status, offset?: number) => {
+    await getNews(offset);
     if (status === "decline") await getDeclined();
     if (status === "publish") await getPublished();
   };
@@ -124,7 +127,7 @@ export const Admin: React.FC = () => {
             items={newsItems}
             status="newItem"
             handleClick={(_, status) => onNewItem(status)}
-            featchItems={(offset) => getNews(offset)}
+            featchItems={(offset) => onNewItem('offset', offset)}
           />
         </div>
         <div className="adminNews__block">

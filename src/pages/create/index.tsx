@@ -40,7 +40,7 @@ export const CreatePage: React.FC = () => {
   const [isCheckedMain, setIsCheckedMain] = useState<boolean>(false);
   const [isCheckedSecondary, setIsCheckedSecondary] = useState<boolean>(false);
 
-  const { request } = useHttp();
+  const { request, error } = useHttp();
   const query = useQuery();
 
   const dragStartHandler = (e: any) => {
@@ -88,6 +88,8 @@ export const CreatePage: React.FC = () => {
     })();
 
     if (query.get("edit") === "true" && adminEditNews) {
+      console.log('adminEditNews', adminEditNews);
+      
       setData(() => ({
         title: adminEditNews.title,
         text: adminEditNews.text,
@@ -98,6 +100,7 @@ export const CreatePage: React.FC = () => {
         tab: adminEditNews.tab,
         media: adminEditNews.media_link,
         cupturn: adminEditNews.cupturn,
+        original_id: adminEditNews.original.id
       }));
       setPreview(adminEditNews.media_link);
     } else if (query.get("edit") === "true" && !adminEditNews) {
@@ -132,13 +135,15 @@ export const CreatePage: React.FC = () => {
           breacking: isCheckedBreaking,
           tab: tab,
           published: true,
-          media: selectedFile ?? "",
+          media: selectedFile ?? data.media,
           secondary_main: isCheckedSecondary,
           cupturn: data.cupturn,
         },
       });
 
-      if (resp?.error) return toast.error(resp.error);
+      console.log('error', error);
+      
+      if (resp?.error || error) return toast.error(resp.error ?? "Error!");
 
       toast.success("Success!");
       history({ pathname: "/admin" });

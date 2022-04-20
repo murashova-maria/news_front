@@ -85,7 +85,7 @@ export interface IProps {
   hasNewsId: boolean;
 }
 
-export type Status = "decline" | "publish" | "restore" | "delete";
+export type Status = "decline" | "publish" | "restore" | "delete" | "offset";
 
 export interface IPropsAdmin {
   item: IAdminItem;
