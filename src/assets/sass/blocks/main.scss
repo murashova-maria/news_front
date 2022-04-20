@@ -8,7 +8,7 @@
         flex-direction: column;
     }
     &_left {
-        max-width: 65%;
+        // max-width: 65%;
         margin-right: 15px;
 
         @media(max-width: 1000px) {
@@ -18,7 +18,7 @@
     }
 
     &_right {
-        max-width: 35%;
+        max-width: 28%;
         @media(max-width: 1000px) {
             margin-top: 20px;
             max-width: 100%;

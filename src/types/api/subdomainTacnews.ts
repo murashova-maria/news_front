@@ -31,3 +31,14 @@ export interface IProps {
   item: MainType;
   hasNewsId: boolean;
 }
+
+export interface ExpandType {
+  id: number;
+  title: string;
+  text: string;
+  media_link: string;
+  tab: string;
+  by: string;
+  date: string;
+  link: string;
+}

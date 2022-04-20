@@ -1,6 +1,5 @@
-import { CorrectNews } from './../pages/correctNews/index';
 // import {Main, Sport, Business, Investigations, New, Technology, Weather, Admin, CreatePage} from '../pages'
-import {Main, TabNews, Admin, CreatePage, SignIn} from '../pages'
+import {Main, TabNews, Admin, CreatePage, SignIn, CorrectNews} from '../pages'
 import {
     MAIN_ROUTE,
     SPORT_ROUTE,
@@ -12,6 +11,7 @@ import {
     CREATE_ROUTE,
     TAB_NEWS,
     LOGIN_ADMIN,
+    NEWS_ROUTE
 } from './paths'
 import { Metainfo } from '../pages/metainfo';
 
@@ -51,6 +51,10 @@ export const PublicRoutes = [
     {
         path: LOGIN_ADMIN,
         Element: SignIn
+    },
+    {
+        path: NEWS_ROUTE,
+        Element: CorrectNews
     },
 ]
 export const PrivateRoutes = [

@@ -24,7 +24,7 @@
         border: 1px solid #20127F;
     }
 
-    &.Technology {
+    &.ScienceTechnology {
         border: 1px solid #7A5648;
     }
 
@@ -56,6 +56,8 @@
 
             & .littleCard__img_title {
                 font-size: 14px !important;
+                white-space: nowrap;
+                overflow: hidden;
             }
         }
 
@@ -90,6 +92,8 @@
 
     &__desc {
         padding: 10px 20px 20px;
+        white-space: nowrap;
+        overflow: hidden;
 
         &.hasNewsId {
             & .littleCard__desc_bot {

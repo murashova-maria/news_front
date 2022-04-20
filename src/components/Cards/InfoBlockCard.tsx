@@ -9,7 +9,7 @@ export const InfoBlockCard: React.FC<IProps> = React.memo(({ item, hasNewsId }) 
     const path = useLocation().pathname
 
     return (
-        <div onClick={() => history({pathname:`/news?newsid=28`})} className={`infoBlockCard ${item.tab}`}>
+        <div onClick={() => history({pathname:`/news?newsid=${item.id}`})} className={`infoBlockCard ${item.tab.replace('&', '')}`}>
             <div className="infoBlockCard__left">
                 <img src={item.media_link} alt="item" />
                 <div className={`infoBlockCard__left_tag tag ${item.tab}`}>{item.tab}</div>

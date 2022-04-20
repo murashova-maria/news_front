@@ -56,9 +56,9 @@ export const TabNews: React.FC = () => {
         <>
             <div className='main__section0'>
                 <div className="main__section0_left">
-                    <div className={`bigCard ${main?.tab}`}>
+                    <div className={`bigCard ${main?.tab.replace('&', '')}`}>
                         <div className="bigCard__img">
-                            <div className={`tag ${main?.tab}`}>{main?.tab}</div>
+                            <div className={`tag ${main?.tab.replace('&', '')}`}>{main?.tab}</div>
                             <img src={main?.media_link} alt="newsItems" />
                             <div className="bigCard__img_title">
                                 {main?.title}
