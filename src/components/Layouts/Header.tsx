@@ -3,6 +3,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 
 import logo1 from "../../assets/img/firsticon.png";
 import logo2 from "../../assets/img/TAC.png";
+import logo from "../../assets/img/Logo.svg";
 import {
   MAIN_ROUTE,
   TAB_NEWS,
@@ -78,8 +79,9 @@ export const Header: React.FC = () => {
               onClick={() => history({ pathname: MAIN_ROUTE })}
               className="header__doubleLogo"
             >
-              <img className="header__logo" src={logo1} alt="logo" />
-              <img className="header__logo" src={logo2} alt="logo" />
+              <img className="header__logo" src={logo} alt="logo" />
+              {/* <img className="header__logo" src={logo1} alt="logo" />
+              <img className="header__logo" src={logo2} alt="logo" /> */}
             </div>
 
             <nav className="nav">
@@ -102,9 +104,9 @@ export const Header: React.FC = () => {
       </header>
       <div className="header__container bgcRed">
         <div className="header__row">
+        <span className="breaking__title">BREACKING</span>
           <div className="breaking">
             <div className="breaking__title-news">
-              <span className="breaking__title">BREACKING</span>
               <span className="breaking__tire">—</span>
               {breacking[numberNews]?.title}
             </div>
