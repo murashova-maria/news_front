@@ -59,9 +59,10 @@ export const CreatePage: React.FC = () => {
     if (type !== "file") e.preventDefault();
     let files = type === "file" ? [e] : [...e.dataTransfer.files];
     if (
-      files[0].name.split(".")[files[0].name.split(".").length - 1] === "png" ||
-      files[0].name.split(".")[files[0].name.split(".").length - 1] === "jpg" ||
-      files[0].name.split(".")[files[0].name.split(".").length - 1] === "jpeg"
+      // files[0].name.split(".")[files[0].name.split(".").length - 1] === "png" ||
+      // files[0].name.split(".")[files[0].name.split(".").length - 1] === "jpg" ||
+      // files[0].name.split(".")[files[0].name.split(".").length - 1] === "jpeg"
+      true
     ) {
       setSelectedFile(files[0]);
       setFileFormat(
