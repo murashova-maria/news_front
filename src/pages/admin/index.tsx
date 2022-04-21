@@ -16,10 +16,13 @@ export const Admin: React.FC = () => {
   const history = useNavigate();
   const { request } = useHttp();
 
-  const getDeclined = async () => {
+  const getDeclined = async (status?: Status, offset?: number) => {
     const respDeclined: Array<IPublishedItemAPI> | null = await request({
       path: "/declined/",
       method: "GET",
+      query: {
+        offset: offset ?? 0
+      }
     });
     if (respDeclined) {
       const declinedItems = respDeclined.map((item) => ({
@@ -32,11 +35,13 @@ export const Admin: React.FC = () => {
         date: item.date,
         mainNews: false,
       }));
-      setDeclined(declinedItems);
+      if(status === 'offset'){
+       setDeclined(prev => [...prev, ...declinedItems]);
+      } else setDeclined(declinedItems);
     }
   };
 
-  const getNews = async (offset?: number) => {
+  const getNews = async (status?: Status, offset?: number) => {
     const respNews: Array<INewsItemAPI> | null = await request({
       path: `/news`,
       method: "GET",
@@ -55,14 +60,20 @@ export const Admin: React.FC = () => {
         date: item.date,
         mainNews: false,
       }));
-      setNewsItems(newItems);
+
+      if(status === 'offset'){
+        setNewsItems(prev => [...prev, ...newItems]);
+      } else setNewsItems(newItems);
     }
   };
 
-  const getPublished = async () => {
+  const getPublished = async (status?: Status, offset?: number) => {
     const respPublished: Array<IPublishedItemAPI> | null = await request({
       path: "/published/",
       method: "GET",
+      query: {
+        offset: offset ?? 0
+      }
     });
     if (respPublished) {
       const newPublished = respPublished.map((item) => ({
@@ -75,7 +86,9 @@ export const Admin: React.FC = () => {
         date: item.date,
         mainNews: false,
       }));
-      setPublished(newPublished);
+      if(status === 'offset'){
+        setPublished(prev => [...prev, ...newPublished]);
+      } else setPublished(newPublished);
     }
   };
 
@@ -90,14 +103,19 @@ export const Admin: React.FC = () => {
   }, [isLogin]);
 
   const onNewItem = async (status: Status, offset?: number) => {
-    await getNews(offset);
+    await getNews(status, offset)
     if (status === "decline") await getDeclined();
     if (status === "publish") await getPublished();
   };
 
-  const onDeclinedNews = async (status: Status) => {
-    await getDeclined();
+  const onDeclinedNews = async (status: Status, offset?: number) => {
+    await getDeclined(status, offset);
     if (status === "restore") await getNews();
+  };
+
+  const onPublished = async (status: Status, offset?: number) => {
+    if (status === "offset")  await getPublished(status, offset);
+    if (status === "publish")  await getPublished();
   };
 
   return (
@@ -136,6 +154,7 @@ export const Admin: React.FC = () => {
             items={declinedItems}
             status="declinedNews"
             handleClick={(_, status) => onDeclinedNews(status)}
+            featchItems={(offset) => onDeclinedNews('offset', offset)}
           />
         </div>
         <div className="adminNews__block">
@@ -143,7 +162,8 @@ export const Admin: React.FC = () => {
           <BlockAdminCard
             items={publishedItems}
             status="publishedNews"
-            handleClick={(id) => getPublished()}
+            handleClick={(_, status) => onPublished(status)}
+            featchItems={(offset) => onPublished('offset', offset)}
           />
         </div>
       </div>
