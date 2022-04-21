@@ -125,7 +125,7 @@ export const CreatePage: React.FC = () => {
   const handleClick = async (editId?: number) => {
     if (data) {
       const resp: any | null = await request({
-        path: `/save/${editId ? editId: ''}/`,
+        path: `/save${editId ? '/' + editId: ''}/`,
         method: "PUT",
         body: {
           title: data.title,
