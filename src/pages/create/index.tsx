@@ -214,7 +214,7 @@ export const CreatePage: React.FC = () => {
                     {"Select picture"}
                     <input
                       type="file"
-                      accept="image/*, video/*"
+                      accept="image/*"
                       hidden
                       onChange={handleLoadFile("file")}
                     />
