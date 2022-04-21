@@ -51,12 +51,14 @@ export const Header: React.FC = () => {
         if (resp) setTabs(resp);
       })();
     }
-    const intervalId = setInterval(() => {
-      setNumberNews(Math.floor(Math.random() * breacking.length));
-    }, 4000);
+    
+  }, [isLogin]);
+    
+  const intervalId = setInterval(() => {
+    setNumberNews(Math.floor(Math.random() * breacking.length));
+  }, 4000);
 
-    return () => clearInterval(intervalId);
-  }, []);
+  // return () => clearInterval(intervalId);
 
 
   return (
