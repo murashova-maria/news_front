@@ -1,21 +1,22 @@
 import React, {useState} from "react";
 import { AdminCard } from "./AdminCard/AdminCard";
-import { IPropsAdmin, Status } from "../../types";
+import { Status } from "../../types";
 import InfiniteScroll from 'react-infinite-scroll-component';
-import { Box } from "@mui/material";
 
 interface IBlockAdminCard {
   items: any;
   status: string;
   handleClick: (id: number, status: Status) => void;
   featchItems?: (offset: number) => void
+  hasMore: boolean
 }
 
 export const BlockAdminCard = ({
   items,
   status,
   handleClick,
-  featchItems
+  featchItems,
+  hasMore
 }: IBlockAdminCard) => {
   const [offset, setOffset] = useState<number>(5);
   const next = () => {
@@ -31,7 +32,7 @@ export const BlockAdminCard = ({
           height={900}
           dataLength={items.length} //This is important field to render the next data
           next={next}
-          hasMore={true}
+          hasMore={!hasMore}
           loader={<h4>Loading...</h4>}
           scrollableTarget={status}
           endMessage={

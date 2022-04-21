@@ -4,6 +4,8 @@ import { TextArea } from "../../components/TextArea/TextArea";
 
 import dropIcon from "../../assets/img/dropIcon.png";
 import iconAuthor from "../../assets/img/iconAuthor.svg";
+import link from "../../assets/img/link.svg";
+import copyright from "../../assets/img/copyright.svg";
 import { Checkbox, Dropdown } from "../../components";
 import { useNavigate } from "react-router";
 import { useGlobalState } from "../../store";
@@ -237,7 +239,7 @@ export const CreatePage: React.FC = () => {
           </div>
           <div className="create__right_by">
             <a href={data.link} target="_blank" style={{ display: "flex" }}>
-              <img src={iconAuthor} alt="iconAuthor" />
+              <img src={link} alt="link" />
             </a>
             <input
               value={data.link}
@@ -249,7 +251,7 @@ export const CreatePage: React.FC = () => {
             />
           </div>
           <div className="create__right_copyright">
-            <img src={iconAuthor} alt="iconAuthor" />
+            <img src={copyright} alt="copyright" />
             <input
               value={data.copyright_label}
               onChange={(event) =>

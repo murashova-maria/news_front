@@ -12,6 +12,11 @@ export const Admin: React.FC = () => {
   const [newsItems, setNewsItems] = useState<Array<INewsItem>>([]);
   const [declinedItems, setDeclined] = useState<Array<any>>([]);
   const [publishedItems, setPublished] = useState<Array<any>>([]);
+  const [endData, setDataEnd] = useState({
+    newsItems: false,
+    declinedItems: false,
+    publishedItems: false
+  });
 
   const history = useNavigate();
   const { request } = useHttp();
@@ -36,6 +41,7 @@ export const Admin: React.FC = () => {
         mainNews: false,
       }));
       if(status === 'offset'){
+       if(!declinedItems.length) return setDataEnd((prev) => ({...prev, declinedItems: true}))
        setDeclined(prev => [...prev, ...declinedItems]);
       } else setDeclined(declinedItems);
     }
@@ -62,6 +68,7 @@ export const Admin: React.FC = () => {
       }));
 
       if(status === 'offset'){
+        if(!newItems.length) return setDataEnd((prev) => ({...prev, newsItems: true}))
         setNewsItems(prev => [...prev, ...newItems]);
       } else setNewsItems(newItems);
     }
@@ -87,6 +94,7 @@ export const Admin: React.FC = () => {
         mainNews: false,
       }));
       if(status === 'offset'){
+        if(!newPublished.length) return setDataEnd((prev) => ({...prev, publishedItems: true}))
         setPublished(prev => [...prev, ...newPublished]);
       } else setPublished(newPublished);
     }
@@ -146,6 +154,7 @@ export const Admin: React.FC = () => {
             status="newItem"
             handleClick={(_, status) => onNewItem(status)}
             featchItems={(offset) => onNewItem('offset', offset)}
+            hasMore={endData.newsItems}
           />
         </div>
         <div className="adminNews__block">
@@ -155,6 +164,7 @@ export const Admin: React.FC = () => {
             status="declinedNews"
             handleClick={(_, status) => onDeclinedNews(status)}
             featchItems={(offset) => onDeclinedNews('offset', offset)}
+            hasMore={endData.declinedItems}
           />
         </div>
         <div className="adminNews__block">
@@ -164,6 +174,7 @@ export const Admin: React.FC = () => {
             status="publishedNews"
             handleClick={(_, status) => onPublished(status)}
             featchItems={(offset) => onPublished('offset', offset)}
+            hasMore={endData.publishedItems}
           />
         </div>
       </div>
