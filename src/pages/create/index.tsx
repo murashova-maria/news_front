@@ -202,9 +202,36 @@ export const CreatePage: React.FC = () => {
               className="dropArea"
             >
               {preview ? (
-                <img src={preview} alt="preview" className="preview" />
+                <div className="create__wrapper__preview">
+                  <img src={preview} alt="preview" className="preview" />
+                  <Button
+                    className="create__wrapper__preview__upload-button"
+                    component="label"
+                  >
+                    {"Select picture"}
+                    <input
+                      type="file"
+                      accept="image/jpeg"
+                      hidden
+                      onChange={handleLoadFile("file")}
+                    />
+                  </Button>
+                </div>
               ) : data.media ? (
-                <img src={data.media} alt="dropIcon" />
+                <div className="create__wrapper__preview">
+                  <img src={data.media} alt="dropIcon" />
+                   <Button
+                    className="create__wrapper__preview__upload-button"
+                    component="label"
+                  >
+                    {"Select picture"}
+                    <input
+                      type="file"
+                      accept="image/jpeg"
+                      hidden
+                      onChange={handleLoadFile("file")}
+                    />
+                  </Button></div>
               ) : (
                 <div className="create__wrapper">
                   <img src={dropIcon} alt="dropIcon" />

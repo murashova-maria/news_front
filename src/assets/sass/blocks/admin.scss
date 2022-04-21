@@ -131,6 +131,7 @@
     position: relative;
     z-index: 1000;
 
+    &__wrapper__preview,
     &__wrapper{
         display: flex;
         flex-direction: column;
@@ -145,6 +146,22 @@
         }
     }
 
+    &__wrapper__preview {
+        position: relative;
+        &__upload-button {
+            opacity: 0.5;
+            top: 50% !important;
+            left: 40% !important;
+            position: absolute !important;
+            &.MuiButton-text{
+                padding: 20px 12px !important;
+            }
+
+            &:hover {
+                opacity: 1;
+            }
+        }
+    }
 
     &__right {
         width: 70%;
