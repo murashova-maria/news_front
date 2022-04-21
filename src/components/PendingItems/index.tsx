@@ -13,15 +13,16 @@ export const PendingItems: React.FC = () => {
   const { request } = useHttp();
 
   const getNews = async (status?: Status, offset?: number) => {
-    const respNews: Array<INewsItemAPI> | null = await request({
-      path: `/news`,
+    const respPending: Array<INewsItemAPI> | null = await request({
+      path: `/pending`,
       method: "GET",
       query: {
         offset: offset ?? 0
       }
     });
-    if (respNews) {
-      const newItems = respNews.map((item) => ({
+
+    if (respPending) {
+      const newItems = respPending.map((item) => ({
         id: item.id,
         img: item.media_link,
         tag: [],
@@ -54,7 +55,7 @@ export const PendingItems: React.FC = () => {
       {query.get("popup") === "pendingItems" && (
         <ModalWrapper>
           <div className="adminNews__block">
-            <div className="adminNews__block_title">New item</div>
+            <div className="adminNews__block_title">Pending Items</div>
             <BlockAdminCard
                 items={newsItems}
                 status="newItem"
