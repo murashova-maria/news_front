@@ -67,7 +67,7 @@ export const Header: React.FC = () => {
 
   useEffect(() =>{
     setViewBreacking(breacking[numberNews])
-  }, [numberNews])
+  }, [numberNews, breacking])
     
   
 
