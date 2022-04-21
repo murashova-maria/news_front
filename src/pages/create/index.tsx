@@ -60,7 +60,8 @@ export const CreatePage: React.FC = () => {
     let files = type === "file" ? [e] : [...e.dataTransfer.files];
     if (
       files[0].name.split(".")[files[0].name.split(".").length - 1] === "png" ||
-      files[0].name.split(".")[files[0].name.split(".").length - 1] === "jpg"
+      files[0].name.split(".")[files[0].name.split(".").length - 1] === "jpg" ||
+      files[0].name.split(".")[files[0].name.split(".").length - 1] === "jpeg"
     ) {
       setSelectedFile(files[0]);
       setFileFormat(
@@ -212,7 +213,7 @@ export const CreatePage: React.FC = () => {
                     {"Select picture"}
                     <input
                       type="file"
-                      accept="image/jpeg"
+                      accept="image/*, video/*"
                       hidden
                       onChange={handleLoadFile("file")}
                     />
