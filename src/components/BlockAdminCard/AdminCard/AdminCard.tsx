@@ -1,7 +1,6 @@
 import React from "react";
-
+import { toast } from "react-toastify";
 import { AdminEditNews, IPropsAdmin } from "../../../types";
-
 import decline from "../../../assets/img/decline.svg";
 import delet from "../../../assets/img/delete.svg";
 import edit from "../../../assets/img/edit.svg";
@@ -51,11 +50,13 @@ export const AdminCard: React.FC<IPropsAdmin> = React.memo(
     };
 
     const handleNewsPublish = async (id: number) => {
-      await request({
+      const resp = await request({
         path: `/news/publish/${id}/`,
         method: "POST",
         body: [],
       });
+
+      if (resp?.error) return toast.error(resp?.error);
       if (handleClick) handleClick(id, "publish");
     };
 
