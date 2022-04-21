@@ -2,7 +2,6 @@
     border-radius: 10px;
     max-width: 100%;
     margin-bottom: 20px;
-
     cursor: pointer;
     transition: all .2s ease-in-out;
 
@@ -13,6 +12,7 @@
 
     &:last-child {
         margin-bottom: 0;
+        height: 50%;
     }
 
 
@@ -38,6 +38,7 @@
 
     &.Business {
         border: 1px solid #913E98;
+        
     }
 
     &__img {
