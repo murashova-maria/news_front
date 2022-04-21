@@ -140,6 +140,12 @@ export const Admin: React.FC = () => {
           Monitoring sources
         </div>
         <div
+          onClick={() => history({ pathname: "/admin?popup=pendingItems " })}
+          className="buttons_monitoring"
+        >
+          Pending items 
+        </div>
+        <div
           onClick={() => history({ pathname: "/admin/create" })}
           className="buttons_create"
         >

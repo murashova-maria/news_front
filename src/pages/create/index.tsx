@@ -19,7 +19,7 @@ export const CreatePage: React.FC = () => {
   const history = useNavigate();
   const [tabs, setTabs] = useGlobalState("tabs");
   const [tab, setTab] = useState<number>(0);
-  const [adminEditNews, setAdminEditNews] = useGlobalState("adminEditNews");
+  const [adminEditNews] = useGlobalState("adminEditNews");
 
   const [data, setData] = useState<CreatePost>({
     title: "",

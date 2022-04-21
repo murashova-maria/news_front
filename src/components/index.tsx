@@ -6,3 +6,4 @@ export { Tab } from "./Tab/index";
 export { TextEditor } from "./TextEditor/index";
 export { ToolPanel } from "./ToolPanel/index";
 export { Dropdown } from "./Dropdown/index";
+export { PendingItems } from "./PendingItems/index";
