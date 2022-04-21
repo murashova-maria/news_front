@@ -355,7 +355,7 @@ export const CreatePage: React.FC = () => {
             <span onClick={() => handleClick()} className="buttons_create">
               Publish
             </span>
-            <span onClick={() => handleClick(adminEditNews?.original.id)} className="buttons_monitoring buttons_cancle">
+            <span onClick={() => handleClick(adminEditNews?.id)} className="buttons_monitoring buttons_cancle">
               save changes & close
             </span>
           </div>
