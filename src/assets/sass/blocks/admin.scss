@@ -257,12 +257,17 @@
         &_buttons {
             text-transform: uppercase;
             display: flex;
+            flex-wrap: wrap;
 
             font-weight: 700;
             font-size: 14px;
             font-family: $gilroy-b;
 
             margin-top: 60px;
+
+            .buttons_cancle {
+                margin-top: 20px;
+            }
         }
     }
 }

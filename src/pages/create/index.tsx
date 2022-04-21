@@ -122,20 +122,20 @@ export const CreatePage: React.FC = () => {
     }
   }, [selectedFile]);
 
-  const handleClick = async () => {
+  const handleClick = async (editId?: number) => {
     if (data) {
       const resp: any | null = await request({
-        path: "/save/",
+        path: `/save/${editId ? editId: ''}/`,
         method: "PUT",
         body: {
           title: data.title,
           text: data.text,
           copyright_label: data.copyright_label,
-          copyright_link: "",
+          copyright_link: data.copyright_link,
           by: data.by,
           main: isCheckedMain,
           breacking: isCheckedBreaking,
-          tab: tab,
+          tab: tab ? tab : data.tab,
           published: true,
           media: selectedFile ?? data.media,
           secondary_main: isCheckedSecondary,
@@ -151,6 +151,7 @@ export const CreatePage: React.FC = () => {
       history({ pathname: "/admin" });
     }
   };
+
 
   const newTabs: Array<{ value: string; name: string }> = tabs.reduce(
     (arr: any, next) => {
@@ -351,8 +352,11 @@ export const CreatePage: React.FC = () => {
             >
               Close
             </div>
-            <span onClick={handleClick} className="buttons_create">
+            <span onClick={() => handleClick()} className="buttons_create">
               Publish
+            </span>
+            <span onClick={() => handleClick(adminEditNews?.original.id)} className="buttons_monitoring buttons_cancle">
+              save changes & close
             </span>
           </div>
         </div>

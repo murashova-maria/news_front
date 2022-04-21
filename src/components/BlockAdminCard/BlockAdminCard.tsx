@@ -35,11 +35,6 @@ export const BlockAdminCard = ({
           hasMore={!hasMore}
           loader={<h4>Loading...</h4>}
           scrollableTarget={status}
-          endMessage={
-            <p style={{ textAlign: 'center' }}>
-              <b>Yay! You have seen it all</b>
-            </p>
-          }
       >
       {items.map((el: any) => (
         <AdminCard item={{ ...el, status }} handleClick={handleClick} />
