@@ -29,7 +29,7 @@ export const BlockAdminCard = ({
   return (
     <div className="blockAdminCard" id={status} >
       <InfiniteScroll
-          height={900}
+          height={600}
           dataLength={items.length} //This is important field to render the next data
           next={next}
           hasMore={!hasMore}
