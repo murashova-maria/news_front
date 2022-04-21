@@ -20,6 +20,7 @@ export const Header: React.FC = () => {
   const [numberNews, setNumberNews] = useState(0);
   const [breacking, setBreacking] = useState<BreackingType[]>([]);
   const [tabs, setTabs] = useState<TabType[]>([]);
+  const [viewBreacking, setViewBreacking] = useState<BreackingType>();
 
   const history = useNavigate();
   const { request } = useHttp();
@@ -53,12 +54,22 @@ export const Header: React.FC = () => {
     }
     
   }, [isLogin]);
-    
-  const intervalId = setInterval(() => {
-    setNumberNews(Math.floor(Math.random() * breacking.length));
-  }, 4000);
 
-  // return () => clearInterval(intervalId);
+  useEffect(()=>{
+    const intervalId = setInterval(() => {
+      let t = Math.floor(Math.random() * breacking.length)
+      setNumberNews(t);
+      console.log(t)
+    }, 10000);
+  
+    return () => clearInterval(intervalId);
+  }, [breacking])
+
+  useEffect(() =>{
+    setViewBreacking(breacking[numberNews])
+  }, [numberNews])
+    
+  
 
 
   return (
@@ -110,7 +121,8 @@ export const Header: React.FC = () => {
           <div className="breaking">
             <div className="breaking__title-news">
               <span className="breaking__tire">—</span>
-              {breacking[numberNews]?.title}
+              {/* {breacking[numberNews]?.title} */}
+              {viewBreacking?.title}
             </div>
           </div>
         </div>
