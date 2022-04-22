@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router';
 import { NavLink } from 'react-router-dom';
 import logo1 from '../../assets/img/firsticon.png';
@@ -8,16 +8,31 @@ import face from '../../assets/img/face.png'
 import telega from '../../assets/img/telega.png'
 import twitter from '../../assets/img/twitter.png'
 import utube from '../../assets/img/utube.png'
-import { ABOUT_ROUTE, BUSINESS_ROUTE, CONTACT_ROUTE, COOKIES_ROUTE, INVESTIGATIONS_ROUTE, MAIN_ROUTE, NEW_ROUTE, SPORT_ROUTE, TECHNOLOGY_ROUTE, TERMS_ROUTE, WEATHER_ROUTE } from '../../constants/paths';
+import { ABOUT_ROUTE, CONTACT_ROUTE, COOKIES_ROUTE, MAIN_ROUTE, TERMS_ROUTE, TAB_NEWS } from '../../constants/paths';
+import { TabType } from "../../types/api/subdomainTacnews";
+import { useHttp } from "../../hooks/useHttp";
 
 export const Footer: React.FC = () => {
 
-    const history = useNavigate()
     const [isActive, setIsActive] = useState(false);
+    const [tabs, setTabs] = useState<TabType[]>([]);
+
+    const history = useNavigate();
+    const { request } = useHttp();
 
     const close = () => {
         document.querySelector('body')!.classList.remove('lock');
     }
+
+    useEffect(() => {
+          (async function () {
+            const resp: TabType[] | null = await request({
+              path: "/tabs/",
+              method: "GET",
+            });
+            if (resp) setTabs(resp);
+          })();
+      }, []);
 
 
     return (
@@ -32,36 +47,13 @@ export const Footer: React.FC = () => {
                         <div className="footer__body_right_top">
                             <nav className="nav">
                                 <ul className={`nav__listf footerList ${isActive ? 'active' : null}`}>
-                                    <li onClick={close} className="nav__itemf">
-                                        <NavLink onClick={() => setIsActive(false)} to={NEW_ROUTE} className="nav__linkf">
-                                            New
-                                    </NavLink>
-                                    </li>
-                                    <li onClick={close} className="nav__itemf">
-                                        <NavLink onClick={() => setIsActive(false)} to={SPORT_ROUTE} className="nav__linkf">
-                                            Sport
-                                    </NavLink>
-                                    </li>
-                                    <li onClick={close} className="nav__itemf">
-                                        <NavLink onClick={() => setIsActive(false)} to={INVESTIGATIONS_ROUTE} className="nav__linkf">
-                                            Investigations
-                                    </NavLink>
-                                    </li>
-                                    <li onClick={close} className="nav__itemf">
-                                        <NavLink onClick={() => setIsActive(false)} to={WEATHER_ROUTE} className="nav__linkf">
-                                            Weather
-                                    </NavLink>
-                                    </li>
-                                    <li onClick={close} className="nav__itemf">
-                                        <NavLink onClick={() => setIsActive(false)} to={BUSINESS_ROUTE} className="nav__linkf">
-                                            Business & economy
-                                    </NavLink>
-                                    </li>
-                                    <li onClick={close} className="nav__itemf">
-                                        <NavLink onClick={() => setIsActive(false)} to={TECHNOLOGY_ROUTE} className="nav__linkf">
-                                            Technology & Science
-                                    </NavLink>
-                                    </li>
+                                    {tabs.map(({id, name}) => (
+                                        <li key={id} onClick={close} className="nav__itemf">
+                                            <NavLink onClick={() => setIsActive(false)} to={TAB_NEWS + '?tab=' + id} className="nav__linkf">
+                                                {name}
+                                            </NavLink>
+                                        </li>
+                                    ))}
                                 </ul>
                             </nav>
                         </div>

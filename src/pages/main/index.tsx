@@ -1,55 +1,85 @@
-import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { TopCards } from '../../components/Cards/TopCards'
-import { InfoBlock } from '../../components/InfoBlock/InfoBlock'
-import { useAppSelector } from '../../store'
-import { INewsItem } from '../../types'
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { TopCards } from "../../components/Cards/TopCards";
+import { MainInfoBlock } from "../../components/InfoBlock/mainInfoBlock";
+import { useHttp } from "../../hooks/useHttp";
+import { TabNewsType, MainType, TabType } from "../../types/api/subdomainTacnews";
 
 export const Main: React.FC = () => {
+  const [main, setMain] = useState<MainType>();
+  const [secondaryMain, setSecondaryMain] = useState<MainType[]>([]);
+  const [tab, setTab] = useState(0);
+  const [tabs, setTabs] = useState<TabType[]>([]);
 
-    const items = useAppSelector(state => state.news.news)
-    const [newsItems, setNewsItems] = useState<Array<INewsItem>>(items)
-    const [topNews, setTopNews] = useState<Array<INewsItem>>([items[1], items[2]])
+  const { request } = useHttp();
 
-    const history = useNavigate()
+  const history = useNavigate();
 
+  useEffect(() => {
+    if (tab) setTab(Number(tab));
+    (async function () {
+        const resp: MainType | null = await request({
+          path: "/main/",
+          method: "GET",
+        });
+        if (resp) setMain(resp);
+      })();
+    (async function () {
+        const resp: MainType[] | null = await request({
+          path: "/secondary_main/",
+          method: "GET",
+        });
+        if (resp) setSecondaryMain(resp);
+      })();
+    (async function () {
+        const resp: TabType[] | null = await request({
+          path: "/tabs/",
+          method: "GET",
+        });
+        if (resp) setTabs(resp);
+      })();
+}, []);
+
+
+  const blocs = tabs.map(el => {
     return (
-        <>
-            <div className='main__section0'>
+      <MainInfoBlock
+          key={el.id}
+          tag={el}
+        />
+    )
+  })
+
+  return (
+    <>
+      <div className='main__section0'>
                 <div className="main__section0_left">
-                    <div onClick={() => history({pathname:`/news?newsid=28`})} className={`bigCard ${newsItems[0].tag[0]}`}>
+                    <div className={`bigCard ${main?.tab.replace('&', '')}`} onClick={() => history({pathname:`/news?newsid=${main?.id}`})}>
                         <div className="bigCard__img">
-                            <div className={`tag ${newsItems[0].tag[0]}`}>{newsItems[0].tag[0]}</div>
-                            <img src={newsItems[0].img} alt="newsItems" />
+                            <div className={`tag ${main?.tab.replace('&', '')}`}>{main?.tab}</div>
+                            <img src={main?.media_link} alt="newsItems" />
                             <div className="bigCard__img_title">
-                                {newsItems[0].title}
+                                {main?.title}
                             </div>
                         </div>
                         <div className="bigCard__desc">
                             <div className="bigCard__desc_top">
-                                <div className="bigCard__desc_top_author">{newsItems[0].author}</div>
-                                <div className="bigCard__desc_top_date">{newsItems[0].date}</div>
+                                <div className="bigCard__desc_top_author">{main?.by}</div>
+                                <div className="bigCard__desc_top_date">{main?.date}</div>
                             </div>
                             <div className="bigCard__desc_bot">
-                                {newsItems[0].description}
+                                {main?.text}
                             </div>
                         </div>
                     </div>
                 </div>
                 <div className="main__section0_right">
-                    {topNews.map(el => <TopCards key={el.id} hasNewsId={false} item={el} />)}
+                    {secondaryMain.map(el => <TopCards key={el.id} hasNewsId={false} item={el} />)}
                 </div>
             </div>
-            <div className="main__section1">
-                <InfoBlock tag={'New'} items={newsItems.filter(el => el.tag[0] === 'New' && !el.mainNews).slice(0, 4)} />
-                <InfoBlock tag={'Sport'} items={newsItems.filter(el => el.tag[0] === 'Sport' && !el.mainNews).slice(0, 4)} />
-                <InfoBlock tag={'Investigations'} items={newsItems.filter(el => el.tag[0] === 'Investigations' && !el.mainNews).slice(0, 4)} />
-                <InfoBlock tag={'Weather'} items={newsItems.filter(el => el.tag[0] === 'Weather' && !el.mainNews).slice(0, 4)} />
-                <InfoBlock tag={'Business & Economy'} items={newsItems.filter(el => el.tag[0] === 'Business & Economy' && !el.mainNews).slice(0, 4)} />
-                <InfoBlock tag={'Technology & Science'} items={newsItems.filter(el => el.tag[0] === 'Technology & Science' && !el.mainNews).slice(0, 4)} />
-            </div>
-            
-        </>
-    )
-}
-
+      <div className="main__section1">
+        {tabs ? blocs : null}
+      </div>
+    </>
+  );
+};

@@ -13,6 +13,8 @@
 @import './blocks/metainfo.scss';
 @import './blocks/admin.scss';
 @import './blocks/modal.scss';
+@import './blocks/wrapperСontent.scss';
+@import './blocks/singleIn.scss';
 
 .tag {
     &.Investigations {
@@ -23,7 +25,7 @@
         color: #20127F;
     }
 
-    &.Technology {
+    &.ScienceTechnology {
         color: #7A5648;
     }
 
@@ -74,9 +76,9 @@
     width: 49%;
     margin-right: 20px;
 
+    &.textarea,
     &.title {
         width: 100%;
-
         font-family: $smooch;
 
 
@@ -91,6 +93,12 @@
             box-sizing: border-box;
             box-shadow: inset 0px 8px 25px rgba(0, 0, 0, 0.05);
             border-radius: 20px;
+        }
+    }
+
+    &.textarea {
+        & textarea {
+            font-size: 16px;
         }
     }
 
@@ -111,7 +119,7 @@
         & textarea {
             height: 62px;
             width: 100% !important;
-            color: #EEEEEE;
+            color: #716161;
             font-weight: 400;
             font-size: 18px;
             font-family: $open;
@@ -567,6 +575,7 @@
 }
 
 .dropArea {
+    overflow: hidden;
     margin-top: 20px;
     width: 100%;
     height: 484px;
@@ -611,6 +620,7 @@ input[type="checkbox"] {
 }
 
 .tab {
+    color: black;
     background: #FFFFFF;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
     border-radius: 5px;
@@ -637,7 +647,7 @@ input[type="checkbox"] {
         color: #20127F;
     }
 
-    &.Technology {
+    &.ScienceTechnology {
         color: #7A5648;
     }
 
@@ -651,6 +661,11 @@ input[type="checkbox"] {
 
     &.Business {
         color: #913E98;
+    }
+
+    &.disabled {
+        color: #FFFFFF;
+        background: #e6e6e6;
     }
 }
 

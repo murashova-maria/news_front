@@ -1,5 +1,5 @@
 .infoBlockCard {
-    min-width: 640px;
+    min-width: 100%;
     border-radius: 10px;
     display: flex;
     margin-bottom: 20px;
@@ -23,15 +23,15 @@
         border-color: #20127F;
     }
 
-    &.Technology {
+    &.ScienceTechnology {
         border-color: #7A5648;
     }
 
-    &.New {
+    &.News {
         border-color: #DA191C;
     }
 
-    &.Weather {
+    &.Economy {
         border-color: #F57C1F;
     }
 

@@ -1,50 +1,43 @@
-import React, { useEffect, useState } from 'react';
-import { BrowserRouter, useLocation } from 'react-router-dom'
-import { Footer, Header } from './components/index'
+import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
+import { Footer, Header } from "./components/index";
 
-import './assets/sass/style.scss';
-import AppRouter from './AppRouter';
-import { PopupHandler } from './components/PopupHandler';
-import { ToastContainer } from 'react-toastify';
-
-import 'react-toastify/dist/ReactToastify.css';
+import "./assets/sass/style.scss";
+import AppRouter from "./AppRouter";
+import { PopupHandler } from "./components/PopupHandler";
+import { ToastContainer } from "react-toastify";
+import { ADMIN_PANEL } from './config'
+import "react-toastify/dist/ReactToastify.css";
 
 const App: React.FC = () => {
-
-  const path = useLocation().pathname
-
-  const [isAdmin, setIsAdmin] = useState<boolean>(false)
-  const [isCreate, setIsCreate] = useState<boolean>(false)
+  const path = useLocation().pathname;
+  const [isCreate, setIsCreate] = useState<boolean>(false);
 
   const checkAdmin = () => {
-    const admin = path.split('/').some(el => el === 'admin')
-    const create = path.split('/').some(el => el === 'create')
-    setIsAdmin(admin)
-    setIsCreate(create)
-  }
+    const create = path.split("/").some((el) => el === "create");
+    setIsCreate(create);
+  };
 
   useEffect(() => {
-    checkAdmin()
-  }, [path])
-
-  useEffect(() => {
-    console.log('isAdmin', isAdmin);
-  }, [isAdmin])
+    checkAdmin();
+  }, [path]);
 
   return (
     <div className={isCreate ? "wrapper overflowX" : "wrapper"}>
-      {!isAdmin && <Header />}
+      {!ADMIN_PANEL && <Header />}
       <PopupHandler />
       <ToastContainer />
-      <div id='main' className={!isAdmin ? "main" : "main h100vh"}>
-        <AppRouter />
+      <div className="wrapper__content">
+        <div id="main" className={!ADMIN_PANEL ? "main" : "main h100vh"}>
+          <AppRouter />
+        </div>
+        {!ADMIN_PANEL && <span className="ad-block"> </span>}
       </div>
-      {!isAdmin && <div className='main__section2'>
-        Advertisement
-            </div>}
-      {!isAdmin && <Footer />}
+
+      {!ADMIN_PANEL && <div className="main__section2">Advertisement</div>}
+      {!ADMIN_PANEL && <Footer />}
     </div>
   );
-}
+};
 
 export default App;

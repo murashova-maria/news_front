@@ -1,26 +1,29 @@
-import React from 'react'
-import { useAppDispatch, useAppSelector } from '../../store'
-import { setTabs } from '../../store/dataAdminReducer'
+import React from "react";
+import { useGlobalState } from "../../store";
+import useQuery from "../../utils/hooks/useQuery";
 
-export const Tab = ({tab} : any) => {
+export const Tab = ({ tab }: any) => {
+  const query = useQuery();
+  const [tabs, setTabs] = useGlobalState("tabs");
+  const isSelect = tabs.find((el) => !el.has);
+  const isPopup = query.get("popup") === "tabs";
 
-    const dispatch = useAppDispatch()
-    const tabs = useAppSelector(state => state.dataADmin.tabs)
+  const changeTab = (tab: any) => {
+    const newArr = tabs.map((el: any) => {
+      if (el.tab === tab) {
+        el = { ...el, has: !el.has };
+      }
+      return el;
+    });
+    if (!isSelect || isPopup) setTabs(newArr);
+  };
 
-const changeTab = (tab:any) => {
-    
-    const newArr = tabs.map((el:any) => {
-        if (el.tab === tab) {
-            el = { ...el, has: !el.has}
-        }
-        return el
-    })
-    dispatch(setTabs(newArr))
-}
-
-    return (
-        <div onClick={() => changeTab(tab)} className={`tab ${tab}`}>
-            {tab}
-        </div>
-    )
-}
+  return (
+    <span
+      onClick={() => changeTab(tab)}
+      className={`tab ${tab} ${isSelect && !isPopup ? "disabled" : ""}`}
+    >
+      {tab}
+    </span>
+  );
+};

@@ -6,7 +6,6 @@ import orangep from '../../assets/img/orangePlanet.png'
 import violetp from '../../assets/img/violetPlanet.png'
 import brownp from '../../assets/img/brownPlanet.png'
 import { InfoBlockCard } from '../Cards/InfoBlockCard'
-import { useAppSelector } from '../../store'
 
 export const InfoBlock = ({ tag, items, withOutTitle }: any) => {
 
@@ -15,7 +14,7 @@ export const InfoBlock = ({ tag, items, withOutTitle }: any) => {
 
     useEffect(() => {
         switch (actualTag) {
-            case 'New':
+            case 'News':
                 setColorPlanet(redp)
                 break
             case 'Sport':
@@ -24,13 +23,13 @@ export const InfoBlock = ({ tag, items, withOutTitle }: any) => {
             case 'Investigations':
                 setColorPlanet(greenp)
                 break
-            case 'Weather':
+            case 'Business':
                 setColorPlanet(orangep)
                 break
-            case 'Business & Economy':
+            case 'Economy':
                 setColorPlanet(violetp)
                 break
-            case 'Technology & Science':
+            case 'Science&Technology':
                 setColorPlanet(brownp)
                 break
         }

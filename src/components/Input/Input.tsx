@@ -1,11 +1,14 @@
-import React, { useState } from 'react'
+import React from "react";
 
-export const Input = (props : any) => {
-
-
-    return (
-        <div className="text-field">
-            <input className="text-field__input" placeholder={props.placeholder} value={props.value}/>
-        </div>
-    )
-}
+export const Input = (props: any) => {
+  return (
+    <div className="text-field">
+      <input
+        className="text-field__input"
+        placeholder={props.placeholder}
+        value={props.value}
+        {...props}
+      />
+    </div>
+  );
+};
