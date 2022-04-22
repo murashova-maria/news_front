@@ -17,7 +17,6 @@ export const Header: React.FC = () => {
   const [isLogin] = useGlobalState("isLogin");
 
   const [isActive, setIsActive] = useState(false);
-  const [numberNews, setNumberNews] = useState(0);
   const [breacking, setBreacking] = useState<BreackingType[]>([]);
   const [tabs, setTabs] = useState<TabType[]>([]);
 
@@ -53,25 +52,6 @@ export const Header: React.FC = () => {
     }
     
   }, [isLogin]);
-
-  let index = 0
-  const generateIndex = () => {
-    if (index + 1 < breacking.length) {
-      index += 1
-      setNumberNews(index)
-    } else {
-      index = 0
-      setNumberNews(1)
-    }
-  }
-
-  useEffect(() => {
-    if ( breacking.length) {
-      const interval = setInterval(() =>
-          generateIndex(),8000);
-      return () => clearInterval(interval);
-    }
-  }, [breacking])
 
   return (
     <>
@@ -121,8 +101,10 @@ export const Header: React.FC = () => {
         <span className="breaking__title">BREACKING</span>
           <div className="breaking">
             <div className="breaking__title-news">
-              <span className="breaking__tire">—</span>
-              {breacking[numberNews]?.title}
+              {breacking.map((item) => <span className='breaking__title-news__text'>
+                <span className="breaking__tire">—</span>
+                {item.title}
+              </span> )}
             </div>
           </div>
         </div>
