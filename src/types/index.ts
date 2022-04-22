@@ -66,7 +66,7 @@ export interface IAdminItem {
   description: string;
   author: string;
   date: string;
-  status: "newItem" | "declinedNews" | "publishedNews";
+  status: "newItem" | "declinedNews" | "publishedNews" | 'pending';
 }
 export interface ITabsItem {
   id: number;

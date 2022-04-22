@@ -49,7 +49,7 @@ export const Admin: React.FC = () => {
 
   const getNews = async (status?: Status, offset?: number) => {
     const respNews: Array<INewsItemAPI> | null = await request({
-      path: `/news`,
+      path: `/news/`,
       method: "GET",
       query: {
         offset: offset ?? 0

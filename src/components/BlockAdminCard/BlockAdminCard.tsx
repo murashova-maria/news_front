@@ -20,8 +20,6 @@ export const BlockAdminCard = ({
 }: IBlockAdminCard) => {
   const [offset, setOffset] = useState<number>(5);
   const next = () => {
-    console.log('sss');
-    
     if(featchItems) featchItems(offset)
     setOffset((prev) => prev + 5)
   }

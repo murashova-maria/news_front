@@ -14,7 +14,7 @@ export const PendingItems: React.FC = () => {
 
   const getNews = async (status?: Status, offset?: number) => {
     const respPending: Array<INewsItemAPI> | null = await request({
-      path: `/pending`,
+      path: `/pending/`,
       method: "GET",
       query: {
         offset: offset ?? 0
@@ -58,7 +58,7 @@ export const PendingItems: React.FC = () => {
             <div className="adminNews__block_title">Pending Items</div>
             <BlockAdminCard
                 items={newsItems}
-                status="newItem"
+                status="pending"
                 handleClick={(_, status) => onNewItem(status)}
                 featchItems={(offset) => onNewItem('offset', offset)}
                 hasMore={endData}

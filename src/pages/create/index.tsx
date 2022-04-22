@@ -124,7 +124,7 @@ export const CreatePage: React.FC = () => {
     }
   }, [selectedFile]);
 
-  const handleClick = async (editId?: number) => {
+  const handleClick = async (editId?: number, published = false) => {
     if (data) {
       const resp: any | null = await request({
         path: `/save${editId ? '/' + editId: ''}/`,
@@ -138,15 +138,12 @@ export const CreatePage: React.FC = () => {
           main: isCheckedMain,
           breacking: isCheckedBreaking,
           tab: tab ? tab : data.tab,
-          published: true,
           media: selectedFile ?? data.media,
           secondary_main: isCheckedSecondary,
           cupturn: data.cupturn,
+          published: published
         },
       });
-
-      console.log('error', error);
-      
       if (resp?.error || error) return toast.error(resp.error ?? "Error!");
 
       toast.success("Success!");
@@ -354,7 +351,7 @@ export const CreatePage: React.FC = () => {
             >
               Close
             </div>
-            <span onClick={() => handleClick()} className="buttons_create">
+            <span onClick={() => handleClick(adminEditNews?.id, true)} className="buttons_create">
               Publish
             </span>
             <span onClick={() => handleClick(adminEditNews?.id)} className="buttons_monitoring buttons_cancle">
