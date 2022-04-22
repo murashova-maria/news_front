@@ -53,13 +53,25 @@ export const Header: React.FC = () => {
     }
     
   }, [isLogin]);
-    
-  const intervalId = setInterval(() => {
-    setNumberNews(Math.floor(Math.random() * breacking.length));
-  }, 4000);
 
-  // return () => clearInterval(intervalId);
+  let index = 0
+  const generateIndex = () => {
+    if (index + 1 < breacking.length) {
+      index += 1
+      setNumberNews(index)
+    } else {
+      index = 0
+      setNumberNews(1)
+    }
+  }
 
+  useEffect(() => {
+    if ( breacking.length) {
+      const interval = setInterval(() =>
+          generateIndex(),8000);
+      return () => clearInterval(interval);
+    }
+  }, [breacking])
 
   return (
     <>
