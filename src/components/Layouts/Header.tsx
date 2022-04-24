@@ -4,14 +4,11 @@ import { NavLink, useNavigate } from "react-router-dom";
 import logo1 from "../../assets/img/firsticon.png";
 import logo2 from "../../assets/img/TAC.png";
 import logo from "../../assets/img/Logo.svg";
-import {
-  MAIN_ROUTE,
-  TAB_NEWS,
-} from "../../constants/paths";
+import { MAIN_ROUTE, TAB_NEWS } from "../../constants/paths";
 import { useHttp } from "../../hooks/useHttp";
 import { BreackingType, TabType } from "../../types/api/subdomainTacnews";
 import { useGlobalState } from "../../store";
-
+import { Link } from "react-router-dom";
 
 export const Header: React.FC = () => {
   const [isLogin] = useGlobalState("isLogin");
@@ -50,7 +47,6 @@ export const Header: React.FC = () => {
         if (resp) setTabs(resp);
       })();
     }
-    
   }, [isLogin]);
 
   return (
@@ -84,7 +80,7 @@ export const Header: React.FC = () => {
                   <li key={id} onClick={close} className="nav__item">
                     <NavLink
                       onClick={() => setIsActive(false)}
-                      to={TAB_NEWS + '?tab=' + id}
+                      to={TAB_NEWS + "?tab=" + id}
                       className="nav__link"
                     >
                       {name}
@@ -98,13 +94,19 @@ export const Header: React.FC = () => {
       </header>
       <div className="header__container bgcRed">
         <div className="header__row">
-        <span className="breaking__title">BREACKING</span>
+          <span className="breaking__title">BREACKING</span>
           <div className="breaking">
             <div className="breaking__title-news">
-              {breacking.map((item) => <span className='breaking__title-news__text'>
-                <span className="breaking__tire">—</span>
-                {item.title}
-              </span> )}
+              {breacking.map(({ id, title }) => (
+                <Link
+                  key={id}
+                  to={`news?newsid=${id}`}
+                  className="breaking__title-news__text"
+                >
+                  <span className="breaking__tire">—</span>
+                  {title}
+                </Link>
+              ))}
             </div>
           </div>
         </div>
