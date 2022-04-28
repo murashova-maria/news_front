@@ -50,7 +50,7 @@ export const Header: React.FC = () => {
   }, [isLogin]);
 
   return (
-    <>
+    <div className="header__wrapper">
       <header className="header">
         <div className="header__container">
           <div className="header__row">
@@ -94,24 +94,24 @@ export const Header: React.FC = () => {
       </header>
       <div className="header__container bgcRed">
         <div className="header__row">
-          <span className="breaking__title">BREACKING</span>
+          <span className="breaking__title">BREAKING</span>
           <div className="breaking">
             <div className="breaking__title-news">
-              {breacking.map(({ id, title }) => (
+              {breacking.map(({ id, cupturn }) => (
                 <Link
                   key={id}
                   to={`news?newsid=${id}`}
                   className="breaking__title-news__text"
                 >
                   <span className="breaking__tire">—</span>
-                  {title}
+                  {cupturn}
                 </Link>
               ))}
             </div>
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
