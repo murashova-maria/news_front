@@ -108,7 +108,8 @@ body {
 
   .wrapper {
     overflow: hidden;
-    margin-top: 104px;
+    margin-top: 111px;
+
 
     &.overflowX {
       overflow-y: auto;
@@ -129,8 +130,10 @@ body {
   .main {
     width: 100%;
     color: black;
-    transform: translateY(40px);
+    //transform: translateY(40px);
     padding: 0 70px;
+    margin-top: 40px;
+
     &.h100vh {
       height: 100vh;
     }

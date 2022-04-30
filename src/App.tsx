@@ -30,7 +30,7 @@ const App: React.FC = () => {
         <div id="main" className={!ADMIN_PANEL ? "main" : "main h100vh"}>
           <AppRouter />
         </div>
-        {!ADMIN_PANEL && <span className="ad-block"> </span>}
+        {!ADMIN_PANEL && <span className="ad-block"/>}
       </div>
 
       {!ADMIN_PANEL && <div className="main__section2">Advertisement</div>}
