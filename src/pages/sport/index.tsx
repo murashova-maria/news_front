@@ -6,6 +6,7 @@ import { useGlobalState } from '../../store'
 import { INewsItem } from '../../types'
 import { useHttp } from "../../hooks/useHttp";
 import { TabNewsType, MainType, TabType } from "../../types/api/subdomainTacnews";
+import {Image} from "../../components/shared/Image/Image";
 
 
 export const Sport: React.FC = () => {
@@ -63,7 +64,7 @@ export const Sport: React.FC = () => {
                     <div className={`bigCard ${main?.tab}`}>
                         <div className="bigCard__img">
                             <div className={`tag ${main?.tab}`}>{main?.tab}</div>
-                            <img src={main?.media_link} alt="newsItems" />
+                            <Image src={main?.media_link} alt="newsItems" />
                             <div className="bigCard__img_title">
                                 {main?.title}
                             </div>

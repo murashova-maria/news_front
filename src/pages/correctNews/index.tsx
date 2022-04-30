@@ -6,6 +6,8 @@ import { TopCards } from '../../components/Cards/TopCards'
 import { ExpandType } from "../../types/api/subdomainTacnews";
 import { useHttp } from "../../hooks/useHttp";
 import { useLocation } from "react-router-dom";
+import {Image} from "../../components/shared/Image/Image";
+
 
 export const CorrectNews: React.FC = () => {
 
@@ -50,7 +52,7 @@ export const CorrectNews: React.FC = () => {
                     </div>
                     <div className="correctnews__left_photo_block">
                         <img className='planetNews' src={bluePlanet} alt="bluePlanet" />
-                        <img className='blockNews' src={item?.media_link} alt="news" />
+                        <Image className='blockNews' src={item?.media_link} alt="news" />
                         <div className="correctnews__left_photo_block_info">
                             <div className="correctnews__left_photo_block_info_item">
                                 <img className='iconPhoto' src={iconAuthor} alt="iconAuthor" />

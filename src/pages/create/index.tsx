@@ -14,6 +14,7 @@ import { CreatePost } from "../../types/api/admin";
 import { TabType } from "../../types/api/subdomainTacnews";
 import useQuery from "../../utils/hooks/useQuery";
 import { Button } from "@mui/material";
+import {Image} from "../../components/shared/Image/Image";
 
 export const CreatePage: React.FC = () => {
   const history = useNavigate();
@@ -203,7 +204,7 @@ export const CreatePage: React.FC = () => {
             >
               {preview ? (
                 <div className="create__wrapper__preview">
-                  <img src={preview} alt="preview" className="preview" />
+                  <Image src={preview} alt="preview" className="preview" />
                   <Button
                     className="create__wrapper__preview__upload-button"
                     component="label"
@@ -219,7 +220,7 @@ export const CreatePage: React.FC = () => {
                 </div>
               ) : data.media ? (
                 <div className="create__wrapper__preview">
-                  <img src={data.media} alt="dropIcon" />
+                  <Image src={data.media} alt="dropIcon" />
                    <Button
                     className="create__wrapper__preview__upload-button"
                     component="label"
@@ -252,7 +253,7 @@ export const CreatePage: React.FC = () => {
             </div>
           )}
           <div className="create__right_by">
-            <a href={data.link} target="_blank" style={{ display: "flex" }}>
+            <a href={data.link} target="_blank" style={{ display: "flex" }} rel="noreferrer">
               <img src={iconAuthor} alt="iconAuthor" />
             </a>
             <input
@@ -265,7 +266,7 @@ export const CreatePage: React.FC = () => {
             />
           </div>
           <div className="create__right_by">
-            <a href={data.link} target="_blank" style={{ display: "flex" }}>
+            <a href={data.link} target="_blank" style={{ display: "flex" }} rel="noreferrer">
               <img src={link} alt="link" />
             </a>
             <input

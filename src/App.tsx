@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { Footer, Header } from "./components/index";
-
+import { Footer, Header } from "./components";
 import "./assets/sass/style.scss";
 import AppRouter from "./AppRouter";
 import { PopupHandler } from "./components/PopupHandler";

@@ -108,12 +108,16 @@
     }
 }
 
+.breakingContainer {
+    color: #fff;
+    @include adap-font(24, 21);
+}
+
 .breaking {
     width: 100%;
     overflow: hidden;
     white-space: nowrap;
 
-    @include adap-font(24, 21);
     padding: 0px clamp(65px, 1vw, 50px) 0px 0px;
     font-style: normal;
 
@@ -165,13 +169,13 @@
     }
 
     &__title {
-        margin-top: 6px;
         margin-left: 140px;
         font-weight: 700;
 
+
+        @include adap-font(24, 21);
         &-news {
             display: inline-flex;
-            padding-left: 100%;
             -webkit-animation: scroll 30s infinite linear;
             -moz-animation: scroll 30s infinite linear;
             animation: scroll 35s infinite linear;
@@ -181,6 +185,6 @@
 
     &__tire {
         font-size: 30px;
-        margin: 0 20px;
+        margin: 0 15px;
     }
 }

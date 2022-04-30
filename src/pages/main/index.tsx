@@ -4,6 +4,7 @@ import { TopCards } from "../../components/Cards/TopCards";
 import { MainInfoBlock } from "../../components/InfoBlock/mainInfoBlock";
 import { useHttp } from "../../hooks/useHttp";
 import { TabNewsType, MainType, TabType } from "../../types/api/subdomainTacnews";
+import {Image} from "../../components/shared/Image/Image";
 
 export const Main: React.FC = () => {
   const [main, setMain] = useState<MainType>();
@@ -57,7 +58,7 @@ export const Main: React.FC = () => {
                     <div className={`bigCard ${main?.tab.replace('&', '')}`} onClick={() => history({pathname:`/news?newsid=${main?.id}`})}>
                         <div className="bigCard__img">
                             <div className={`tag ${main?.tab.replace('&', '')}`}>{main?.tab}</div>
-                            <img src={main?.media_link} alt="newsItems" />
+                            <Image src={main?.media_link} alt="newsItems" />
                             <div className="bigCard__img_title">
                                 {main?.title}
                             </div>

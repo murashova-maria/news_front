@@ -3,6 +3,7 @@ import { TopCards } from '../../components/Cards/TopCards'
 import { InfoBlock } from '../../components/InfoBlock/InfoBlock'
 import { useGlobalState } from '../../store'
 import { INewsItem } from '../../types'
+import {Image} from "../../components/shared/Image/Image";
 
 export const Business: React.FC = () => {
     const [items] = useGlobalState('news')
@@ -17,7 +18,7 @@ export const Business: React.FC = () => {
                     <div className={`bigCard ${newsItems[0].tag[0]}`}>
                         <div className="bigCard__img">
                             <div className={`tag ${newsItems[0].tag[0]}`}>{newsItems[0].tag[0]}</div>
-                            <img src={newsItems[0].img} alt="newsItems" />
+                            <Image src={newsItems[0].img} alt="newsItems" />
                             <div className="bigCard__img_title">
                                 {newsItems[0].title}
                             </div>

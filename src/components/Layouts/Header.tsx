@@ -9,6 +9,7 @@ import { useHttp } from "../../hooks/useHttp";
 import { BreackingType, TabType } from "../../types/api/subdomainTacnews";
 import { useGlobalState } from "../../store";
 import { Link } from "react-router-dom";
+import {Button} from "../shared/Button/Button";
 
 export const Header: React.FC = () => {
   const [isLogin] = useGlobalState("isLogin");
@@ -48,6 +49,11 @@ export const Header: React.FC = () => {
       })();
     }
   }, [isLogin]);
+
+  const addNewsHandler = () => {
+    // todo add normal modal
+    console.log('addNewsHandler')
+  }
 
   return (
     <div className="header__wrapper">
@@ -89,12 +95,14 @@ export const Header: React.FC = () => {
                 ))}
               </ul>
             </nav>
+            {/*<Button onCLick={addNewsHandler}>TIP US</Button>*/}
           </div>
         </div>
       </header>
-      <div className="header__container bgcRed">
-        <div className="header__row">
+      <div className="header__container bgcRed breakingContainer">
+        {breacking && <div className="header__row">
           <span className="breaking__title">BREAKING</span>
+          <span className="breaking__tire">—</span>
           <div className="breaking">
             <div className="breaking__title-news">
               {breacking.map(({ id, cupturn }) => (
@@ -103,13 +111,12 @@ export const Header: React.FC = () => {
                   to={`news?newsid=${id}`}
                   className="breaking__title-news__text"
                 >
-                  <span className="breaking__tire">—</span>
                   {cupturn}
                 </Link>
               ))}
             </div>
           </div>
-        </div>
+        </div>}
       </div>
     </div>
   );

@@ -133,6 +133,12 @@ export const PopupHandler: React.FC = () => {
         </ModalWrapper>
       )}
 
+      {query.get("popup") === "tipus" && (
+          <ModalWrapper>
+           124
+          </ModalWrapper>
+      )}
+
     <PendingItems />
     </>
   );

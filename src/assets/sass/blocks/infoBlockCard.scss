@@ -6,6 +6,7 @@
     border: 1px solid #fff;
     cursor: pointer;
     transition: all .2s ease-in-out;
+    height: 162px;
 
     @media(max-width: 1000px) {
         min-width: 100%;
@@ -43,6 +44,11 @@
         position: relative;
         width: 30%;
 
+        .placeholder {
+            background-color: gray;
+            height: 100%;
+            width: 100%;
+        }
         & img {
             border-radius: 10px 0 0 10px;
             height: 100%;
@@ -72,6 +78,11 @@
         &_top {
             font-weight: 700;
             font-size: 18px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
 
             @media(max-width: 1190px) {
                 font-size: 12px;
