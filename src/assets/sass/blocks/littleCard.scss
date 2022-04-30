@@ -44,11 +44,19 @@
     &__img {
         position: relative;
 
-       
-
         img {
             border-radius: 10px 10px 0 0;
             width: 100%;
+            max-height: 137px;
+        }
+        .blur {
+            position: absolute;
+            left:0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0) 24.99%, #000000 100%);
+            z-index: 1;
         }
         &.hasNewsId {
             & img {
@@ -69,6 +77,7 @@
             background: #FFFFFF;
             border-radius: 0px 9px 0px 5px;
             padding: 5px 10px;
+            z-index: 2;
 
             @media(max-width: 1190px) {
                 font-size: 10px;
@@ -84,6 +93,7 @@
             font-size: 18px;
             max-width: 80%;
             padding: 19px 20px;
+            z-index: 2;
 
             @media(max-width: 1190px) {
                 font-size: 12px;
@@ -93,8 +103,12 @@
 
     &__desc {
         padding: 10px 20px 20px;
-        white-space: nowrap;
         overflow: hidden;
+        height: 125px;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
 
         &.hasNewsId {
             & .littleCard__desc_bot {

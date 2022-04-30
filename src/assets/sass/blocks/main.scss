@@ -1,15 +1,14 @@
 .main__section0 {
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
     align-items: stretch;
     margin-bottom: 60px;
+    gap: 22px;
     @media(max-width: 1000px) {
         flex-direction: column;
     }
     &_left {
         width: 68%;
-        // margin-right: 15px;
 
         @media(max-width: 1000px) {
             max-width: 100%;
@@ -18,7 +17,7 @@
     }
 
     &_right {
-        max-width: 28%;
+        max-width: 32%;
         display: flex;
         flex-direction: column;
         @media(max-width: 1000px) {

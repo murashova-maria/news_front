@@ -17,6 +17,7 @@ export const TopCards: React.FC<IProps> = React.memo(({ item, hasNewsId }) => {
                 <div className="littleCard__img_title">
                     {item?.title}
                 </div>
+                <div className="blur"/>
 
             </div>
             <div className={hasNewsId ? "littleCard__desc hasNewsId" : 'littleCard__desc'}>

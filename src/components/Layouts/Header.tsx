@@ -9,7 +9,6 @@ import { useHttp } from "../../hooks/useHttp";
 import { BreackingType, TabType } from "../../types/api/subdomainTacnews";
 import { useGlobalState } from "../../store";
 import { Link } from "react-router-dom";
-import {Button} from "../shared/Button/Button";
 
 export const Header: React.FC = () => {
   const [isLogin] = useGlobalState("isLogin");

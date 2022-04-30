@@ -130,7 +130,6 @@ body {
   .main {
     width: 100%;
     color: black;
-    //transform: translateY(40px);
     padding: 0 70px;
     margin-top: 40px;
 
@@ -138,6 +137,10 @@ body {
       height: 100vh;
     }
 
+    @media(max-width: 1440px) {
+      min-width: 1440px;
+      padding: 0 30px;
+    }
     @media(max-width: 1000px) {
       padding: 0 30px;
     }
