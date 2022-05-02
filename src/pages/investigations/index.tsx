@@ -18,6 +18,7 @@ export const Investigations: React.FC = () => {
         <div className="main__section0_left">
           <div className={`bigCard ${newsItems[0].tag[0]}`}>
             <div className="bigCard__img">
+              <div className="blur"/>
               <div className={`tag ${newsItems[0].tag[0]}`}>
                 {newsItems[0].tag[0]}
               </div>

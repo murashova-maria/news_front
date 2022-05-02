@@ -11,31 +11,41 @@
 
 
     &.Investigations {
-        border: 1px solid #27AE60;
+        border: 1px solid $investigations;
     }
 
     &.Sport {
-        border: 1px solid #20127F;
+        border: 1px solid $sport;
     }
 
     &.ScienceTechnology {
-        border: 1px solid #7A5648;
+        border: 1px solid $technology;
     }
 
     &.News {
-        border: 1px solid #DA191C;
+        border: 1px solid $news;
     }
 
     &.Economy {
-        border: 1px solid #F57C1F;
+        border: 1px solid $weather;
     }
 
     &.Business {
-        border: 1px solid #913E98;
+        border: 1px solid $business;
     }
 
     &__img {
         position: relative;
+
+        .blur {
+            position: absolute;
+            left:0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0) 24.99%, #000000 100%);
+            z-index: 1;
+        }
 
         img {
             border-radius: 10px 10px 0 0;
@@ -51,6 +61,7 @@
             background: #FFFFFF;
             border-radius: 0px 9px 0px 5px;
             padding: 5px 10px;
+            z-index: 2;
         }
 
         &_title {
@@ -59,6 +70,7 @@
             bottom: 0;
             color: #FFFFFF;
             font-weight: 700;
+            z-index: 2;
             @include adap-font(24, 20);
             max-width: 80%;
             padding: 19px 20px;

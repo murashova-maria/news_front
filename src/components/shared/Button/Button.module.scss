@@ -28,6 +28,11 @@
       color: $white;
       border: 1px solid $red-accent;
     }
+    &:active {
+      background-color: $red-accent-dark;
+      color: $white;
+      border: 1px solid $red-accent-dark;
+    }
   }
 
   &.default {

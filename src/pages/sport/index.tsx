@@ -63,7 +63,8 @@ export const Sport: React.FC = () => {
                 <div className="main__section0_left">
                     <div className={`bigCard ${main?.tab}`}>
                         <div className="bigCard__img">
-                            <div className={`tag ${main?.tab}`}>{main?.tab}</div>
+                            <div className="blur"/>
+                            <div className={`tag ${main?.tab.replace('&', '')}`}>{main?.tab}</div>
                             <Image src={main?.media_link} alt="newsItems" />
                             <div className="bigCard__img_title">
                                 {main?.title}

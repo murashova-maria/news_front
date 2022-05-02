@@ -9,6 +9,10 @@ import { useHttp } from "../../hooks/useHttp";
 import { BreackingType, TabType } from "../../types/api/subdomainTacnews";
 import { useGlobalState } from "../../store";
 import { Link } from "react-router-dom";
+import {Modal} from "../shared/Modal/Modal";
+import {useModal} from "../../hooks/useModal";
+import {Button} from "../shared/Button/Button";
+import {AddNewsModal} from "../AddNewsModal/AddNewsModal";
 
 export const Header: React.FC = () => {
   const [isLogin] = useGlobalState("isLogin");
@@ -49,9 +53,11 @@ export const Header: React.FC = () => {
     }
   }, [isLogin]);
 
+  const addNewsModal = useModal();
   const addNewsHandler = () => {
     // todo add normal modal
     console.log('addNewsHandler')
+    addNewsModal.onOpen();
   }
 
   return (
@@ -94,7 +100,7 @@ export const Header: React.FC = () => {
                 ))}
               </ul>
             </nav>
-            {/*<Button onCLick={addNewsHandler}>TIP US</Button>*/}
+            <Button onClick={addNewsHandler}>TIP US</Button>
           </div>
         </div>
       </header>
@@ -117,6 +123,7 @@ export const Header: React.FC = () => {
           </div>
         </div>}
       </div>
+      {addNewsModal.isOpened && <AddNewsModal onClose={addNewsModal.onClose} isOpened={addNewsModal.isOpened} />}
     </div>
   );
 };

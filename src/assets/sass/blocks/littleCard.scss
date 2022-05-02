@@ -15,39 +15,40 @@
         height: 50%;
     }
 
-
     &.Investigations {
-        border: 1px solid #27AE60;
+        border: 1px solid $investigations;
     }
 
     &.Sport {
-        border: 1px solid #20127F;
+        border: 1px solid $sport;
     }
 
     &.ScienceTechnology {
-        border: 1px solid #7A5648;
+        border: 1px solid $technology;
     }
 
     &.News {
-        border: 1px solid #DA191C;
+        border: 1px solid $news;
     }
 
     &.Economy {
-        border: 1px solid #F57C1F;
+        border: 1px solid $weather;
     }
 
     &.Business {
-        border: 1px solid #913E98;
+        border: 1px solid $business;
         
     }
 
     &__img {
         position: relative;
+        height: 137px;
 
         img {
+            display: flex;
             border-radius: 10px 10px 0 0;
             width: 100%;
-            max-height: 137px;
+            height: 137px;
         }
         .blur {
             position: absolute;

@@ -19,7 +19,7 @@ interface Props {
     type?: Type;
     size?: Size;
     disabled?: boolean;
-    onCLick?: (e: MouseEvent<HTMLButtonElement>) => void;
+    onClick?: (e: MouseEvent<HTMLButtonElement>) => void;
     color?: Color;
     withoutBorder?: boolean;
 }
@@ -29,7 +29,7 @@ export const Button: FC<Props> = ({
     type = Type.Button,
     color = Color.Primary,
     disabled,
-    onCLick,
+    onClick,
     withoutBorder,
     children,
 }) => {
@@ -42,7 +42,7 @@ export const Button: FC<Props> = ({
                 styles[color],
                 withoutBorder ? styles.withoutBorder : ''
             )}
-            onClick={onCLick}
+            onClick={onClick}
             disabled={disabled}
         >
             {children}

@@ -57,6 +57,7 @@ export const Main: React.FC = () => {
                 <div className="main__section0_left">
                     <div className={`bigCard ${main?.tab.replace('&', '')}`} onClick={() => history({pathname:`/news?newsid=${main?.id}`})}>
                         <div className="bigCard__img">
+                            <div className="blur"/>
                             <div className={`tag ${main?.tab.replace('&', '')}`}>{main?.tab}</div>
                             <Image src={main?.media_link} alt="newsItems" />
                             <div className="bigCard__img_title">

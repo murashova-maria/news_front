@@ -7,6 +7,7 @@
     cursor: pointer;
     transition: all .2s ease-in-out;
     height: 162px;
+    background-color: $white;
 
     @media(max-width: 1000px) {
         min-width: 100%;
@@ -17,27 +18,27 @@
     }
 
     &.Investigations {
-        border-color: #27AE60;
+        border-color: $investigations;
     }
 
     &.Sport {
-        border-color: #20127F;
+        border-color: $sport;
     }
 
     &.ScienceTechnology {
-        border-color: #7A5648;
+        border-color: $technology;
     }
 
     &.News {
-        border-color: #DA191C;
+        border-color: $news;
     }
 
     &.Economy {
-        border-color: #F57C1F;
+        border-color: $weather;
     }
 
     &.Business {
-        border-color: #913E98;
+        border-color: $business;
     }
 
     &__left {
@@ -45,6 +46,7 @@
         width: 30%;
 
         & img {
+            display: flex;
             border-radius: 10px 0 0 10px;
             height: 100%;
             width: 100%;

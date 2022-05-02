@@ -16,29 +16,30 @@
 @import './blocks/wrapperСontent.scss';
 @import './blocks/singleIn.scss';
 
+
 .tag {
     &.Investigations {
-        color: #27AE60;
+        color: $investigations;
     }
 
     &.Sport {
-        color: #20127F;
+        color: $sport;
     }
 
     &.ScienceTechnology {
-        color: #7A5648;
+        color: $technology;
     }
 
-    &.New {
-        color: #DA191C;
+    &.News {
+        color: $news;
     }
 
-    &.Weather {
-        color: #F57C1F;
+    &.Economy {
+        color: $weather;
     }
 
     &.Business {
-        color: #913E98;
+        color: $business;
     }
 }
 
