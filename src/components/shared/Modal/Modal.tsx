@@ -38,6 +38,7 @@ export const Modal: FC<Props> = ({
                                      onClose,
                                      confirmButton,
                                      isLoading,
+                                     fullWidth ,
                                      children,
                                  }) => {
     const disabled = confirmButton?.confirmButtonIsDisabled || isLoading;
@@ -54,6 +55,8 @@ export const Modal: FC<Props> = ({
             onClose={onCloseHandler}
             disableEscapeKeyDown
             keepMounted
+            fullWidth
+            maxWidth={fullWidth ? 'md' : undefined}
         >
             <div className={styles.Container}>
                 <div className={styles.Header}>

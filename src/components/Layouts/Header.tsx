@@ -54,6 +54,8 @@ export const Header: React.FC = () => {
   }, [isLogin]);
 
   const addNewsModal = useModal();
+  const breakingNewsModal = useModal();
+
   const addNewsHandler = () => {
     // todo add normal modal
     console.log('addNewsHandler')
@@ -121,9 +123,28 @@ export const Header: React.FC = () => {
               ))}
             </div>
           </div>
+          <div className="breaking__allNews" onClick={breakingNewsModal.onOpen}>View all breaking news</div>
         </div>}
       </div>
       {addNewsModal.isOpened && <AddNewsModal onClose={addNewsModal.onClose} isOpened={addNewsModal.isOpened} />}
+      {breakingNewsModal.isOpened && <Modal onClose={breakingNewsModal.onClose}
+                                            isOpened={breakingNewsModal.isOpened}
+                                            title="BREAKING NEWS"
+                                            fullWidth
+      >
+        <div className="breaking__allNews-modal">
+          {breacking.map(({ id, cupturn, }) => (
+              <Link
+                  key={id}
+                  to={`news?newsid=${id}`}
+                  className="breaking__title-all-news"
+                  onClick={breakingNewsModal.onClose}
+              >
+                {cupturn}
+              </Link>
+          ))}
+        </div>
+      </Modal>}
     </div>
   );
 };

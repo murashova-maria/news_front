@@ -183,10 +183,42 @@
             animation: scroll 35s infinite linear;
             gap: 100px;
         }
+
+        &-all-news {
+            border-bottom: 1px solid #EEEEEE;
+            padding: 25px 0;
+            font-size: 24px;
+            display: block;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
     }
 
     &__tire {
         font-size: 30px;
         margin: 0 15px;
+    }
+
+    &__allNews {
+        position: absolute;
+        right: 0;
+        height: 56px;
+        display: flex;
+        padding: 0 90px;
+        align-items: center;
+        justify-content: center;
+        white-space: nowrap;
+        box-shadow: -2px 0px 4px rgba(0, 0, 0, 0.25);
+        z-index: 1;
+        background-color: $red-accent;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 19px;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+    &__allNews-modal {
+        width: 100%;
     }
 }

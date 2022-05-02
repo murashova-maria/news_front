@@ -13,4 +13,5 @@ export type Props = {
   confirmButton?: ConfirmButton;
   isLoading?: boolean;
   children: ReactNode;
+  fullWidth?: boolean;
 };
