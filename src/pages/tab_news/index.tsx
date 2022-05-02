@@ -59,8 +59,6 @@ export const TabNews: React.FC = () => {
           })();
     }, [tab]);
 
-    console.log('newsItems')
-
     return (
         <>
             <div className='main__section0'>

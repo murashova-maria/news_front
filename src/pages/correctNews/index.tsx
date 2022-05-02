@@ -38,7 +38,6 @@ export const CorrectNews: React.FC = () => {
         
     }, [location])
 
-    console.log('item', item)
     return (
         <div className='correctnews'>
             {item ? 
