@@ -17,7 +17,6 @@ export const CorrectNews: React.FC = () => {
     const { request } = useHttp();
     const location = useLocation();
 
-
     useEffect(() => {
         const query = new URLSearchParams(location.search);
         const news_id = query.get('newsid');
@@ -39,6 +38,7 @@ export const CorrectNews: React.FC = () => {
         
     }, [location])
 
+    console.log('item', item)
     return (
         <div className='correctnews'>
             {item ? 
