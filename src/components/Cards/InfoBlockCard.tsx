@@ -7,7 +7,6 @@ export const InfoBlockCard: React.FC<IProps> = React.memo(({ item, hasNewsId }) 
 
     const history = useNavigate()
 
-    console.log('item', item)
     return (
         <div onClick={() => history({pathname:`/news?newsid=${item.id}`})} className={`infoBlockCard ${item.tab.replace('&', '')}`}>
             <div className="infoBlockCard__left">

@@ -57,8 +57,6 @@ export const Header: React.FC = () => {
   const breakingNewsModal = useModal();
 
   const addNewsHandler = () => {
-    // todo add normal modal
-    console.log('addNewsHandler')
     addNewsModal.onOpen();
   }
 
