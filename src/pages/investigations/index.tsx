@@ -12,6 +12,7 @@ export const Investigations: React.FC = () => {
     items[1],
     items[2],
   ]);
+
   return (
     <>
       <div className="main__section0">
