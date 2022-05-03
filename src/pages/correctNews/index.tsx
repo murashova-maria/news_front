@@ -64,9 +64,7 @@ export const CorrectNews: React.FC = () => {
                         </div>
                     </div>
                 </div>
-                <div className="correctnews__left_text">
-                    {item?.text}
-                </div>
+                <div className="correctnews__left_text" dangerouslySetInnerHTML={{__html: item?.text || ''}}/>
             </div>
             : null}
             <div className="correctnews__right">

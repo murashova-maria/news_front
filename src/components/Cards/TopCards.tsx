@@ -25,9 +25,7 @@ export const TopCards: React.FC<IProps> = React.memo(({ item, hasNewsId }) => {
                     <div className="littleCard__desc_top_author">{item?.by}</div>
                     <div className="littleCard__desc_top_date">{item?.date}</div>
                 </div>
-                <div className="littleCard__desc_bot">
-                    {item?.text || ''}
-                </div>
+                <div className="littleCard__desc_bot" dangerouslySetInnerHTML={{ __html: item?.text || ''}}/>
             </div>
         </div>
     )
