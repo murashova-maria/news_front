@@ -8,6 +8,8 @@ import {FormInputContainer} from "../shared/Forms/FormInputContainer/FormInputCo
 import {toast} from "react-toastify";
 import {useHttp} from "../../hooks/useHttp";
 import styles from './AddNewsModal.module.scss';
+import {styled} from "@mui/material/styles";
+import {TextField} from "@mui/material";
 type Props = {
     onClose: VoidFunction;
     isOpened: boolean

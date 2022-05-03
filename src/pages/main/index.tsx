@@ -5,6 +5,8 @@ import { MainInfoBlock } from "../../components/InfoBlock/mainInfoBlock";
 import { useHttp } from "../../hooks/useHttp";
 import { TabNewsType, MainType, TabType } from "../../types/api/subdomainTacnews";
 import {Image} from "../../components/shared/Image/Image";
+import {ADMIN_PANEL} from "../../config";
+import {Twitter} from "../../components/Twitter/Twitter";
 
 export const Main: React.FC = () => {
   const [main, setMain] = useState<MainType>();
@@ -79,6 +81,10 @@ export const Main: React.FC = () => {
                     {secondaryMain.map(el => <TopCards key={el.id} hasNewsId={false} item={el} />)}
                 </div>
             </div>
+            {!ADMIN_PANEL && <span className="ad-block__mobile">
+                  <Twitter isMobile/>
+              </span>
+            }
       <div className="main__section1">
         {tabs ? blocs : null}
       </div>

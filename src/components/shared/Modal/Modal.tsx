@@ -28,7 +28,6 @@ const StyledDialogContent = styled(DialogContent)(() => ({
     display: 'flex',
     flexDirection: 'column',
     gap: '16px',
-    minWidth: '350px',
     fontSize: '15px',
 }));
 

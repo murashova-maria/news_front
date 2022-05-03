@@ -6,6 +6,17 @@
     min-width: 20%;
     max-width: 20%;
     background: #d0d0d0;
-    padding: 40px 5px;
+    padding: 5px;
+
+    @media(max-width: 1000px) {
+      display: none;
+    }
+  }
+
+  .ad-block__mobile {
+    display: none;
+    @media(max-width: 1000px) {
+      display: block;
+    }
   }
 }

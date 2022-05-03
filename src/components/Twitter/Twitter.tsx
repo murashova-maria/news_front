@@ -1,21 +1,26 @@
 import { TwitterTimelineEmbed } from 'react-twitter-embed';
+import {FC} from "react";
 
 const accounts = [
 'StandtoEndRape',
-// 'AdultRapeClinic',
+'AdultRapeClinic',
 // 'womenforchange5',
 // 'MeTooMVMT',
 // 'ChildSoldiersIn',
 // 'Foundation_IL',
 ]
 
-export const Twitter = () => {
+type Props = {
+    isMobile?: boolean;
+}
+
+export const Twitter: FC<Props> = ({isMobile = false}) => {
     return <>
         {accounts.map((profile) => <TwitterTimelineEmbed
             key={profile}
             sourceType="profile"
             screenName={profile}
-            options={{height: 400}}
+            options={{height: isMobile ? 400 : 400}}
         />)}
     </>
 

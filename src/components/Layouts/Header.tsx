@@ -100,7 +100,7 @@ export const Header: React.FC = () => {
                 ))}
               </ul>
             </nav>
-            <Button onClick={addNewsHandler}>TIP US</Button>
+            <Button onClick={addNewsHandler} className="header__addNewsBtn">TIP US</Button>
           </div>
         </div>
       </header>
@@ -138,7 +138,7 @@ export const Header: React.FC = () => {
                   className="breaking__title-all-news"
                   onClick={breakingNewsModal.onClose}
               >
-                <div>{cupturn}</div>
+                <div className="breaking__title-all-news-title" title={cupturn}>{cupturn}</div>
                 <div className="breaking__title-all-news-date">{date}</div>
               </Link>
           ))}

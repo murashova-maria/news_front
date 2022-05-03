@@ -133,6 +133,11 @@
             @media(max-width: 960px) {
                 font-size: 8px;
             }
+
+            @media(max-width: 767px) {
+                flex-direction: column;
+                gap: 5px;
+            }
         }
 
         &_bot {

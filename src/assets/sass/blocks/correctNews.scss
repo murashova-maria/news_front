@@ -56,6 +56,10 @@
                 font-weight: 700;
                 font-size: 60px;
                 font-family: $smooch;
+
+                @media(max-width: 767px) {
+                    font-size: 35px;
+                }
             }
 
             &_block {
@@ -127,6 +131,9 @@
             font-size: 36px;
             font-family: $smooch;
             margin-bottom: 20px;
+            @media(max-width: 767px) {
+                font-size: 25px;
+            }
         }
 
         &_news {

@@ -20,6 +20,9 @@
     box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
     background-color: #fff;
 
+    &__addNewsBtn {
+        white-space: nowrap;
+    }
     &__doubleLogo {
         display: flex;
         align-items: center;
@@ -44,6 +47,10 @@
         &.bgcRed {
             background-color: #DA191C;
             padding: 10px 70px;
+
+            @media(max-width: 767px) {
+                padding: 10px 20px;
+            }
         }
     }
 
@@ -190,6 +197,12 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+
+            &-title {
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
             &-date {
                 font-size: 14px;
                 color: #CCCCCC;
@@ -219,7 +232,14 @@
         line-height: 19px;
         text-decoration: underline;
         cursor: pointer;
+
+        @media(max-width: 767px) {
+            left: 0;
+            top: 125px;
+            height: 40px;
+        }
     }
+
     &__allNews-modal {
         width: 100%;
     }
