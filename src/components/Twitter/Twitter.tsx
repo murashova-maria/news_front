@@ -12,6 +12,7 @@ const accounts = [
 export const Twitter = () => {
     return <>
         {accounts.map((profile) => <TwitterTimelineEmbed
+            key={profile}
             sourceType="profile"
             screenName={profile}
             options={{height: 400}}
