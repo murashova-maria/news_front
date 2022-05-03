@@ -2,11 +2,11 @@ import { TwitterTimelineEmbed } from 'react-twitter-embed';
 
 const accounts = [
 'StandtoEndRape',
-'AdultRapeClinic',
-'womenforchange5',
-'MeTooMVMT',
-'ChildSoldiersIn',
-'Foundation_IL',
+// 'AdultRapeClinic',
+// 'womenforchange5',
+// 'MeTooMVMT',
+// 'ChildSoldiersIn',
+// 'Foundation_IL',
 ]
 
 export const Twitter = () => {
