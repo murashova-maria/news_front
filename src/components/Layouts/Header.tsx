@@ -131,14 +131,15 @@ export const Header: React.FC = () => {
                                             fullWidth
       >
         <div className="breaking__allNews-modal">
-          {breacking.map(({ id, cupturn, }) => (
+          {breacking.map(({ id, cupturn, date, }) => (
               <Link
                   key={id}
                   to={`news?newsid=${id}`}
                   className="breaking__title-all-news"
                   onClick={breakingNewsModal.onClose}
               >
-                {cupturn}
+                <div>{cupturn}</div>
+                <div className="breaking__title-all-news-date">{date}</div>
               </Link>
           ))}
         </div>

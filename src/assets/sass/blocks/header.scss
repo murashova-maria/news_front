@@ -188,10 +188,16 @@
             border-bottom: 1px solid #EEEEEE;
             padding: 25px 0;
             font-size: 24px;
-            display: block;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            &-date {
+                font-size: 14px;
+                color: #CCCCCC;
+            }
         }
     }
 

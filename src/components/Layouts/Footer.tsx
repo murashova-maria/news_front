@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router';
 import { NavLink } from 'react-router-dom';
-import logo1 from '../../assets/img/firsticon.png';
+import logo1 from '../../assets/img/bluePlanet.png';
 import logo2 from '../../assets/img/TAC.png';
 import telegram from '../../assets/img/telega.png'
 import twitter from '../../assets/img/twitter.png'
@@ -37,7 +37,7 @@ export const Footer: React.FC = () => {
             <div className="footer__container">
                 <div className="footer__body">
                     <div onClick={() => history({ pathname: MAIN_ROUTE })} className="footer__body_left">
-                        <img className='header__logo' src={logo1} alt="logo" />
+                        <img className='header__logo footer__logo-first' src={logo1} alt="logo" />
                         <img className='header__logo' src={logo2} alt="logo" />
                     </div>
                     <div className="footer__body_right">
@@ -54,8 +54,9 @@ export const Footer: React.FC = () => {
                                 </ul>
                             </nav>
                         </div>
+                        <div className="footer__body_line"/>
                         <div className="footer__body_right_bot">
-                            <nav className="nav">
+                            <nav>
                                 <ul className={`nav__listf ${isActive ? 'active' : null}`}>
                                     <li onClick={close} className="nav__itemf">
                                         <NavLink onClick={() => setIsActive(false)} to={ABOUT_ROUTE} className="nav__linkf">

@@ -7,6 +7,7 @@ import { PopupHandler } from "./components/PopupHandler";
 import { ToastContainer } from "react-toastify";
 import { ADMIN_PANEL } from './config'
 import "react-toastify/dist/ReactToastify.css";
+import {Twitter} from "./components/Twitter/Twitter";
 
 const App: React.FC = () => {
   const path = useLocation().pathname;
@@ -30,7 +31,9 @@ const App: React.FC = () => {
         <div id="main" className={!ADMIN_PANEL ? "main" : "main h100vh"}>
           <AppRouter />
         </div>
-        {!ADMIN_PANEL && <span className="ad-block"/>}
+          {!ADMIN_PANEL && <span className="ad-block">
+              <Twitter />
+          </span>}
       </div>
 
       {!ADMIN_PANEL && <div className="main__section2">Advertisement</div>}
