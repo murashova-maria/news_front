@@ -8,11 +8,10 @@
     &:hover {
         transform: scale(1.02);
     }
-    
+
 
     &:last-child {
         margin-bottom: 0;
-        height: 50%;
     }
 
     &.Investigations {
@@ -42,13 +41,13 @@
 
     &__img {
         position: relative;
-        height: 137px;
 
         img {
             display: flex;
             border-radius: 10px 10px 0 0;
             width: 100%;
-            height: 137px;
+            height: 168px;
+            overflow: hidden;
         }
         .blur {
             position: absolute;
@@ -60,10 +59,6 @@
             z-index: 1;
         }
         &.hasNewsId {
-            & img {
-                max-height: 161px;
-            }
-
             & .littleCard__img_title {
                 font-size: 14px !important;
                 white-space: nowrap;
@@ -89,12 +84,14 @@
             position: absolute;
             left: 0;
             bottom: 0;
+            right: 0;
             color: #FFFFFF;
             font-weight: 700;
             font-size: 18px;
-            max-width: 80%;
             padding: 19px 20px;
             z-index: 2;
+            overflow: hidden;
+            text-overflow: ellipsis;
 
             @media(max-width: 1190px) {
                 font-size: 12px;
@@ -105,7 +102,7 @@
     &__desc {
         padding: 10px 20px 20px;
         overflow: hidden;
-        height: 125px;
+        height: 115px;
         text-overflow: ellipsis;
         display: -webkit-box;
         -webkit-line-clamp: 3;

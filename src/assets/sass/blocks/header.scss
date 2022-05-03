@@ -24,10 +24,7 @@
         display: flex;
         align-items: center;
         cursor: pointer;
-
-        margin-bottom: -69px;
-        margin-left: -70px;
-        width: 200px;
+        width: 130px;
 
         img {
             width: 100%;
@@ -66,6 +63,7 @@
     display: flex;
     margin: 0 auto;
     padding: 7px 0;
+    font-size: 18px;
 
     &__list {
         display: flex;
@@ -76,7 +74,7 @@
     }
 
     &__item {
-        @include adap-font(18, 15);
+        @include adap-font(20, 18);
         padding: 0px clamp(65px, 1vw, 50px) 0px 0px;
         font-style: normal;
 
@@ -171,11 +169,9 @@
     }
 
     &__title {
-        margin-left: 140px;
         font-weight: 700;
 
-
-        @include adap-font(24, 21);
+        @include adap-font(32, 28);
         &-news {
             display: inline-flex;
             -webkit-animation: scroll 30s infinite linear;
@@ -203,7 +199,7 @@
 
     &__tire {
         font-size: 30px;
-        margin: 0 15px;
+        margin: 0 12px;
     }
 
     &__allNews {
