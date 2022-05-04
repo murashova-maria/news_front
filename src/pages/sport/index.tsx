@@ -64,7 +64,7 @@ export const Sport: React.FC = () => {
                     <div className={`bigCard ${main?.tab}`}>
                         <div className="bigCard__img">
                             <div className="blur"/>
-                            <div className={`tag ${main?.tab.replace('&', '')}`}>{main?.tab}</div>
+                            <div className={`tag ${main?.tab?.replace('&', '')}`}>{main?.tab}</div>
                             <Image src={main?.media_link} alt="newsItems" />
                             <div className="bigCard__img_title">
                                 {main?.title}
@@ -75,9 +75,7 @@ export const Sport: React.FC = () => {
                                 <div className="bigCard__desc_top_author">{main?.by}</div>
                                 <div className="bigCard__desc_top_date">{main?.date}</div>
                             </div>
-                            <div className="bigCard__desc_bot">
-                                {main?.text}
-                            </div>
+                            <div className="bigCard__desc_bot" dangerouslySetInnerHTML={{__html: main?.text || ''}} />
                         </div>
                     </div>
                 </div>

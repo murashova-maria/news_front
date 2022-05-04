@@ -77,9 +77,7 @@ export const TabNews: React.FC = () => {
                                 <div className="bigCard__desc_top_author">{main?.by}</div>
                                 <div className="bigCard__desc_top_date">{main?.date}</div>
                             </div>
-                            <div className="bigCard__desc_bot">
-                                {main?.text}
-                            </div>
+                            <div className="bigCard__desc_bot" dangerouslySetInnerHTML={{__html: main?.text || ''}} />
                         </div>
                     </div>
                 </div>

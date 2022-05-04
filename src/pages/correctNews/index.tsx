@@ -43,7 +43,7 @@ export const CorrectNews: React.FC = () => {
             {item ? 
             <div className="correctnews__left">
                 <div className="correctnews__left_tags">
-                    <div className={`tagNews tag ${item?.tab.replace('&', '')}`}>{item?.tab}</div>
+                    <div className={`tagNews tag ${item?.tab?.replace('&', '')}`}>{item?.tab}</div>
                 </div>
                 <div className="correctnews__left_photo">
                     <div className="correctnews__left_photo_title">

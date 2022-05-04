@@ -29,9 +29,7 @@ export const Business: React.FC = () => {
                                 <div className="bigCard__desc_top_author">{newsItems[0].author}</div>
                                 <div className="bigCard__desc_top_date">{newsItems[0].date}</div>
                             </div>
-                            <div className="bigCard__desc_bot">
-                                {newsItems[0].description}
-                            </div>
+                            <div className="bigCard__desc_bot" dangerouslySetInnerHTML={{__html: newsItems[0].description}} />
                         </div>
                     </div>
                 </div>

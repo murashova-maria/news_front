@@ -132,7 +132,7 @@ export const CreatePage: React.FC = () => {
         method: "PUT",
         body: {
           title: data.title,
-          text: data.text,
+          text: data.text.replaceAll('\n', '<br>'),
           copyright_label: data.copyright_label,
           copyright_link: data.copyright_link,
           by: data.by,
@@ -168,6 +168,7 @@ export const CreatePage: React.FC = () => {
       onDropHandler(file, type);
     };
 
+  console.log('data', data)
   return (
     <>
       <div className="circle firstcircle"></div>
@@ -295,7 +296,7 @@ export const CreatePage: React.FC = () => {
           <TextArea
             textarea={true}
             placeholder="Enter texts..."
-            value={data.text}
+            value={data.text?.replaceAll('<br>', '\n')}
             onChange={(event: any) =>
               setData((prev) => ({ ...prev, text: event.target.value }))
             }

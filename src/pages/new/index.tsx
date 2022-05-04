@@ -34,9 +34,7 @@ export const New: React.FC = () => {
                   {newsItems[0].date}
                 </div>
               </div>
-              <div className="bigCard__desc_bot">
-                {newsItems[0].description}
-              </div>
+              <div className="bigCard__desc_bot" dangerouslySetInnerHTML={{__html: newsItems[0].description}} />
             </div>
           </div>
         </div>

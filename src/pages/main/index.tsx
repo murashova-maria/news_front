@@ -57,10 +57,10 @@ export const Main: React.FC = () => {
     <>
       <div className='main__section0'>
                 <div className="main__section0_left">
-                    <div className={`bigCard ${main?.tab.replace('&', '')}`} onClick={() => history({pathname:`/news?newsid=${main?.id}`})}>
+                    <div className={`bigCard ${main?.tab?.replace('&', '')}`} onClick={() => history({pathname:`/news?newsid=${main?.id}`})}>
                         <div className="bigCard__img">
                             <div className="blur"/>
-                            <div className={`tag ${main?.tab.replace('&', '')}`}>{main?.tab}</div>
+                            <div className={`tag ${main?.tab?.replace('&', '')}`}>{main?.tab}</div>
                             <Image src={main?.media_link} alt="newsItems" />
                             <div className="bigCard__img_title">
                                 {main?.title}
@@ -71,9 +71,7 @@ export const Main: React.FC = () => {
                                 <div className="bigCard__desc_top_author">{main?.by}</div>
                                 <div className="bigCard__desc_top_date">{main?.date}</div>
                             </div>
-                            <div className="bigCard__desc_bot">
-                                {main?.text}
-                            </div>
+                            <div className="bigCard__desc_bot" dangerouslySetInnerHTML={{__html: main?.text || ''}} />
                         </div>
                     </div>
                 </div>
