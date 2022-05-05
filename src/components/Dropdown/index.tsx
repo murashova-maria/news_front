@@ -20,11 +20,7 @@ export const Dropdown: React.FC<IDropdown> = ({
   handleChange,
   predefinedValue,
 }) => {
-  console.log('options', options)
-  console.log('predefinedValue', predefinedValue)
   const [selected, setSelected] = React.useState({ value: "", name: "" } );
-
-  console.log('selected', selected)
 
   const handleChg = (event: SelectChangeEvent) => {
     setSelected({ value: event.target.value, name: event.target.name });

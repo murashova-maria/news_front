@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { TextArea } from "../../components/TextArea/TextArea";
 
@@ -169,7 +169,6 @@ export const CreatePage: React.FC = () => {
       onDropHandler(file, type);
     };
 
-  console.log('data', data)
   return (
     <>
       <div className="circle firstcircle"></div>
