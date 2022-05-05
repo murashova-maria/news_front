@@ -108,6 +108,7 @@ export const CreatePage: React.FC = () => {
         original_id: adminEditNews.original.id
       }));
       setPreview(adminEditNews.media_link);
+      setTab(adminEditNews.tab);
     } else if (query.get("edit") === "true" && !adminEditNews) {
       history({ pathname: "/admin" });
     }
@@ -343,6 +344,7 @@ export const CreatePage: React.FC = () => {
                 label="Tabs"
                 options={newTabs}
                 handleChange={(value) => setTab(Number(value))}
+                predefinedValue={String(tab)}
               />
             </div>
           </div>
