@@ -27,7 +27,7 @@ const App: React.FC = () => {
       {!ADMIN_PANEL && <Header />}
       <PopupHandler />
       <ToastContainer />
-      <div className="wrapper__content">
+      <div className={!ADMIN_PANEL ? "wrapper__content wrapper__content_public" : "wrapper__content"}>
         <div id="main" className={!ADMIN_PANEL ? "main" : "main h100vh"}>
           <AppRouter />
         </div>

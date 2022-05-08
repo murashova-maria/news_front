@@ -109,6 +109,7 @@ export const CreatePage: React.FC = () => {
       }));
       setPreview(adminEditNews.media_link);
       setTab(adminEditNews.tab);
+
       setIsCheckedBreaking(adminEditNews.breacking);
       setIsCheckedMain(adminEditNews.main);
       setIsCheckedSecondary(adminEditNews.secondary_main);
@@ -146,7 +147,8 @@ export const CreatePage: React.FC = () => {
           media: selectedFile ?? data.media,
           secondary_main: isCheckedSecondary,
           cupturn: data.cupturn,
-          published: published
+          published: published,
+          link: data.link,
         },
       });
       if (resp?.error || error) return toast.error(resp.error ?? "Error!");

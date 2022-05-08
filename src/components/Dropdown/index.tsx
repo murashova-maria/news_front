@@ -31,10 +31,11 @@ export const Dropdown: React.FC<IDropdown> = ({
     if (select) handleChange(select.value, select.name);
   }, [selected]);
 
+
   useEffect(() => {
       const val = options.find((i) => i.value === predefinedValue)
       setSelected(val || { value: "", name: "" });
-  }, [predefinedValue]);
+  }, [predefinedValue, options]);
 
   return (
     <FormControl sx={{ m: 1, minWidth: 200 }} size="small">
@@ -48,7 +49,7 @@ export const Dropdown: React.FC<IDropdown> = ({
         onChange={handleChg}
       >
         {options.map((item) => (
-          <MenuItem value={item.value}>{item.name}</MenuItem>
+          <MenuItem key={item.value} value={item.value}>{item.name}</MenuItem>
         ))}
       </Select>
     </FormControl>

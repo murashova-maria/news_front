@@ -4,6 +4,7 @@
     margin-bottom: 20px;
     cursor: pointer;
     transition: all .2s ease-in-out;
+    background-color: #fff;
 
     &:hover {
         transform: scale(1.02);
@@ -14,30 +15,30 @@
         margin-bottom: 0;
     }
 
-    &.Investigations {
-        border: 1px solid $investigations;
-    }
-
-    &.Sport {
-        border: 1px solid $sport;
-    }
-
-    &.ScienceTechnology {
-        border: 1px solid $technology;
-    }
-
-    &.News {
-        border: 1px solid $news;
-    }
-
-    &.Economy {
-        border: 1px solid $weather;
-    }
-
-    &.Business {
-        border: 1px solid $business;
-        
-    }
+    //&.Investigations {
+    //    border: 1px solid $investigations;
+    //}
+    //
+    //&.Sport {
+    //    border: 1px solid $sport;
+    //}
+    //
+    //&.ScienceTechnology {
+    //    border: 1px solid $technology;
+    //}
+    //
+    //&.News {
+    //    border: 1px solid $news;
+    //}
+    //
+    //&.Economy {
+    //    border: 1px solid $weather;
+    //}
+    //
+    //&.Business {
+    //    border: 1px solid $business;
+    //
+    //}
 
     &__img {
         position: relative;

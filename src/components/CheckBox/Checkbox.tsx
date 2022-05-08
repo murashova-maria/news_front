@@ -1,4 +1,3 @@
-import { AnyCnameRecord } from "dns";
 import React, { useEffect, useState } from "react";
 import { animated, useSpring } from "react-spring";
 
