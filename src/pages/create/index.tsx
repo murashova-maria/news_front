@@ -109,6 +109,9 @@ export const CreatePage: React.FC = () => {
       }));
       setPreview(adminEditNews.media_link);
       setTab(adminEditNews.tab);
+      setIsCheckedBreaking(adminEditNews.breacking);
+      setIsCheckedMain(adminEditNews.main);
+      setIsCheckedSecondary(adminEditNews.secondary_main);
     } else if (query.get("edit") === "true" && !adminEditNews) {
       history({ pathname: "/admin" });
     }
@@ -309,6 +312,7 @@ export const CreatePage: React.FC = () => {
             <Checkbox
               disabled={isCheckedSecondary}
               setIsCheckedCreate={setIsCheckedMain}
+              initialChecked={isCheckedMain}
             />
           </div>
           <br />
@@ -317,12 +321,13 @@ export const CreatePage: React.FC = () => {
             <Checkbox
               disabled={isCheckedMain}
               setIsCheckedCreate={setIsCheckedSecondary}
+              initialChecked={isCheckedSecondary}
             />
           </div>
           <div className="create__left_check breaking">
             <div className="create__left_check_top">
               Breaking news{" "}
-              <Checkbox setIsCheckedCreate={setIsCheckedBreaking} />
+              <Checkbox setIsCheckedCreate={setIsCheckedBreaking} initialChecked={isCheckedBreaking} />
             </div>
             <div className="create__left_check_bot">
               <TextArea

@@ -21,6 +21,7 @@ export const Twitter: FC<Props> = ({isMobile = false}) => {
             sourceType="profile"
             screenName={profile}
             options={{height: isMobile ? 400 : 400}}
+            noFooter
         />)}
     </>
 
