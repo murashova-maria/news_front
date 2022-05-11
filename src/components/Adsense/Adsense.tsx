@@ -13,12 +13,12 @@ export const Adsense: FC<Props> = ({slot}) => {
         adsbygoogle = (window.adsbygoogle || []).push({});
     }, []);
 
-    return <div style={{width: "100%"}}>
+    return <div style={{width: "100%", height: "100%"}}>
         <script async
                 src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-${clientId}`}
                 crossOrigin="anonymous"/>
         <ins className="adsbygoogle"
-             style={{display: "block"}}
+             style={{display: "block", height: "100%", width: "100%"}}
              data-ad-format="autorelaxed"
              data-ad-client={`ca-pub-${clientId}`}
              data-ad-slot={slot}

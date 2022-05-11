@@ -23,7 +23,7 @@ export const Twitter: FC<Props> = ({isMobile = false}) => {
         else setActiveProfile(0)
     }, 10000);
 
-    return <>
+    return <div style={{height: '400px'}}>
         <TwitterTimelineEmbed
             key={activeProfile}
             sourceType="profile"
@@ -31,6 +31,6 @@ export const Twitter: FC<Props> = ({isMobile = false}) => {
             options={{height: isMobile ? 400 : 400}}
             noFooter
         />
-    </>
+    </div>
 
 }
