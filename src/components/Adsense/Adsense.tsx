@@ -26,8 +26,8 @@ export const Adsense: FC<Props> = ({slot, isHorisontal = false}) => {
              data-ad-format="autorelaxed"
              data-ad-client={`ca-pub-${clientId}`}
              data-ad-slot={slot}
-             data-matched-content-rows-num={isHorisontal ? "1, 4" : "4, 4"}
-             data-matched-content-columns-num={isHorisontal ? "4, 1" : "1, 1"}
+             data-matched-content-rows-num={isHorisontal ? "1, 4" : "8, 8"}
+             data-matched-content-columns-num={isHorisontal ? "8, 1" : "1, 1"}
              data-matched-content-ui-type="image_sidebyside, image_card_sidebyside"
         />
 
