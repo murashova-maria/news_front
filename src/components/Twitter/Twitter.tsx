@@ -23,7 +23,7 @@ export const Twitter: FC<Props> = ({isMobile = false}) => {
         else setActiveProfile(0)
     }, 10000);
 
-    return <div style={{height: '400px'}}>
+    return <div style={{height: '400px', marginBottom: '5px'}}>
         <TwitterTimelineEmbed
             key={activeProfile}
             sourceType="profile"
