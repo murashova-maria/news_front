@@ -8,6 +8,7 @@ import { ToastContainer } from "react-toastify";
 import { ADMIN_PANEL } from './config'
 import "react-toastify/dist/ReactToastify.css";
 import {Twitter} from "./components/Twitter/Twitter";
+import {Adsense} from "./components/Adsense/Adsense";
 
 const App: React.FC = () => {
   const path = useLocation().pathname;
@@ -33,10 +34,13 @@ const App: React.FC = () => {
         </div>
           {!ADMIN_PANEL && <span className="ad-block">
               <Twitter />
+              <Adsense slot="2148763374"/>
           </span>}
       </div>
 
-      {!ADMIN_PANEL && <div className="main__section2">Advertisement</div>}
+      {!ADMIN_PANEL && <div className="main__section2">
+          <Adsense slot="4719086396"/>
+      </div>}
       {!ADMIN_PANEL && <Footer />}
     </div>
   );
