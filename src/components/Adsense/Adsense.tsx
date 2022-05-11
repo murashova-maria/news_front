@@ -1,12 +1,19 @@
-import {FC} from "react";
+import {FC, useEffect} from "react";
 
 type Props = {
     slot: string;
 };
 
+var adsbygoogle;
 export const Adsense: FC<Props> = ({slot}) => {
     const clientId = '3527692473995145';
-    return <>
+
+    useEffect(() => {
+        // @ts-ignore
+        adsbygoogle = (window.adsbygoogle || []).push({});
+    }, []);
+
+    return <div style={{width: "100%"}}>
         <script async
                 src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-${clientId}`}
                 crossOrigin="anonymous"/>
@@ -16,8 +23,5 @@ export const Adsense: FC<Props> = ({slot}) => {
              data-ad-client={`ca-pub-${clientId}`}
              data-ad-slot={slot}
         />
-        <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-    </>
+    </div>
 }
