@@ -20,7 +20,7 @@ export const Adsense: FC<Props> = ({slot, isHorisontal = false, width = '100%', 
 
     const styles = {display: "inline-block", width: width, height: height}
 
-    return <div style={{width: "100%", height: "100%"}}>
+    return <>
         <script async
                                src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-${clientId}`}
                                crossOrigin="anonymous"/>
@@ -32,5 +32,5 @@ export const Adsense: FC<Props> = ({slot, isHorisontal = false, width = '100%', 
              // data-matched-content-columns-num={isHorisontal ? "8, 1" : "1, 1"}
              // data-matched-content-ui-type="image_sidebyside, image_card_sidebyside"
         />
-    </div>
+    </>
 }
