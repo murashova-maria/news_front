@@ -35,6 +35,23 @@
     }
   }
 
+  &.secondary {
+    background-color: $white;
+    color: #58C7DA;
+    border: 1px solid #58C7DA;;
+
+    &:hover {
+      background-color: #1998A7;
+      color: $white;
+      border: 1px solid #1998A7;
+    }
+    &:active {
+      background-color: #1998A7;
+      color: $white;
+      border: 1px solid #1998A7;
+    }
+  }
+
   &.default {
     min-width: $button_default_width;
   }

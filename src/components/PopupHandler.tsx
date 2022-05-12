@@ -12,6 +12,7 @@ import { useHttp } from "../hooks/useHttp";
 import { SourcesAPI } from "../types/api/admin";
 import { BlockAdminCard } from "./BlockAdminCard/BlockAdminCard";
 import { PendingItems } from "./PendingItems";
+import {TwitterAccountsModal} from "./TwitterAccountsModal/TwitterAccountsModal";
 
 interface LinksType {
   id: number;
@@ -138,6 +139,12 @@ export const PopupHandler: React.FC = () => {
            124
           </ModalWrapper>
       )}
+
+      {query.get("popup") === "twitter" && (
+            <ModalWrapper>
+              <TwitterAccountsModal/>
+            </ModalWrapper>
+        )}
 
     <PendingItems />
     </>

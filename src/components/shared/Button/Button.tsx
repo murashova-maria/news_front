@@ -13,6 +13,7 @@ export enum Type {
 
 export enum Color {
     Primary = 'primary',
+    Secondary = 'secondary',
 }
 
 interface Props {
