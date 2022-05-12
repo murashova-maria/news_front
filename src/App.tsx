@@ -34,12 +34,13 @@ const App: React.FC = () => {
         </div>
           {!ADMIN_PANEL && <span className="ad-block">
               <Twitter />
-              <Adsense slot="2148763374"/>
+              <Adsense slot="2148763374" height="1200px" width="360px"/>
+              <Adsense slot="9463166679" height="800px" width="360px"/>
           </span>}
       </div>
 
       {!ADMIN_PANEL && <div className="main__section2">
-          <Adsense slot="4719086396" isHorisontal/>
+          <Adsense slot="4719086396" isHorisontal width="1000px" height="350px" />
       </div>}
       {!ADMIN_PANEL && <Footer />}
     </div>
