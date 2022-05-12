@@ -40,7 +40,7 @@ const App: React.FC = () => {
       </div>
 
       {!ADMIN_PANEL && <div className="main__section2">
-          <Adsense slot="4719086396" isHorisontal width="1000px" height="350px" />
+          <Adsense slot="4719086396" isHorisontal width="1000px" height="200px" />
       </div>}
       {!ADMIN_PANEL && <Footer />}
     </div>
