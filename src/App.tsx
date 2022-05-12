@@ -41,6 +41,7 @@ const App: React.FC = () => {
 
       {!ADMIN_PANEL && <div className="main__section2">
           <Adsense slot="4719086396" width="1200px" height="200px" />
+          <Adsense slot="1417155696" width="300px" height="200px" />
       </div>}
       {!ADMIN_PANEL && <Footer />}
     </div>
