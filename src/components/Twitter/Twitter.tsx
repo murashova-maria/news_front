@@ -1,7 +1,7 @@
 import { TwitterTimelineEmbed } from 'react-twitter-embed';
 import {FC, useState} from "react";
 import {useInterval} from "../../hooks/useInterval";
-
+import styles from './Twitter.module.scss';
 const accounts = [
 'StandtoEndRape',
 'AdultRapeClinic',
@@ -23,14 +23,16 @@ export const Twitter: FC<Props> = ({isMobile = false}) => {
         else setActiveProfile(0)
     }, 10000);
 
-    return <div style={{height: '400px', marginBottom: '5px'}}>
-        <TwitterTimelineEmbed
-            key={activeProfile}
-            sourceType="profile"
-            screenName={accounts[activeProfile]}
-            options={{height: isMobile ? 400 : 400}}
-            noFooter
-        />
-    </div>
-
+    return <>
+        <div className={styles.TwitterContainer}>
+            <TwitterTimelineEmbed
+                key={activeProfile}
+                sourceType="profile"
+                screenName={accounts[activeProfile]}
+                options={{height: isMobile ? 400 : 400}}
+                noFooter
+            />
+            <div className={styles.Line}/>
+        </div>
+    </>
 }
