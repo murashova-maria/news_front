@@ -29,7 +29,7 @@ const accountsLocal = [
         id: 6,
         name: 'Foundation_IL',
     },
-]
+];
 
 type Props = {
     isMobile?: boolean;
@@ -44,7 +44,7 @@ export const Twitter: FC<Props> = ({isMobile = false}) => {
     const { request } = useHttp();
 
     const [activeProfile, setActiveProfile] = useState(0);
-    const [accounts, setAccounts] = useState<Twitters[]>(accountsLocal || [])
+    const [accounts, setAccounts] = useState<Twitters[]>([])
 
     const getTwitters = async () => {
         try {
