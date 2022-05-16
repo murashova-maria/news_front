@@ -17,7 +17,10 @@ export const AdminCard: React.FC<IPropsAdmin> = React.memo(
     const { request } = useHttp();
     const [, setAdminEditNews] = useGlobalState("adminEditNews");
 
-    const handleNewsDecline = async (id: number, status: "news" | "pending" | "published") => {
+    const handleNewsDecline = async (
+      id: number,
+      status: "news" | "pending" | "published"
+    ) => {
       await request({ path: `/${status}/${id}/`, method: "POST" });
       if (handleClick) handleClick(id, "decline");
     };
@@ -49,7 +52,10 @@ export const AdminCard: React.FC<IPropsAdmin> = React.memo(
       if (handleClick) handleClick(id, "publish");
     };
 
-    const handleNewsPublish = async (id: number, status: "news" | "pending" | "published") => {
+    const handleNewsPublish = async (
+      id: number,
+      status: "news" | "pending" | "published"
+    ) => {
       const resp = await request({
         path: `/${status}/publish/${id}/`,
         method: "POST",
@@ -60,7 +66,6 @@ export const AdminCard: React.FC<IPropsAdmin> = React.memo(
       if (handleClick) handleClick(id, "publish");
     };
 
-      console.log('item.status', item.status)
     return (
       <div className="adminCard">
         <div className="adminCard__container">
@@ -80,19 +85,34 @@ export const AdminCard: React.FC<IPropsAdmin> = React.memo(
                 <>
                   <span
                     className="btnAdmin red"
-                    onClick={() => handleNewsDecline(item.id, item.status === 'pending' ? 'pending' : 'news')}
+                    onClick={() =>
+                      handleNewsDecline(
+                        item.id,
+                        item.status === "pending" ? "pending" : "news"
+                      )
+                    }
                   >
                     Decline <img src={decline} alt="decline" />
                   </span>
                   <span
                     className="btnAdmin yellow"
-                    onClick={() => handleEdit(item.id, item.status === 'pending' ? 'pending' : 'news')}
+                    onClick={() =>
+                      handleEdit(
+                        item.id,
+                        item.status === "pending" ? "pending" : "news"
+                      )
+                    }
                   >
                     Edit <img src={edit} alt="edit" />
                   </span>
                   <span
                     className="btnAdmin green"
-                    onClick={() => handleNewsPublish(item.id, item.status === 'pending' ? 'pending' : 'news')}
+                    onClick={() =>
+                      handleNewsPublish(
+                        item.id,
+                        item.status === "pending" ? "pending" : "news"
+                      )
+                    }
                   >
                     Publish <img src={publish} alt="publish" />
                   </span>

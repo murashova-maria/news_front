@@ -92,8 +92,6 @@ export const CreatePage: React.FC = () => {
     })();
 
     if (query.get("edit") === "true" && adminEditNews) {
-      console.log('adminEditNews', adminEditNews);
-      
       setData(() => ({
         title: adminEditNews.title,
         text: adminEditNews.text,
@@ -104,9 +102,13 @@ export const CreatePage: React.FC = () => {
         tab: adminEditNews.tab,
         media: adminEditNews.media_link,
         cupturn: adminEditNews.cupturn,
-        original_id: adminEditNews.original.id
+        original_id: adminEditNews.original.id,
       }));
+      setTab(adminEditNews.tab);
       setPreview(adminEditNews.media_link);
+      setIsCheckedBreaking(adminEditNews.breacking);
+      setIsCheckedMain(adminEditNews.main);
+      setIsCheckedSecondary(adminEditNews.secondary_main);
     } else if (query.get("edit") === "true" && !adminEditNews) {
       history({ pathname: "/admin" });
     }
@@ -127,7 +129,7 @@ export const CreatePage: React.FC = () => {
   const handleClick = async (editId?: number, published = false) => {
     if (data) {
       const resp: any | null = await request({
-        path: `/save${editId ? '/' + editId: ''}/`,
+        path: `/save${editId ? "/" + editId : ""}/`,
         method: "PUT",
         body: {
           title: data.title,
@@ -138,10 +140,11 @@ export const CreatePage: React.FC = () => {
           main: isCheckedMain,
           breacking: isCheckedBreaking,
           tab: tab ? tab : data.tab,
+          link: data.link,
           media: selectedFile ?? data.media,
           secondary_main: isCheckedSecondary,
           cupturn: data.cupturn,
-          published: published
+          published: published,
         },
       });
       if (resp?.error || error) return toast.error(resp.error ?? "Error!");
@@ -150,7 +153,6 @@ export const CreatePage: React.FC = () => {
       history({ pathname: "/admin" });
     }
   };
-
 
   const newTabs: Array<{ value: string; name: string }> = tabs.reduce(
     (arr: any, next) => {
@@ -220,7 +222,7 @@ export const CreatePage: React.FC = () => {
               ) : data.media ? (
                 <div className="create__wrapper__preview">
                   <img src={data.media} alt="dropIcon" />
-                   <Button
+                  <Button
                     className="create__wrapper__preview__upload-button"
                     component="label"
                   >
@@ -231,7 +233,8 @@ export const CreatePage: React.FC = () => {
                       hidden
                       onChange={handleLoadFile("file")}
                     />
-                  </Button></div>
+                  </Button>
+                </div>
               ) : (
                 <div className="create__wrapper">
                   <img src={dropIcon} alt="dropIcon" />
@@ -305,6 +308,7 @@ export const CreatePage: React.FC = () => {
           <div className="create__left_check">
             Main item{" "}
             <Checkbox
+              checked={isCheckedMain}
               disabled={isCheckedSecondary}
               setIsCheckedCreate={setIsCheckedMain}
             />
@@ -313,6 +317,7 @@ export const CreatePage: React.FC = () => {
           <div className="create__left_check">
             Secondary item
             <Checkbox
+              checked={isCheckedSecondary}
               disabled={isCheckedMain}
               setIsCheckedCreate={setIsCheckedSecondary}
             />
@@ -320,7 +325,10 @@ export const CreatePage: React.FC = () => {
           <div className="create__left_check breaking">
             <div className="create__left_check_top">
               Breaking news{" "}
-              <Checkbox setIsCheckedCreate={setIsCheckedBreaking} />
+              <Checkbox
+                checked={isCheckedBreaking}
+                setIsCheckedCreate={setIsCheckedBreaking}
+              />
             </div>
             <div className="create__left_check_bot">
               <TextArea
@@ -340,6 +348,7 @@ export const CreatePage: React.FC = () => {
               <Dropdown
                 label="Tabs"
                 options={newTabs}
+                value={tab.toString()}
                 handleChange={(value) => setTab(Number(value))}
               />
             </div>
@@ -351,10 +360,16 @@ export const CreatePage: React.FC = () => {
             >
               Close
             </div>
-            <span onClick={() => handleClick(adminEditNews?.id, true)} className="buttons_create">
+            <span
+              onClick={() => handleClick(adminEditNews?.id, true)}
+              className="buttons_create"
+            >
               Publish
             </span>
-            <span onClick={() => handleClick(adminEditNews?.id)} className="buttons_monitoring buttons_cancle">
+            <span
+              onClick={() => handleClick(adminEditNews?.id)}
+              className="buttons_monitoring buttons_cancle"
+            >
               save changes & close
             </span>
           </div>
