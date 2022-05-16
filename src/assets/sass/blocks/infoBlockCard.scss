@@ -6,6 +6,8 @@
     border: 1px solid #fff;
     cursor: pointer;
     transition: all .2s ease-in-out;
+    height: 110px;
+    background-color: $white;
 
     @media(max-width: 1000px) {
         min-width: 100%;
@@ -15,35 +17,36 @@
         transform: scale(1.02);
     }
 
-    &.Investigations {
-        border-color: #27AE60;
-    }
-
-    &.Sport {
-        border-color: #20127F;
-    }
-
-    &.ScienceTechnology {
-        border-color: #7A5648;
-    }
-
-    &.News {
-        border-color: #DA191C;
-    }
-
-    &.Economy {
-        border-color: #F57C1F;
-    }
-
-    &.Business {
-        border-color: #913E98;
-    }
+    //&.Investigations {
+    //    border-color: $investigations;
+    //}
+    //
+    //&.Sport {
+    //    border-color: $sport;
+    //}
+    //
+    //&.ScienceTechnology {
+    //    border-color: $technology;
+    //}
+    //
+    //&.News {
+    //    border-color: $news;
+    //}
+    //
+    //&.Economy {
+    //    border-color: $weather;
+    //}
+    //
+    //&.Business {
+    //    border-color: $business;
+    //}
 
     &__left {
         position: relative;
-        width: 30%;
+        width: 40%;
 
         & img {
+            display: flex;
             border-radius: 10px 0 0 10px;
             height: 100%;
             width: 100%;
@@ -62,7 +65,7 @@
     }
 
     &__right {
-        width: 70%;
+        width: 60%;
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -72,6 +75,11 @@
         &_top {
             font-weight: 700;
             font-size: 18px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
 
             @media(max-width: 1190px) {
                 font-size: 12px;

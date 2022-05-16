@@ -6,6 +6,8 @@ import { TopCards } from '../../components/Cards/TopCards'
 import { ExpandType } from "../../types/api/subdomainTacnews";
 import { useHttp } from "../../hooks/useHttp";
 import { useLocation } from "react-router-dom";
+import {Image} from "../../components/shared/Image/Image";
+
 
 export const CorrectNews: React.FC = () => {
 
@@ -14,7 +16,6 @@ export const CorrectNews: React.FC = () => {
 
     const { request } = useHttp();
     const location = useLocation();
-
 
     useEffect(() => {
         const query = new URLSearchParams(location.search);
@@ -42,7 +43,7 @@ export const CorrectNews: React.FC = () => {
             {item ? 
             <div className="correctnews__left">
                 <div className="correctnews__left_tags">
-                    <div className={`tagNews tag ${item?.tab.replace('&', '')}`}>{item?.tab}</div>
+                    <div className={`tagNews tag ${item?.tab?.replace('&', '')}`}>{item?.tab}</div>
                 </div>
                 <div className="correctnews__left_photo">
                     <div className="correctnews__left_photo_title">
@@ -50,7 +51,7 @@ export const CorrectNews: React.FC = () => {
                     </div>
                     <div className="correctnews__left_photo_block">
                         <img className='planetNews' src={bluePlanet} alt="bluePlanet" />
-                        <img className='blockNews' src={item?.media_link} alt="news" />
+                        <Image className='blockNews' src={item?.media_link} alt="news" />
                         <div className="correctnews__left_photo_block_info">
                             <div className="correctnews__left_photo_block_info_item">
                                 <img className='iconPhoto' src={iconAuthor} alt="iconAuthor" />
@@ -63,9 +64,7 @@ export const CorrectNews: React.FC = () => {
                         </div>
                     </div>
                 </div>
-                <div className="correctnews__left_text">
-                    {item?.text}
-                </div>
+                <div className="correctnews__left_text" dangerouslySetInnerHTML={{__html: item?.text || ''}}/>
             </div>
             : null}
             <div className="correctnews__right">

@@ -16,29 +16,30 @@
 @import './blocks/wrapperСontent.scss';
 @import './blocks/singleIn.scss';
 
+
 .tag {
     &.Investigations {
-        color: #27AE60;
+        color: $investigations;
     }
 
     &.Sport {
-        color: #20127F;
+        color: $sport;
     }
 
     &.ScienceTechnology {
-        color: #7A5648;
+        color: $technology;
     }
 
-    &.New {
-        color: #DA191C;
+    &.News {
+        color: $news;
     }
 
-    &.Weather {
-        color: #F57C1F;
+    &.Economy {
+        color: $weather;
     }
 
     &.Business {
-        color: #913E98;
+        color: $business;
     }
 }
 
@@ -122,7 +123,7 @@
             color: #716161;
             font-weight: 400;
             font-size: 18px;
-            font-family: $open;
+            font-family: $smooch;
         }
     }
 }
@@ -231,8 +232,8 @@
     .icon-menu {
         display: block;
         position: absolute;
-        top: 24px;
-        right: 25px;
+        top: 27px;
+        right: 10px;
         width: 60px;
         height: 28px;
         cursor: pointer;
@@ -526,7 +527,7 @@
 
 .blockAdminCard {
     padding: 20px;
-    background: #FFFFFF;
+    background: #EEEEEE;
     border: 1px solid #C2FFFD;
     box-sizing: border-box;
     box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.05);
@@ -543,7 +544,7 @@
 
     font-weight: 400;
     font-size: 14px;
-    font-family: $gilroy-r;
+    font-family: $smooch;
 
     margin-right: 15px;
     margin-top: 20px;
@@ -627,7 +628,7 @@ input[type="checkbox"] {
 
     font-weight: 700;
     font-size: 14px;
-    font-family: $open;
+    font-family: $smooch;
     margin-right: 20px;
     margin-bottom: 10px;
 

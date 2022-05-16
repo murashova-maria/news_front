@@ -134,6 +134,12 @@ export const Admin: React.FC = () => {
       <div className="circlebot fourthcircle"></div>
       <div className="buttons">
         <div
+            onClick={() => history({ pathname: "/admin?popup=twitter" })}
+            className="buttons_monitoring"
+        >
+          Twitter accounts
+        </div>
+        <div
           onClick={() => history({ pathname: "/admin?popup=monitoring" })}
           className="buttons_monitoring"
         >

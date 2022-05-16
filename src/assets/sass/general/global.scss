@@ -7,10 +7,7 @@ body {
     font-size: 16px;
     line-height: normal;
     height:100%;
-    font-family: $open;
-    color: #fff;
-    // background-color: #000000;
-  
+    font-family: $smooch;
   }
   
   
@@ -111,6 +108,8 @@ body {
 
   .wrapper {
     overflow: hidden;
+    margin-top: 138px;
+
 
     &.overflowX {
       overflow-y: auto;
@@ -131,8 +130,9 @@ body {
   .main {
     width: 100%;
     color: black;
-    transform: translateY(40px);
     padding: 0 70px;
+    margin-top: 40px;
+
     &.h100vh {
       height: 100vh;
     }

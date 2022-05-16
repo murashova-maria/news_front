@@ -3,7 +3,7 @@
     display: flex;
 
     &__left {
-        max-width: 70%;
+        width: 68%;
 
         &_tags {
             display: flex;
@@ -54,25 +54,31 @@
 
             &_title {
                 font-weight: 700;
-                font-size: 64px;
+                font-size: 60px;
                 font-family: $smooch;
+
+                @media(max-width: 767px) {
+                    font-size: 35px;
+                }
             }
 
             &_block {
                 position: relative;
                 border: 1px solid #CCCCCC;
                 border-radius: 10px;
+                background-color: white;
 
                 & .blockNews {
                     width: 100%;
+                    max-height: 40vh;
                 }
 
                 & .planetNews {
                     position: absolute;
-                    top: -217px;
-                    right: 186px;
+                    top: -212px;
+                    left: 30%;
                     z-index: -1;
-                    width: 411px;
+                    width: 400px;
                 }
 
                 &_info {
@@ -94,6 +100,10 @@
                         }
                     }
                 }
+
+                img {
+                    border-radius: 10px;
+                }
             }
         }
 
@@ -102,11 +112,16 @@
             font-size: 18px;
             margin-bottom: 60px;
         }
+
+        border-right: 1px solid #CCCCCC;
+        border-left: 1px solid #CCCCCC;
+        padding: 0 10px;
     }
 
     &__right {
         width: 30%;
-        margin-left: 20px;
+        margin-left: 10px;
+        margin-bottom: 20px;
 
         display: flex;
         flex-direction: column;
@@ -117,6 +132,13 @@
             font-size: 36px;
             font-family: $smooch;
             margin-bottom: 20px;
+            @media(max-width: 767px) {
+                font-size: 25px;
+            }
+        }
+
+        &_news {
+            width: 100%;
         }
     }
 }

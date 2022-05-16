@@ -1,0 +1,58 @@
+@import '../../../assets/sass/general/global';
+
+.btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  color: $red-accent;
+  border: 1px solid transparent;
+  cursor: pointer;
+  font-size: $button_font_size;
+  min-width: $button_default_width;
+  max-height: 41px;
+  padding: 10px 40px;
+  line-height: 25px;
+  font-style: normal;
+  font-family: $smooch;
+  transition: all .2s ease-in-out;
+  @include adap-font(18, 15);
+
+  &.primary {
+    background-color: $white;
+    color: $red-accent;
+    border: 1px solid $red-accent;
+
+    &:hover {
+      background-color: $red-accent;
+      color: $white;
+      border: 1px solid $red-accent;
+    }
+    &:active {
+      background-color: $red-accent-dark;
+      color: $white;
+      border: 1px solid $red-accent-dark;
+    }
+  }
+
+  &.secondary {
+    background-color: $white;
+    color: #58C7DA;
+    border: 1px solid #58C7DA;;
+
+    &:hover {
+      background-color: #1998A7;
+      color: $white;
+      border: 1px solid #1998A7;
+    }
+    &:active {
+      background-color: #1998A7;
+      color: $white;
+      border: 1px solid #1998A7;
+    }
+  }
+
+  &.default {
+    min-width: $button_default_width;
+  }
+}

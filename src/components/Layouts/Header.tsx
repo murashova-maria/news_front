@@ -9,6 +9,10 @@ import { useHttp } from "../../hooks/useHttp";
 import { BreackingType, TabType } from "../../types/api/subdomainTacnews";
 import { useGlobalState } from "../../store";
 import { Link } from "react-router-dom";
+import {Modal} from "../shared/Modal/Modal";
+import {useModal} from "../../hooks/useModal";
+import {Button} from "../shared/Button/Button";
+import {AddNewsModal} from "../AddNewsModal/AddNewsModal";
 
 export const Header: React.FC = () => {
   const [isLogin] = useGlobalState("isLogin");
@@ -49,8 +53,15 @@ export const Header: React.FC = () => {
     }
   }, [isLogin]);
 
+  const addNewsModal = useModal();
+  const breakingNewsModal = useModal();
+
+  const addNewsHandler = () => {
+    addNewsModal.onOpen();
+  }
+
   return (
-    <>
+    <div className="header__wrapper">
       <header className="header">
         <div className="header__container">
           <div className="header__row">
@@ -89,29 +100,51 @@ export const Header: React.FC = () => {
                 ))}
               </ul>
             </nav>
+            <Button onClick={addNewsHandler} className="header__addNewsBtn">TIP US</Button>
           </div>
         </div>
       </header>
-      <div className="header__container bgcRed">
-        <div className="header__row">
-          <span className="breaking__title">BREACKING</span>
+      <div className="header__container bgcRed breakingContainer">
+        {breacking && <div className="header__row">
+          <span className="breaking__title">BREAKING</span>
+          <span className="breaking__tire">—</span>
           <div className="breaking">
             <div className="breaking__title-news">
-              {breacking.map(({ id, title }) => (
+              {breacking.map(({ id, cupturn }) => (
                 <Link
                   key={id}
                   to={`news?newsid=${id}`}
                   className="breaking__title-news__text"
                 >
-                  <span className="breaking__tire">—</span>
-                  {title}
+                  {cupturn}
                 </Link>
               ))}
             </div>
           </div>
-        </div>
+          <div className="breaking__allNews" onClick={breakingNewsModal.onOpen}>View all breaking news</div>
+        </div>}
       </div>
-    </>
+      {addNewsModal.isOpened && <AddNewsModal onClose={addNewsModal.onClose} isOpened={addNewsModal.isOpened} />}
+      {breakingNewsModal.isOpened && <Modal onClose={breakingNewsModal.onClose}
+                                            isOpened={breakingNewsModal.isOpened}
+                                            title="BREAKING NEWS"
+                                            fullWidth
+      >
+        <div className="breaking__allNews-modal">
+          {breacking.map(({ id, cupturn, date, }) => (
+              <Link
+                  key={id}
+                  to={`news?newsid=${id}`}
+                  className="breaking__title-all-news"
+                  onClick={breakingNewsModal.onClose}
+              >
+                <div className="breaking__title-all-news-title" title={cupturn}>{cupturn}</div>
+                <div className="breaking__title-all-news-date">{date}</div>
+              </Link>
+          ))}
+        </div>
+      </Modal>}
+    </div>
   );
 };
 

@@ -1,13 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router';
 import { NavLink } from 'react-router-dom';
-import logo1 from '../../assets/img/firsticon.png';
+import logo1 from '../../assets/img/bluePlanet.png';
 import logo2 from '../../assets/img/TAC.png';
-import insta from '../../assets/img/insta.png'
-import face from '../../assets/img/face.png'
-import telega from '../../assets/img/telega.png'
+import telegram from '../../assets/img/telega.png'
 import twitter from '../../assets/img/twitter.png'
-import utube from '../../assets/img/utube.png'
 import { ABOUT_ROUTE, CONTACT_ROUTE, COOKIES_ROUTE, MAIN_ROUTE, TERMS_ROUTE, TAB_NEWS } from '../../constants/paths';
 import { TabType } from "../../types/api/subdomainTacnews";
 import { useHttp } from "../../hooks/useHttp";
@@ -40,7 +37,7 @@ export const Footer: React.FC = () => {
             <div className="footer__container">
                 <div className="footer__body">
                     <div onClick={() => history({ pathname: MAIN_ROUTE })} className="footer__body_left">
-                        <img className='header__logo' src={logo1} alt="logo" />
+                        <img className='header__logo footer__logo-first' src={logo1} alt="logo" />
                         <img className='header__logo' src={logo2} alt="logo" />
                     </div>
                     <div className="footer__body_right">
@@ -57,8 +54,9 @@ export const Footer: React.FC = () => {
                                 </ul>
                             </nav>
                         </div>
+                        <div className="footer__body_line"/>
                         <div className="footer__body_right_bot">
-                            <nav className="nav">
+                            <nav>
                                 <ul className={`nav__listf ${isActive ? 'active' : null}`}>
                                     <li onClick={close} className="nav__itemf">
                                         <NavLink onClick={() => setIsActive(false)} to={ABOUT_ROUTE} className="nav__linkf">
@@ -81,20 +79,11 @@ export const Footer: React.FC = () => {
                                     </NavLink>
                                     </li>
                                     <div className="footer__body_right_bot_social">
-                                        <a href="/">
-                                            <img src={insta} alt="insta"/>
-                                        </a>
-                                        <a href="/">
-                                            <img src={face} alt="face"/>
-                                        </a>
-                                        <a href="/">
+                                        <a href="https://twitter.com/ThinkTAC2022" target="_blank" rel="noreferrer">
                                             <img src={twitter} alt="twitter"/>
                                         </a>
                                         <a href="/">
-                                            <img src={telega} alt="telega"/>
-                                        </a>
-                                        <a href="/">
-                                            <img src={utube} alt="utube"/>
+                                            <img src={telegram} alt="telegram"/>
                                         </a>
                                     </div>
                                 </ul>

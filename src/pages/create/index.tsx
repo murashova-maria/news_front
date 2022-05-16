@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { TextArea } from "../../components/TextArea/TextArea";
 
@@ -14,6 +14,7 @@ import { CreatePost } from "../../types/api/admin";
 import { TabType } from "../../types/api/subdomainTacnews";
 import useQuery from "../../utils/hooks/useQuery";
 import { Button } from "@mui/material";
+import {Image} from "../../components/shared/Image/Image";
 
 export const CreatePage: React.FC = () => {
   const history = useNavigate();
@@ -133,7 +134,7 @@ export const CreatePage: React.FC = () => {
         method: "PUT",
         body: {
           title: data.title,
-          text: data.text,
+          text: data.text.replaceAll('\n', '<br>'),
           copyright_label: data.copyright_label,
           copyright_link: data.copyright_link,
           by: data.by,
@@ -205,7 +206,7 @@ export const CreatePage: React.FC = () => {
             >
               {preview ? (
                 <div className="create__wrapper__preview">
-                  <img src={preview} alt="preview" className="preview" />
+                  <Image src={preview} alt="preview" className="preview" />
                   <Button
                     className="create__wrapper__preview__upload-button"
                     component="label"
@@ -221,8 +222,8 @@ export const CreatePage: React.FC = () => {
                 </div>
               ) : data.media ? (
                 <div className="create__wrapper__preview">
-                  <img src={data.media} alt="dropIcon" />
-                  <Button
+                  <Image src={data.media} alt="dropIcon" />
+                   <Button
                     className="create__wrapper__preview__upload-button"
                     component="label"
                   >
@@ -255,7 +256,7 @@ export const CreatePage: React.FC = () => {
             </div>
           )}
           <div className="create__right_by">
-            <a href={data.link} target="_blank" style={{ display: "flex" }}>
+            <a href={data.link} target="_blank" style={{ display: "flex" }} rel="noreferrer">
               <img src={iconAuthor} alt="iconAuthor" />
             </a>
             <input
@@ -268,7 +269,7 @@ export const CreatePage: React.FC = () => {
             />
           </div>
           <div className="create__right_by">
-            <a href={data.link} target="_blank" style={{ display: "flex" }}>
+            <a href={data.link} target="_blank" style={{ display: "flex" }} rel="noreferrer">
               <img src={link} alt="link" />
             </a>
             <input
@@ -297,7 +298,7 @@ export const CreatePage: React.FC = () => {
           <TextArea
             textarea={true}
             placeholder="Enter texts..."
-            value={data.text}
+            value={data.text?.replaceAll('<br>', '\n')}
             onChange={(event: any) =>
               setData((prev) => ({ ...prev, text: event.target.value }))
             }
@@ -348,7 +349,7 @@ export const CreatePage: React.FC = () => {
               <Dropdown
                 label="Tabs"
                 options={newTabs}
-                value={tab.toString()}
+                value={String(tab)}
                 handleChange={(value) => setTab(Number(value))}
               />
             </div>

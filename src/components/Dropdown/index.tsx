@@ -12,16 +12,15 @@ interface IDropdown {
   handleChange: (value: string, name: string) => void;
 }
 
+const emptyValue = { value: "", name: "" };
+
 export const Dropdown: React.FC<IDropdown> = ({
   value,
   label,
   options,
   handleChange,
 }) => {
-  const [selected, setSelected] = React.useState({
-    value: "",
-    name: "",
-  });
+  const [selected, setSelected] = React.useState(emptyValue);
 
   const handleChg = (event: SelectChangeEvent) => {
     setSelected({ value: event.target.value, name: event.target.name });
@@ -30,7 +29,7 @@ export const Dropdown: React.FC<IDropdown> = ({
   useEffect(() => {
     const select = options.find((item) => item.value === value);
     if (select) setSelected({ value: select.value, name: select.name });
-  }, [value]);
+  }, [value, options]);
 
   useEffect(() => {
     const select = options.find((item) => item.value === selected.value);
@@ -39,19 +38,20 @@ export const Dropdown: React.FC<IDropdown> = ({
     }
   }, [selected, value]);
 
+
   return (
     <FormControl sx={{ m: 1, minWidth: 200 }} size="small">
       <InputLabel id="demo-select-small">{label}</InputLabel>
       <Select
         labelId="demo-select-small"
         id="demo-select-small"
-        value={selected.value}
-        name={selected.name}
+        value={selected?.value}
+        name={selected?.name}
         label="Tabs"
         onChange={handleChg}
       >
         {options.map((item) => (
-          <MenuItem value={item.value}>{item.name}</MenuItem>
+          <MenuItem key={item.value} value={item.value}>{item.name}</MenuItem>
         ))}
       </Select>
     </FormControl>

@@ -1,6 +1,5 @@
 .footer {
-    margin-top: auto;
-    padding: 40px 0px;
+    padding: 20px 0px;
 
    
 
@@ -8,10 +7,19 @@
         padding: 0px 70px;
     }
 
+    &__logo-first {
+        width: 48px;
+    }
+
     &__body {
-        justify-content: space-between;
         display: flex;
+        justify-content: center;
         align-items: center;
+        font-size: 18px;
+        font-family: $open;
+        font-style: normal;
+        font-weight: 600;
+
         @media(max-width:1180px) {
             flex-direction: column;
         }
@@ -20,6 +28,7 @@
             display: flex;
             align-items: center;
             cursor: pointer;
+            margin-right: 50px;
 
             @media(max-width:1180px) {
                 margin-bottom: 15px;
@@ -30,14 +39,26 @@
                 margin-right: 10px;
             }
         }
-
+        &_line {
+            height: 1px;
+            background-color: #CCCCCC;
+            width: 100%;
+        }
         &_right {
-            margin: 0 auto;
+
+            &_top {
+                padding-bottom: 15px;
+                font-weight: 800;
+            }
 
             &_bot {
-                
-
+                display: flex;
+                justify-content: center;
+                width: 100%;
                 margin-top: 20px;
+                font-weight: lighter;
+                font-size: 16px;
+
                 & .nav .nav__listf{
                     justify-content: space-around;
                     @media(max-width:1180px) {
@@ -49,10 +70,6 @@
                     @media(max-width:1180px) {
                         margin-bottom: 15px;
                     }
-                }
-                & .nav .nav__listf .nav__itemf .nav__linkf {
-                    font-weight: 400 !important;
-                    font-size: 16px !important;
                 }
 
                 &_social {
@@ -89,10 +106,12 @@
             padding: 0;
             margin-bottom: 15px;
         }
+        &:last-child {
+            padding: 0;
+        }
     }
 
     &__linkf {
-        font-weight: 600;
         position: relative;
 
         &::before {

@@ -10,6 +10,7 @@ import unpublish from "../../../assets/img/unpublish.svg";
 import { useHttp } from "../../../hooks/useHttp";
 import { useNavigate } from "react-router";
 import { useGlobalState } from "../../../store";
+import {Image} from "../../shared/Image/Image";
 
 export const AdminCard: React.FC<IPropsAdmin> = React.memo(
   ({ item, handleClick }) => {
@@ -70,7 +71,7 @@ export const AdminCard: React.FC<IPropsAdmin> = React.memo(
       <div className="adminCard">
         <div className="adminCard__container">
           <div className="adminCard__top">
-            <img src={item.img} alt="item.img" />
+            <Image src={item.img} alt="item.img" />
           </div>
           <div className="adminCard__bot">
             <div className="adminCard__bot_title">{item.title}</div>

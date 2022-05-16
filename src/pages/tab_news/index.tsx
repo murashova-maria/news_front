@@ -4,6 +4,7 @@ import { TopCards } from '../../components/Cards/TopCards'
 import { InfoBlock } from '../../components/InfoBlock/InfoBlock'
 import { useHttp } from "../../hooks/useHttp";
 import { TabNewsType, MainType, TabType } from "../../types/api/subdomainTacnews";
+import {Image} from "../../components/shared/Image/Image";
 
 
 export const TabNews: React.FC = () => {
@@ -62,10 +63,11 @@ export const TabNews: React.FC = () => {
         <>
             <div className='main__section0'>
                 <div className="main__section0_left">
-                    <div className={`bigCard ${main?.tab.replace('&', '')}`} onClick={() => history({pathname:`/news?newsid=${main?.id}`})}>
+                    <div className={`bigCard ${main?.tab?.replace('&', '')}`} onClick={() => history({pathname:`/news?newsid=${main?.id}`})}>
                         <div className="bigCard__img">
-                            <div className={`tag ${main?.tab.replace('&', '')}`}>{main?.tab}</div>
-                            <img src={main?.media_link} alt="newsItems" />
+                            <div className="blur"/>
+                            <div className={`tag ${main?.tab?.replace('&', '')}`}>{main?.tab}</div>
+                            <Image src={main?.media_link} alt="newsItems" />
                             <div className="bigCard__img_title">
                                 {main?.title}
                             </div>
@@ -75,9 +77,7 @@ export const TabNews: React.FC = () => {
                                 <div className="bigCard__desc_top_author">{main?.by}</div>
                                 <div className="bigCard__desc_top_date">{main?.date}</div>
                             </div>
-                            <div className="bigCard__desc_bot">
-                                {main?.text}
-                            </div>
+                            <div className="bigCard__desc_bot" dangerouslySetInnerHTML={{__html: main?.text || ''}} />
                         </div>
                     </div>
                 </div>

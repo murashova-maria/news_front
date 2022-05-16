@@ -1,24 +1,24 @@
 .main__section0 {
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
     align-items: stretch;
     margin-bottom: 60px;
+    gap: 22px;
     @media(max-width: 1000px) {
         flex-direction: column;
     }
     &_left {
         width: 68%;
-        // margin-right: 15px;
 
         @media(max-width: 1000px) {
             max-width: 100%;
+            width: 100%;
             margin-right: 0;
         }
     }
 
     &_right {
-        max-width: 28%;
+        max-width: 32%;
         display: flex;
         flex-direction: column;
         @media(max-width: 1000px) {
@@ -36,10 +36,9 @@
 
 .main__section2 {
     width: 100%;
-    height: 138px;
-    background-color: #ccc;
+    min-height: 138px;
+    //background-color: #d0d0d0;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 40px;
 }

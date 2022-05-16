@@ -1,0 +1,47 @@
+@import '../../assets/sass/general/global';
+
+.Container {
+  padding: 16px;
+}
+
+.Title {
+  padding: 27px 0;
+  border-radius: 17px;
+  background: #fff;
+  width: 100%;
+  @include adap-font(30, 20);
+  color: #000000;
+  text-align: center;
+  position: relative;
+  font-family: $smooch;
+  font-weight: 700;
+  font-size: 36px;
+}
+
+.Content {
+  max-height: 500px;
+  overflow: auto;
+
+  &_item {
+    font-family: $smooch;
+    font-weight: 400;
+    font-size: 24px;
+    color: #999999;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+}
+
+.Loader {
+  color: #000;
+  padding: 20px;
+  margin: 0 auto;
+}
+
+.Action {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}

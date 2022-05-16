@@ -1,6 +1,8 @@
 export interface BreackingType {
   id: number;
   title: string;
+  cupturn: string;
+  date: string;
 }
 
 export interface TabType {

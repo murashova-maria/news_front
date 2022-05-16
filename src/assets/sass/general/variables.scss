@@ -1,7 +1,23 @@
-$open: 'Open Sans, sans-serif';
-$button: #DA191C;
+$open: 'Open Sans';
 $smooch: 'Smooch Sans';
 $gilroy-r: 'Gilroy-R';
 $gilroy-m: 'Gilroy-M';
 $gilroy-sb: 'Gilroy-SB';
 $gilroy-b: 'Gilroy-B';
+
+$button: #DA191C;
+$red-accent: #DA191C;
+$red-accent-dark: #B9181B;
+$white: #fff;
+
+// categories from figma
+$news: #DA191C;
+$sport: #20127F;
+$business: #913E98;
+$technology: #7A5648;
+$weather: #F57C1F; // uses for economy
+$investigations: #27AE60;
+
+$button_default_width: 100px;
+
+$button_font_size: 18px;
