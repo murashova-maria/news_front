@@ -312,7 +312,6 @@ export const CreatePage: React.FC = () => {
               checked={isCheckedMain}
               disabled={isCheckedSecondary}
               setIsCheckedCreate={setIsCheckedMain}
-              initialChecked={isCheckedMain}
             />
           </div>
           <br />
@@ -322,7 +321,6 @@ export const CreatePage: React.FC = () => {
               checked={isCheckedSecondary}
               disabled={isCheckedMain}
               setIsCheckedCreate={setIsCheckedSecondary}
-              initialChecked={isCheckedSecondary}
             />
           </div>
           <div className="create__left_check breaking">
@@ -351,9 +349,8 @@ export const CreatePage: React.FC = () => {
               <Dropdown
                 label="Tabs"
                 options={newTabs}
-                value={tab.toString()}
+                value={String(tab)}
                 handleChange={(value) => setTab(Number(value))}
-                predefinedValue={String(tab)}
               />
             </div>
           </div>
