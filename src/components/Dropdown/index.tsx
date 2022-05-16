@@ -6,36 +6,38 @@ import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { useEffect } from "react";
 
 interface IDropdown {
+  value?: string;
   label: string;
   options: { value: string; name: string }[];
   handleChange: (value: string, name: string) => void;
-  predefinedValue?: string;
 }
 
 const emptyValue = { value: "", name: "" };
 
 export const Dropdown: React.FC<IDropdown> = ({
+  value,
   label,
   options,
   handleChange,
-  predefinedValue,
 }) => {
-  const [selected, setSelected] = React.useState({ value: "", name: "" } );
+  const [selected, setSelected] = React.useState(emptyValue);
 
   const handleChg = (event: SelectChangeEvent) => {
     setSelected({ value: event.target.value, name: event.target.name });
   };
 
   useEffect(() => {
-    const select = options.find((item) => item.value === selected?.value);
-    if (select) handleChange(select.value, select.name);
-  }, [selected]);
-
+    const select = options.find((item) => item.value === value);
+    if (select) setSelected({ value: select.value, name: select.name });
+  }, [value, options]);
 
   useEffect(() => {
-      const val = options.find((i) => i.value === predefinedValue)
-      setSelected(val || { value: "", name: "" });
-  }, [predefinedValue, options]);
+    const select = options.find((item) => item.value === selected.value);
+    if (select) {
+      handleChange(select.value, select.name);
+    }
+  }, [selected, value]);
+
 
   return (
     <FormControl sx={{ m: 1, minWidth: 200 }} size="small">

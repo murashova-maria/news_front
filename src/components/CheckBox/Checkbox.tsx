@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { animated, useSpring } from "react-spring";
 
-export const Checkbox = ({ setIsCheckedCreate, disabled, initialChecked = false }: any) => {
-  const [isChecked, setIsChecked] = useState<boolean>(initialChecked);
+export const Checkbox = ({
+  checked = false,
+  setIsCheckedCreate,
+  disabled,
+}: any) => {
+  const [isChecked, setIsChecked] = useState<boolean>(checked);
   const checkboxAnimationStyle = useSpring({
     backgroundColor: isChecked ? "#F06543" : "#fff",
     borderColor: isChecked ? "#F06543" : "#F06543",
@@ -19,8 +23,8 @@ export const Checkbox = ({ setIsCheckedCreate, disabled, initialChecked = false 
   }, [isChecked]);
 
   useEffect(() => {
-      setIsChecked(initialChecked);
-  }, [initialChecked]);
+    setIsChecked(checked);
+  }, [checked]);
 
   return (
     <label>
