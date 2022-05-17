@@ -48,9 +48,9 @@ export const AddNewsModal: FC<Props> = ({onClose, isOpened}) => {
     const onSubmitHandler = async () => {
         const formValues:any = getValues()
         //Embed image file
-        const formData = new FormData();
-        formData.append('image', formValues.media);
-        formValues.media = formData
+        //const formData = new FormData();
+        //formData.append('image', formValues.media);
+        //formValues.media = formData
         console.log(formValues)
         try {
             const data = await request({
