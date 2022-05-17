@@ -1,5 +1,9 @@
 .TwitterContainer {
-  height: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 500px;
   margin-bottom: 5px;
 }
 .Line {

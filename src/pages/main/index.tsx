@@ -79,9 +79,9 @@ export const Main: React.FC = () => {
                     {secondaryMain.map(el => <TopCards key={el.id} hasNewsId={false} item={el} />)}
                 </div>
             </div>
-            {!ADMIN_PANEL && <span className="ad-block__mobile">
+            {!ADMIN_PANEL && <div>
                   <Twitter isMobile/>
-              </span>
+              </div>
             }
       <div className="main__section1">
         {tabs ? blocs : null}
