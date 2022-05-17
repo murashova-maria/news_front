@@ -1,6 +1,10 @@
 import { useFormContext, useController } from "react-hook-form";
+import { Input } from '@mui/material';
 
-export const FormFileContainer = ({ disabled = false, name }: any) => {
+export const FormFileContainer = ({
+  disabled = false,
+  name,
+}: any) => {
   const formContext = useFormContext();
   const {
     field: { onChange, onBlur, value },
@@ -12,14 +16,13 @@ export const FormFileContainer = ({ disabled = false, name }: any) => {
   formContext.register(name, { disabled });
 
   return (
-    <label className="MuiOutlinedInput-root MuiInputBase-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl css-md26zr-MuiInputBase-root-MuiOutlinedInput-root">
-      <input
-        onChange={onChange}
-        onBlur={onBlur}
-        disabled={disabled}
-        name={name}
-        type="file"
-      />
-    </label>
+    <Input
+    className="filee"
+      onChange={onChange}
+      onBlur={onBlur}
+      disabled={disabled}
+      name={name}
+      type="file"
+    />
   );
 };
