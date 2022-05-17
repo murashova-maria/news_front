@@ -70,16 +70,17 @@ export const Twitter: FC<Props> = ({isMobile = false}) => {
 
     return <>
         <div className={styles.TwitterContainer}>
-            {accounts &&
+            {accounts.length > 0 &&
                 <>
                     <TwitterTimelineEmbed
                         key={activeProfile}
                         sourceType="profile"
                         screenName={accounts[activeProfile]?.name}
-                        options={{height: isMobile ? 400 : 400}}
+                        options={{height: isMobile ? 500 : 500, width: 1200, align: 'center'}}
                         noFooter
+
                     />
-                    <div className={styles.Line}/>
+                    {/*<div className={styles.Line}/>*/}
                 </>
             }
         </div>

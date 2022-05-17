@@ -17,10 +17,15 @@
     }
   }
 
-  .ad-block__mobile {
-    display: none;
-    @media(max-width: 1000px) {
-      display: block;
-    }
-  }
+  //.ad-block__twitter {
+  //  display: block;
+    //@media(max-width: 1000px) {
+    //  display: block;
+    //}
+  //}
+}
+
+.timeline-Widget {
+  width: 100%;
+  max-width: 100%;
 }
