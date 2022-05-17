@@ -54,7 +54,7 @@
     @include adap-font(18, 15);
     cursor: pointer;
     transition: all .2s ease-in-out;
-
+    text-align: center;
     &:hover {
         background-color: $button;
         color: #fff;

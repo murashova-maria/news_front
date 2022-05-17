@@ -1,15 +1,18 @@
 import {Modal} from "../shared/Modal/Modal";
 import React, {FC, } from "react";
-import { object, string } from 'yup';
+import { object, string, mixed} from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useFormContext, useController } from "react-hook-form";
 
 import { FormProvider, useForm } from 'react-hook-form';
 import {FormInputContainer} from "../shared/Forms/FormInputContainer/FormInputContainer";
+
 import {toast} from "react-toastify";
 import {useHttp} from "../../hooks/useHttp";
 import styles from './AddNewsModal.module.scss';
 import {styled} from "@mui/material/styles";
 import {TextField} from "@mui/material";
+import { FormFileContainer } from "../shared/Forms/FormInputContainer/FormFileInput";
 type Props = {
     onClose: VoidFunction;
     isOpened: boolean
@@ -17,6 +20,7 @@ type Props = {
 
 export const FORM_VALIDATION_SCHEMA = object({
     title: string().required(),
+    media: mixed(),
     link: string().required(),
     text: string().required(),
 });
@@ -25,6 +29,7 @@ export const AddNewsModal: FC<Props> = ({onClose, isOpened}) => {
     const methods = useForm<any>({
         defaultValues: {
             title: '',
+            media: '',
             link: '',
             text: '',
         },
@@ -41,11 +46,17 @@ export const AddNewsModal: FC<Props> = ({onClose, isOpened}) => {
     } = useHttp();
 
     const onSubmitHandler = async () => {
+        const formValues:any = getValues()
+        //Embed image file
+        const formData = new FormData();
+        formData.append('image', formValues.media);
+        formValues.media = formData
+        console.log(formValues)
         try {
             const data = await request({
                 path: `/offer_news/`,
                 method: "POST",
-                body: getValues(),
+                body: formValues,
             });
 
             if (data?.error) {
@@ -60,9 +71,10 @@ export const AddNewsModal: FC<Props> = ({onClose, isOpened}) => {
         }
     };
 
+
     return (
         <FormProvider {...methods}>
-            <Modal title="ADD NEWS"
+            <Modal title="Share a story"
                    isOpened={isOpened}
                    onClose={onClose}
                    isLoading={loading}
@@ -73,6 +85,7 @@ export const AddNewsModal: FC<Props> = ({onClose, isOpened}) => {
            }>
                 <div className={styles.Container}>
                     <FormInputContainer name="title" label="Title"/>
+                    <FormFileContainer name="media"/>
                     <FormInputContainer name="link" label="Url"/>
                     <FormInputContainer name="text" label="Text" multiline rows={5}/>
                 </div>
