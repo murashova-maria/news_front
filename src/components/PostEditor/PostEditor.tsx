@@ -4,7 +4,6 @@ import "suneditor/dist/css/suneditor.min.css"; // Import Sun Editor's CSS File
 
 const MyComponent = (props: any) => {
   const area = useRef();
-  console.log(props.defaultValue)
   return (
     <div>
       <SunEditor
