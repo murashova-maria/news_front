@@ -42,7 +42,6 @@ export const AddNewsModal: FC<Props> = ({ onClose, isOpened }) => {
     requestData.append('text', requestValues.text)
     requestData.append('link', requestValues.link)
     requestData.append('media', requestValues.media)
-    console.log(requestData)
     try {
       const data = await request({
         path: `/offer_news/`,
