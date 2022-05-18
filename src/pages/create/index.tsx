@@ -131,7 +131,6 @@ export const CreatePage: React.FC = () => {
   const handleClick = async (editId?: number, published = false) => {
     if (data) {
 
-      // This is the old object we don't use this now
       const body:any = {
         title: data.title,
         text: data.text.replaceAll("\n", "<br>"),
@@ -150,7 +149,6 @@ export const CreatePage: React.FC = () => {
 
       let requestBody:any = new FormData()
       requestBody.append('title', data.title)
-      requestBody.append('text', data.text.replaceAll("\n", "<br>"))
       requestBody.append('copyright_label', data.copyright_label)
       requestBody.append('copyright_link', data.copyright_link)
       requestBody.append('by', data.by)
@@ -162,6 +160,7 @@ export const CreatePage: React.FC = () => {
       requestBody.append('secondary_main', isCheckedSecondary)
       requestBody.append('cupturn', data.cupturn)
       requestBody.append('published', published)
+      requestBody.append('text', data.text.replaceAll("\n", "<br>"))
 
       const resp: any | null = await request({
         path: `/save${editId ? "/" + editId : ""}/`,

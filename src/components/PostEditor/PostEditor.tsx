@@ -12,6 +12,7 @@ const MyComponent = (props: any) => {
         setDefaultStyle='font-size: 16px; font-weight: 400; font-family: "Smooch Sans";'
         placeholder={props.placeholder}
         setOptions={{
+          imageUploadSizeLimit: 10000000,
           buttonList: [
             // default
             ["undo", "redo"],
