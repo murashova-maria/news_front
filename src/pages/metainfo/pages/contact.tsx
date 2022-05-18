@@ -15,7 +15,7 @@ export const Contact: React.FC = () => {
                     <Input placeholder='Email' value='' />
                 </div>
                 <div className="contact__form_top">
-                    <Input placeholder='Position' value='' />
+                    <Input placeholder='Last Name' value='' />
                     <Input placeholder='Phone' value='' />
                 </div>
                 <div className="contact__form_area">

@@ -54,7 +54,7 @@
     @include adap-font(18, 15);
     cursor: pointer;
     transition: all .2s ease-in-out;
-
+    text-align: center;
     &:hover {
         background-color: $button;
         color: #fff;
@@ -144,6 +144,10 @@
     border: 1px solid #bdbdbd;
     border-radius: 0.25rem;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.file {
+    display: none;
 }
 
 .text-field__input::placeholder {
@@ -710,4 +714,30 @@ input[type="checkbox"] {
             // background: #999999;
           }
     }
+}
+
+//Share a stroy form fileinput
+
+.addnewsModal__image-input > div {
+    width: 100%;
+}
+.addnewsModal__image-input .MuiOutlinedInput-input[type="file"] {
+    padding-left: 125px;
+    cursor: pointer;
+}
+
+.addnewsModal__image-input .MuiOutlinedInput-input::file-selector-button{
+    background-color: #fff;
+    color: #DA191C;
+    border: 1px solid #DA191C;
+    cursor: pointer;
+    transition: 150ms linear;
+    border-radius: 5px;
+    padding: 3px 7px;
+}
+
+.addnewsModal__image-input .MuiOutlinedInput-input::file-selector-button:hover{
+    color: #fff;
+    background-color: #DA191C;
+    cursor: pointer;
 }
