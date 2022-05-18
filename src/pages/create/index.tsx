@@ -130,24 +130,43 @@ export const CreatePage: React.FC = () => {
 
   const handleClick = async (editId?: number, published = false) => {
     if (data) {
+
+      // This is the old object we don't use this now
+      const body:any = {
+        title: data.title,
+        text: data.text.replaceAll("\n", "<br>"),
+        copyright_label: data.copyright_label,
+        copyright_link: data.copyright_link,
+        by: data.by,
+        main: isCheckedMain,
+        breacking: isCheckedBreaking,
+        tab: tab ? tab : data.tab,
+        link: data.link,
+        media: selectedFile ?? data.media,
+        secondary_main: isCheckedSecondary,
+        cupturn: data.cupturn,
+        published: published,
+      }
+
+      let requestBody:any = new FormData()
+      requestBody.append('title', data.title)
+      requestBody.append('text', data.text.replaceAll("\n", "<br>"))
+      requestBody.append('copyright_label', data.copyright_label)
+      requestBody.append('copyright_link', data.copyright_link)
+      requestBody.append('by', data.by)
+      requestBody.append('main', isCheckedMain)
+      requestBody.append('breacking', isCheckedBreaking)
+      requestBody.append('tab', tab ? tab : data.tab)
+      requestBody.append('link', data.link)
+      requestBody.append('media', selectedFile ?? data.media)
+      requestBody.append('secondary_main', isCheckedSecondary)
+      requestBody.append('cupturn', data.cupturn)
+      requestBody.append('published', published)
+
       const resp: any | null = await request({
         path: `/save${editId ? "/" + editId : ""}/`,
         method: "PUT",
-        body: {
-          title: data.title,
-          text: data.text.replaceAll("\n", "<br>"),
-          copyright_label: data.copyright_label,
-          copyright_link: data.copyright_link,
-          by: data.by,
-          main: isCheckedMain,
-          breacking: isCheckedBreaking,
-          tab: tab ? tab : data.tab,
-          link: data.link,
-          media: selectedFile ?? data.media,
-          secondary_main: isCheckedSecondary,
-          cupturn: data.cupturn,
-          published: published,
-        },
+        body: requestBody,
       });
       if (resp?.error || error) return toast.error(resp.error ?? "Error!");
 
@@ -309,7 +328,6 @@ export const CreatePage: React.FC = () => {
 
           <PostEditor
             onChange={(content:string)=> {
-              console.log(content)
               setData((prev) => ({ ...prev, text: content }))
             }}
             placeholder="Enter texts..."
