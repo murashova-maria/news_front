@@ -4,6 +4,7 @@ type ConfirmButton = {
   confirmButtonName?: string;
   handleConfirm?: VoidFunction;
   confirmButtonIsDisabled?: boolean;
+  confirmButtonIsHide?: boolean;
 };
 
 export type Props = {
