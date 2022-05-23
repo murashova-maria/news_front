@@ -101,7 +101,7 @@ export const Twitter: FC<Props> = ({isMobile = false}) => {
                         key={name}
                         sourceType="profile"
                         screenName={name}
-                        options={{height: isMobile ? 500 : 500, width: 1200, align: 'center'}}
+                        options={{height: isMobile ? 400 : 400, width: 1200, align: 'center'}}
                         noFooter
                     />
                     {/*<div className={styles.Line}/>*/}
