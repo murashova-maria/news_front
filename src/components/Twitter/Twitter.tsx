@@ -3,6 +3,7 @@ import {FC, useEffect, useState} from "react";
 import {useInterval} from "../../hooks/useInterval";
 import styles from './Twitter.module.scss';
 import {useHttp} from "../../hooks/useHttp";
+import {useWindowSize} from "../../hooks/useWindowSize";
 
 const accountsLocal = [
     {
@@ -40,11 +41,27 @@ type Twitters = {
     name: string;
 }
 
+const TwitterCounts = 3;
+const TwitterCountsMobile = 1;
+const TwitterChangeInterval = 10000;
+
+const sliceAccounts = (accounts: Twitters[], start: number, counts: number) => {
+    if (counts === 1) return [accounts[start]];
+    if (start === accounts.length) return [accounts[0], accounts[1], accounts[2]];
+    if (accounts.length - start === 1) return [accounts[start], accounts[0], accounts[1]];
+    if (accounts.length - counts < start) return [...accounts.slice(start, start + counts), accounts[0]];
+    return accounts.slice(start, start + counts);
+};
+
 export const Twitter: FC<Props> = ({isMobile = false}) => {
     const { request } = useHttp();
 
-    const [activeProfile, setActiveProfile] = useState(0);
+    const [start, setStart] = useState<number>(0);
     const [accounts, setAccounts] = useState<Twitters[]>([])
+    const [accountsForShow, setAccountsForShow] = useState<Twitters[]>([])
+
+    const { width } = useWindowSize();
+    const countsAccounts = width && width < 768 ? TwitterCountsMobile : TwitterCounts;
 
     const getTwitters = async () => {
         try {
@@ -54,6 +71,7 @@ export const Twitter: FC<Props> = ({isMobile = false}) => {
             });
             if (resp) {
                 setAccounts(resp);
+                setAccountsForShow(sliceAccounts(resp, start, countsAccounts));
             }
         } catch (e) {
             console.log(e);
@@ -64,25 +82,32 @@ export const Twitter: FC<Props> = ({isMobile = false}) => {
     }, []);
 
     useInterval(() => {
-        if (accounts.length - 1 !== activeProfile) setActiveProfile(prevState => prevState + 1)
-        else setActiveProfile(0)
-    }, 10000);
+        if (accounts.length - 1 >= start) setStart(prevState => prevState + countsAccounts >= accounts.length ? 0 : prevState + countsAccounts)
+        else setStart(0)
+    }, TwitterChangeInterval);
 
-    return <>
+    useEffect(() => {
+        if (accounts.length) {
+            setAccountsForShow(sliceAccounts(accounts, start, countsAccounts));
+        }
+    }, [start])
+
+    return <div className={styles.TwitterWrapper}>
+        <div className={styles.TwitterContainerHeader}>Twits from top Africans journalists</div>
         <div className={styles.TwitterContainer}>
-            {accounts.length > 0 &&
-                <>
+            {accountsForShow.length > 0 && accountsForShow.map(({name}) =>
+                <div key={name}>
                     <TwitterTimelineEmbed
-                        key={activeProfile}
+                        key={name}
                         sourceType="profile"
-                        screenName={accounts[activeProfile]?.name}
+                        screenName={name}
                         options={{height: isMobile ? 500 : 500, width: 1200, align: 'center'}}
                         noFooter
-
                     />
                     {/*<div className={styles.Line}/>*/}
-                </>
+                </div>
+                )
             }
         </div>
-    </>
+    </div>
 }
