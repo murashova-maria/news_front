@@ -61,11 +61,6 @@ export const AddNewsModal: FC<Props> = ({ onClose, isOpened }) => {
     }
   };
 
-  const testSubmit = (data:any)=> {
-    console.log(data)
-  }
-
-
   return (
     <FormProvider {...methods}>
       <Modal
@@ -76,8 +71,8 @@ export const AddNewsModal: FC<Props> = ({ onClose, isOpened }) => {
         confirmButton={{
           handleConfirm: handleSubmit(onSubmitHandler),
           confirmButtonName: "SUBMIT",
-            confirmButtonIsDisabled: loading,
-            confirmButtonIsHide: loading,
+          confirmButtonIsDisabled: loading,
+          confirmButtonIsHide: loading,
         }}
       >
         <div className={styles.Container}>
