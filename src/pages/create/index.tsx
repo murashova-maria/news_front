@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { TextArea } from "../../components/TextArea/TextArea";
+import PostEditor from "../../components/PostEditor/PostEditor";
 
 import dropIcon from "../../assets/img/dropIcon.png";
 import iconAuthor from "../../assets/img/iconAuthor.svg";
@@ -14,7 +15,7 @@ import { CreatePost } from "../../types/api/admin";
 import { TabType } from "../../types/api/subdomainTacnews";
 import useQuery from "../../utils/hooks/useQuery";
 import { Button } from "@mui/material";
-import {Image} from "../../components/shared/Image/Image";
+import { Image } from "../../components/shared/Image/Image";
 
 export const CreatePage: React.FC = () => {
   const history = useNavigate();
@@ -129,24 +130,42 @@ export const CreatePage: React.FC = () => {
 
   const handleClick = async (editId?: number, published = false) => {
     if (data) {
+
+      const body:any = {
+        title: data.title,
+        text: data.text.replaceAll("\n", "<br>"),
+        copyright_label: data.copyright_label,
+        copyright_link: data.copyright_link,
+        by: data.by,
+        main: isCheckedMain,
+        breacking: isCheckedBreaking,
+        tab: tab ? tab : data.tab,
+        link: data.link,
+        media: selectedFile ?? data.media,
+        secondary_main: isCheckedSecondary,
+        cupturn: data.cupturn,
+        published: published,
+      }
+
+      let requestBody:any = new FormData()
+      requestBody.append('title', data.title)
+      requestBody.append('copyright_label', data.copyright_label)
+      requestBody.append('copyright_link', data.copyright_link)
+      requestBody.append('by', data.by)
+      requestBody.append('main', isCheckedMain)
+      requestBody.append('breacking', isCheckedBreaking)
+      requestBody.append('tab', tab ? tab : data.tab)
+      requestBody.append('link', data.link)
+      requestBody.append('media', selectedFile ?? data.media)
+      requestBody.append('secondary_main', isCheckedSecondary)
+      requestBody.append('cupturn', data.cupturn)
+      requestBody.append('published', published)
+      requestBody.append('text', data.text.replaceAll("\n", "<br>"))
+
       const resp: any | null = await request({
         path: `/save${editId ? "/" + editId : ""}/`,
         method: "PUT",
-        body: {
-          title: data.title,
-          text: data.text.replaceAll('\n', '<br>'),
-          copyright_label: data.copyright_label,
-          copyright_link: data.copyright_link,
-          by: data.by,
-          main: isCheckedMain,
-          breacking: isCheckedBreaking,
-          tab: tab ? tab : data.tab,
-          link: data.link,
-          media: selectedFile ?? data.media,
-          secondary_main: isCheckedSecondary,
-          cupturn: data.cupturn,
-          published: published,
-        },
+        body: requestBody,
       });
       if (resp?.error || error) return toast.error(resp.error ?? "Error!");
 
@@ -223,7 +242,7 @@ export const CreatePage: React.FC = () => {
               ) : data.media ? (
                 <div className="create__wrapper__preview">
                   <Image src={data.media} alt="dropIcon" />
-                   <Button
+                  <Button
                     className="create__wrapper__preview__upload-button"
                     component="label"
                   >
@@ -256,7 +275,12 @@ export const CreatePage: React.FC = () => {
             </div>
           )}
           <div className="create__right_by">
-            <a href={data.link} target="_blank" style={{ display: "flex" }} rel="noreferrer">
+            <a
+              href={data.link}
+              target="_blank"
+              style={{ display: "flex" }}
+              rel="noreferrer"
+            >
               <img src={iconAuthor} alt="iconAuthor" />
             </a>
             <input
@@ -269,7 +293,12 @@ export const CreatePage: React.FC = () => {
             />
           </div>
           <div className="create__right_by">
-            <a href={data.link} target="_blank" style={{ display: "flex" }} rel="noreferrer">
+            <a
+              href={data.link}
+              target="_blank"
+              style={{ display: "flex" }}
+              rel="noreferrer"
+            >
               <img src={link} alt="link" />
             </a>
             <input
@@ -295,13 +324,13 @@ export const CreatePage: React.FC = () => {
               placeholder="copyright"
             />
           </div>
-          <TextArea
-            textarea={true}
+
+          <PostEditor
+            onChange={(content:string)=> {
+              setData((prev) => ({ ...prev, text: content }))
+            }}
             placeholder="Enter texts..."
-            value={data.text?.replaceAll('<br>', '\n')}
-            onChange={(event: any) =>
-              setData((prev) => ({ ...prev, text: event.target.value }))
-            }
+            defaultValue={data.text}
           />
         </div>
 
