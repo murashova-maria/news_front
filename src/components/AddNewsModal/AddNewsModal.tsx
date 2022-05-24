@@ -76,6 +76,8 @@ export const AddNewsModal: FC<Props> = ({ onClose, isOpened }) => {
         confirmButton={{
           handleConfirm: handleSubmit(onSubmitHandler),
           confirmButtonName: "SUBMIT",
+            confirmButtonIsDisabled: loading,
+            confirmButtonIsHide: loading,
         }}
       >
         <div className={styles.Container}>

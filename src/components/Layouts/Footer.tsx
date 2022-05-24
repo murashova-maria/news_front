@@ -82,9 +82,9 @@ export const Footer: React.FC = () => {
                                         <a href="https://twitter.com/ThinkTAC2022" target="_blank" rel="noreferrer">
                                             <img src={twitter} alt="twitter"/>
                                         </a>
-                                        <a href="/">
-                                            <img src={telegram} alt="telegram"/>
-                                        </a>
+                                        {/*<a href="/">*/}
+                                        {/*    <img src={telegram} alt="telegram"/>*/}
+                                        {/*</a>*/}
                                     </div>
                                 </ul>
                             </nav>

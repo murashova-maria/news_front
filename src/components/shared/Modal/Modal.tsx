@@ -66,7 +66,7 @@ export const Modal: FC<Props> = ({
                     {isLoading ? '...Loading' : children}
                 </StyledDialogContent>
                 <StyledDialogActions>
-                    {confirmButton?.handleConfirm && (
+                    {confirmButton?.handleConfirm && !confirmButton?.confirmButtonIsHide && (
                         <Button onClick={confirmButton.handleConfirm} disabled={disabled}>
                             {confirmButton?.confirmButtonName || 'Confirm'}
                         </Button>
