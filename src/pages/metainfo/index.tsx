@@ -29,7 +29,7 @@ export const Metainfo: React.FC = () => {
                 setContent('terms')
                 break
             case '/cookies':
-                setTitle('Cookies Policy')
+                setTitle('Privacy Policy')
                 setContent('cookies')
                 break
         }

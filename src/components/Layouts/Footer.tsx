@@ -75,8 +75,8 @@ export const Footer: React.FC = () => {
                                     </li>
                                     <li onClick={close} className="nav__itemf">
                                         <NavLink onClick={() => setIsActive(false)} to={COOKIES_ROUTE} className="nav__linkf">
-                                        Cookies Policy
-                                    </NavLink>
+                                            Privacy Policy
+                                        </NavLink>
                                     </li>
                                     <div className="footer__body_right_bot_social">
                                         <a href="https://twitter.com/ThinkTAC2022" target="_blank" rel="noreferrer">

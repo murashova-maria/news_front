@@ -7,8 +7,10 @@ import { PopupHandler } from "./components/PopupHandler";
 import { ToastContainer } from "react-toastify";
 import { ADMIN_PANEL } from './config'
 import "react-toastify/dist/ReactToastify.css";
-import {Twitter} from "./components/Twitter/Twitter";
 import {Adsense} from "./components/Adsense/Adsense";
+
+// @ts-ignore
+window.IS_PUBLIC_SITE = !ADMIN_PANEL;
 
 const App: React.FC = () => {
   const path = useLocation().pathname;

@@ -16,7 +16,7 @@ export const Tabs = () => {
                     Terms of use
                </NavLink>
                 <NavLink to={COOKIES_ROUTE} className="tabs__link">
-                    Cookies Policy
+                    Privacy Policy
                </NavLink>
             </div>
         </div>
