@@ -7,6 +7,7 @@ import { INewsItem } from '../../types'
 import { useHttp } from "../../hooks/useHttp";
 import { TabNewsType, MainType, TabType } from "../../types/api/subdomainTacnews";
 import {Image} from "../../components/shared/Image/Image";
+import {getImgUrl} from "../../utils/getImgUrl";
 
 
 export const Sport: React.FC = () => {
@@ -65,7 +66,7 @@ export const Sport: React.FC = () => {
                         <div className="bigCard__img">
                             <div className="blur"/>
                             <div className={`tag ${main?.tab?.replace('&', '')}`}>{main?.tab}</div>
-                            <Image src={main?.media_link} alt="newsItems" />
+                            <Image src={getImgUrl(main?.media_link || '')} alt="newsItems" />
                             <div className="bigCard__img_title">
                                 {main?.title}
                             </div>

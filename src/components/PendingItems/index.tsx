@@ -5,6 +5,7 @@ import { INewsItem, Status } from "../../types";
 import { INewsItemAPI } from "../../types/api/admin";
 import { useHttp } from "../../hooks/useHttp";
 import useQuery from "../../utils/hooks/useQuery";
+import {getImgUrl} from "../../utils/getImgUrl";
 
 export const PendingItems: React.FC = () => {
   const query = useQuery();
@@ -24,7 +25,7 @@ export const PendingItems: React.FC = () => {
     if (respPending) {
       const newItems = respPending.map((item) => ({
         id: item.id,
-        img: item.media_link,
+        img: getImgUrl(item.media_link),
         tag: [],
         title: item.title,
         description: "",

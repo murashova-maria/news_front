@@ -5,6 +5,7 @@ import { INewsItem, Status } from "../../types";
 import { useHttp } from "../../hooks/useHttp";
 import { INewsItemAPI, IPublishedItemAPI } from "../../types/api/admin";
 import { useGlobalState } from "../../store";
+import {getImgUrl} from "../../utils/getImgUrl";
 
 export const Admin: React.FC = () => {
   const token = sessionStorage.getItem("token");
@@ -32,7 +33,7 @@ export const Admin: React.FC = () => {
     if (respDeclined) {
       const declinedItems = respDeclined.map((item) => ({
         id: item.id,
-        img: item.media_link,
+        img: getImgUrl(item.media_link),
         tag: [],
         title: item.title,
         description: "",
@@ -58,7 +59,7 @@ export const Admin: React.FC = () => {
     if (respNews) {
       const newItems = respNews.map((item) => ({
         id: item.id,
-        img: item.media_link,
+        img: getImgUrl(item.media_link),
         tag: [],
         title: item.title,
         description: "",
@@ -85,7 +86,7 @@ export const Admin: React.FC = () => {
     if (respPublished) {
       const newPublished = respPublished.map((item) => ({
         id: item.id,
-        img: item.media_link,
+        img: getImgUrl(item.media_link),
         tag: [],
         title: item.title,
         description: "",

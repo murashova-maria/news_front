@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import { toast } from "react-toastify";
 import { TextArea } from "../../components/TextArea/TextArea";
 import PostEditor from "../../components/PostEditor/PostEditor";
@@ -16,6 +16,7 @@ import { TabType } from "../../types/api/subdomainTacnews";
 import useQuery from "../../utils/hooks/useQuery";
 import { Button } from "@mui/material";
 import { Image } from "../../components/shared/Image/Image";
+import {getImgUrl} from "../../utils/getImgUrl";
 
 export const CreatePage: React.FC = () => {
   const history = useNavigate();
@@ -102,12 +103,12 @@ export const CreatePage: React.FC = () => {
         link: adminEditNews.link,
         by: adminEditNews.by,
         tab: adminEditNews.tab,
-        media: adminEditNews.media_link,
+        media: getImgUrl(adminEditNews.media_link),
         cupturn: adminEditNews.cupturn,
         original_id: adminEditNews.original.id,
       }));
       setTab(adminEditNews.tab);
-      setPreview(adminEditNews.media_link);
+      setPreview(getImgUrl(adminEditNews.media_link));
       setIsCheckedBreaking(adminEditNews.breacking);
       setIsCheckedMain(adminEditNews.main);
       setIsCheckedSecondary(adminEditNews.secondary_main);
@@ -124,7 +125,7 @@ export const CreatePage: React.FC = () => {
       };
       reader.readAsDataURL(selectedFile);
     } else {
-      setPreview("");
+      setPreview(getImgUrl(adminEditNews?.media_link || ""));
     }
   }, [selectedFile]);
 
