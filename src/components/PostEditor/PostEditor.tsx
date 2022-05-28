@@ -13,12 +13,16 @@ const MyComponent = (props: any) => {
         placeholder={props.placeholder}
         setOptions={{
           imageUploadSizeLimit: 10000000,
+          fontSize : [
+            8, 10, 14, 16, 18, 20, 22, 24, 36
+        ],
           buttonList: [
             // default
             ["undo", "redo"],
             ["bold", "underline", "italic", "list"],
             ["image"],
             ["fullScreen"],
+            ['fontSize'],
           ],
         }}
         height="570px"
