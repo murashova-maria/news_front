@@ -98,6 +98,7 @@ export const Twitter: FC<Props> = ({isMobile = false}) => {
             {accountsForShow.length > 0 && accountsForShow.map(({name}) =>
                 <div key={name}>
                     <TwitterTimelineEmbed
+                        noHeader
                         key={name}
                         sourceType="profile"
                         screenName={name}
