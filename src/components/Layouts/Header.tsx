@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useState } from "react";
+import React, {memo, useEffect, useRef, useState} from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 
 import logo1 from "../../assets/img/firsticon.png";
@@ -14,6 +14,8 @@ import {useModal} from "../../hooks/useModal";
 import {Button} from "../shared/Button/Button";
 import {AddNewsModal} from "../AddNewsModal/AddNewsModal";
 
+const animationDuration = 6;
+
 export const Header: React.FC = () => {
   const [isLogin] = useGlobalState("isLogin");
 
@@ -23,6 +25,8 @@ export const Header: React.FC = () => {
 
   const history = useNavigate();
   const { request } = useHttp();
+
+  const animationRef = useRef<HTMLDivElement>(null);
 
   const open = () => {
     setIsActive(!isActive);
@@ -59,6 +63,12 @@ export const Header: React.FC = () => {
   const addNewsHandler = () => {
     addNewsModal.onOpen();
   }
+
+  useEffect(() => {
+    if (animationRef.current && breacking.length) {
+      animationRef.current.style.animationDuration = `${breacking.length * animationDuration}s`;
+    }
+  }, [breacking])
 
   return (
     <div className="header__wrapper">
@@ -109,7 +119,7 @@ export const Header: React.FC = () => {
           <span className="breaking__title">BREAKING</span>
           <span className="breaking__tire">—</span>
           <div className="breaking">
-            <div className="breaking__title-news">
+            <div className="breaking__title-news" ref={animationRef}>
               {breacking.map(({ id, cupturn }) => (
                 <Link
                   key={id}
