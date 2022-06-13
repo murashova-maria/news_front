@@ -32,7 +32,6 @@ export type HttpRequestType = <ResponseType = any>(requestParameters: RequestPar
 export interface IUseHttp {
     loading: boolean;
     request: HttpRequestType;
-    error: unknown;
 }
 
 // useCacheHttp
@@ -48,6 +47,6 @@ export type CacheRequestType = <ResponseType>(
     cacheParameters: CacheParameters
 ) => Promise<ResponseType | string>;
 
-export interface IUseCacheHttp extends Pick<IUseHttp, 'loading' | 'error'> {
+export interface IUseCacheHttp extends Pick<IUseHttp, 'loading'> {
     request: CacheRequestType;
 }
