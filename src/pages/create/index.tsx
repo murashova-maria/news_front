@@ -45,7 +45,7 @@ export const CreatePage: React.FC = () => {
   const [isCheckedMain, setIsCheckedMain] = useState<boolean>(false);
   const [isCheckedSecondary, setIsCheckedSecondary] = useState<boolean>(false);
 
-  const { request, error } = useHttp();
+  const { request } = useHttp();
   const query = useQuery();
 
   const dragStartHandler = (e: any) => {
@@ -168,7 +168,8 @@ export const CreatePage: React.FC = () => {
         method: "PUT",
         body: requestBody,
       });
-      if (resp?.error || error) return toast.error(resp.error ?? "Error!");
+
+      if (resp?.error) return toast.error(resp.error ?? "Error!");
 
       toast.success("Success!");
       history({ pathname: "/admin" });

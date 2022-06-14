@@ -181,9 +181,7 @@
         @include adap-font(32, 28);
         &-news {
             display: inline-flex;
-            -webkit-animation: scroll 30s infinite linear;
-            -moz-animation: scroll 30s infinite linear;
-            animation: scroll 35s infinite linear;
+            animation: scroll infinite linear;
             gap: 100px;
         }
 
