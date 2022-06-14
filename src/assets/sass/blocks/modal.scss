@@ -89,6 +89,12 @@
         display: flex;
         align-items: center;
       }
+      &_icon img {
+        height: 24px;
+        width: 24px;
+        object-fit: contain;
+        object-position: center;
+      }
     }
   }
 

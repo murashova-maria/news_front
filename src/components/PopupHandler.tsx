@@ -134,7 +134,8 @@ export const PopupHandler: React.FC = () => {
                 </div>
                 <div className="modal-wrapper__content_item_icon">
                   {el.status === "active" && <img src={done} alt="done" />}
-                  {el.status === "stop" && <img src={fals} alt="fals" />}
+                  {el.status === "false" && <img src={fals} alt="false" />}
+                  {el.status === "stop" && <img src={stop} alt="stop" />}
                   {el.status === "pending" && (
                     <img src={pending} alt="pending" />
                   )}
