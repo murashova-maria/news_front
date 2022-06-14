@@ -105,7 +105,7 @@ export const PopupHandler: React.FC = () => {
                     Do you want to stop receiving data from this source?
                   </p>
                   <button
-                    className="modal-wrapper__actions-btn"
+                    className={`modal-wrapper__actions-btn ${el.status === "stop" ? 'modal-wrapper__actions-btn_green' : null}`}
                     onClick={() => handleUpdate(el)}
                   >
                     {el.status === "active" ? (

@@ -164,6 +164,10 @@
   &__actions-btn:hover {
     opacity: .65;
   }
+  &__actions-btn_green {
+    border: 1px solid #8ac44b;
+    color: #8ac44b;
+  }
   &__actions-pic {
     height: 16px;
     width: 16px;
