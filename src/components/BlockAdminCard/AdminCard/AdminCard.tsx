@@ -10,10 +10,10 @@ import unpublish from "../../../assets/img/unpublish.svg";
 import { useHttp } from "../../../hooks/useHttp";
 import { useNavigate } from "react-router";
 import { useGlobalState } from "../../../store";
-import {Image} from "../../shared/Image/Image";
+import { Image } from "../../shared/Image/Image";
 
 export const AdminCard: React.FC<IPropsAdmin> = React.memo(
-  ({ item, handleClick }) => {
+  ({ item, handleClick, permissions }) => {
     const history = useNavigate();
     const { request } = useHttp();
     const [, setAdminEditNews] = useGlobalState("adminEditNews");
@@ -84,71 +84,87 @@ export const AdminCard: React.FC<IPropsAdmin> = React.memo(
             <div className="adminCard__bot_buttons">
               {(item.status === "newItem" || item.status === "pending") && (
                 <>
-                  <span
-                    className="btnAdmin red"
-                    onClick={() =>
-                      handleNewsDecline(
-                        item.id,
-                        item.status === "pending" ? "pending" : "news"
-                      )
-                    }
-                  >
-                    Decline <img src={decline} alt="decline" />
-                  </span>
-                  <span
-                    className="btnAdmin yellow"
-                    onClick={() =>
-                      handleEdit(
-                        item.id,
-                        item.status === "pending" ? "pending" : "news"
-                      )
-                    }
-                  >
-                    Edit <img src={edit} alt="edit" />
-                  </span>
-                  <span
-                    className="btnAdmin green"
-                    onClick={() =>
-                      handleNewsPublish(
-                        item.id,
-                        item.status === "pending" ? "pending" : "news"
-                      )
-                    }
-                  >
-                    Publish <img src={publish} alt="publish" />
-                  </span>
+                  {(!permissions || permissions.includes("decline")) && (
+                    <span
+                      className="btnAdmin red"
+                      onClick={() =>
+                        handleNewsDecline(
+                          item.id,
+                          item.status === "pending" ? "pending" : "news"
+                        )
+                      }
+                    >
+                      Decline <img src={decline} alt="decline" />
+                    </span>
+                  )}
+
+                  {(!permissions || permissions.includes("edit")) && (
+                    <span
+                      className="btnAdmin yellow"
+                      onClick={() =>
+                        handleEdit(
+                          item.id,
+                          item.status === "pending" ? "pending" : "news"
+                        )
+                      }
+                    >
+                      Edit <img src={edit} alt="edit" />
+                    </span>
+                  )}
+                  {(!permissions || permissions.includes("publish")) && (
+                    <span
+                      className="btnAdmin green"
+                      onClick={() =>
+                        handleNewsPublish(
+                          item.id,
+                          item.status === "pending" ? "pending" : "news"
+                        )
+                      }
+                    >
+                      Publish <img src={publish} alt="publish" />
+                    </span>
+                  )}
                 </>
               )}
               {item.status === "declinedNews" && (
                 <>
-                  <span
-                    className="btnAdmin red"
-                    onClick={() => deleteDeclined(item.id)}
-                  >
-                    Delete <img src={delet} alt="delete" />
-                  </span>
-                  <span
-                    className="btnAdmin yellow"
-                    onClick={() => restoreDecline(item.id)}
-                  >
-                    Restore <img src={restore} alt="restore" />
-                  </span>
+                  {(!permissions || permissions.includes("delete")) && (
+                    <span
+                      className="btnAdmin red"
+                      onClick={() => deleteDeclined(item.id)}
+                    >
+                      Delete <img src={delet} alt="delete" />
+                    </span>
+                  )}
+                  {(!permissions || permissions.includes("restore")) && (
+                    <span
+                      className="btnAdmin yellow"
+                      onClick={() => restoreDecline(item.id)}
+                    >
+                      Restore <img src={restore} alt="restore" />
+                    </span>
+                  )}
                 </>
               )}
               {item.status === "publishedNews" && (
                 <>
-                  <span
-                    className="btnAdmin red"
-                    onClick={() => handleUnPublish(item.id)}
-                  >
-                    Unpublish <img src={unpublish} alt="unpublish" />
-                  </span>
-                  <span
-                    className="btnAdmin yellow"
-                    onClick={() => handleEdit(item.id, "published")}
-                  >
-                    Edit <img src={edit} alt="edit" />
-                  </span>
+                  {(!permissions || permissions.includes("unpublish")) && (
+                    <span
+                      className="btnAdmin red"
+                      onClick={() => handleUnPublish(item.id)}
+                    >
+                      Unpublish <img src={unpublish} alt="unpublish" />
+                    </span>
+                  )}
+
+                  {(!permissions || permissions.includes("edit")) && (
+                    <span
+                      className="btnAdmin yellow"
+                      onClick={() => handleEdit(item.id, "published")}
+                    >
+                      Edit <img src={edit} alt="edit" />
+                    </span>
+                  )}
                 </>
               )}
             </div>

@@ -93,7 +93,7 @@ export const Twitter: FC<Props> = ({isMobile = false}) => {
     }, [start])
 
     return <div className={styles.TwitterWrapper}>
-        <div className={styles.TwitterContainerHeader}>Twits from top Africans journalists</div>
+        <div className={styles.TwitterContainerHeader}>Tweets from top Africans journalists</div>
         <div className={styles.TwitterContainer}>
             {accountsForShow.length > 0 && accountsForShow.map(({name}) =>
                 <div key={name}>

@@ -87,9 +87,18 @@ export interface IProps {
 
 export type Status = "decline" | "publish" | "restore" | "delete" | "offset";
 
+export type PermissionType =
+  | "decline"
+  | "edit"
+  | "publish"
+  | "delete"
+  | "restore"
+  | "unpublish";
+
 export interface IPropsAdmin {
   item: IAdminItem;
   handleClick: (id: number, status: Status) => void;
+  permissions?: PermissionType[]
 }
 
 export interface IInput {
