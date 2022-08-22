@@ -143,3 +143,14 @@
         }
     }
 }
+
+@media  screen and (max-width: 600px) {
+    .correctnews {
+        &__left {
+            width: 100%;
+        }
+        &__right {
+            display: none;
+        }
+    }
+}
