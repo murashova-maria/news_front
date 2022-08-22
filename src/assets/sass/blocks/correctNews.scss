@@ -145,12 +145,10 @@
 }
 
 @media  screen and (max-width: 600px) {
-    .correctnews {
-        &__left {
-            width: 100%;
-        }
-        &__right {
-            display: none;
-        }
+    .no_right_side .correctnews__left {
+        width: 100%;
+    }
+    .no_right_side .correctnews__right {
+        display: none;
     }
 }

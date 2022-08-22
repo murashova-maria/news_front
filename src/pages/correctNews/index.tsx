@@ -8,6 +8,7 @@ import { useHttp } from "../../hooks/useHttp";
 import { useLocation } from "react-router-dom";
 import {Image} from "../../components/shared/Image/Image";
 import {getImgUrl} from "../../utils/getImgUrl";
+import cn from 'classnames'
 
 
 export const CorrectNews: React.FC = () => {
@@ -40,7 +41,7 @@ export const CorrectNews: React.FC = () => {
     }, [location])
 
     return (
-        <div className='correctnews'>
+        <div className={cn({'correctnews': true, 'no_right_side': item?.tab === "Investigations"})}>
             {item ? 
             <div className="correctnews__left">
                 <div className="correctnews__left_tags">
