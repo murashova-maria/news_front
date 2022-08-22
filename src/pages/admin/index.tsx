@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router";
 import { BlockAdminCard } from "../../components";
 import { INewsItem, Status } from "../../types";
@@ -18,6 +18,11 @@ export const Admin: React.FC = () => {
     declinedItems: false,
     publishedItems: false
   });
+  const [searchText, setSearchText] = useState<string>('')
+  const searchRegExp = useMemo(() => {
+    return new RegExp(searchText, "i")
+  }, [searchText])
+
 
   const history = useNavigate();
   const { request } = useHttp();
@@ -127,6 +132,16 @@ export const Admin: React.FC = () => {
     if (status === "publish")  await getPublished();
   };
 
+  const filteredSearch = useCallback((items: INewsItem[]) => {
+    return items.filter(item => {
+      if (searchRegExp.test(item?.author)) return true
+      if (searchRegExp.test(item?.description)) return true
+      if (searchRegExp.test(item?.date)) return true
+      if (searchRegExp.test(item?.title)) return true
+      return false
+    })
+  }, [searchRegExp])
+
   return (
     <>
       <div className="circle firstcircle"></div>
@@ -134,6 +149,9 @@ export const Admin: React.FC = () => {
       <div className="circle thirdcircle"></div>
       <div className="circlebot fourthcircle"></div>
       <div className="buttons">
+        <div className="search">
+          <input value={searchText} onChange={(e) => setSearchText(e.target.value)} placeholder="Search" type="text" className="search__input" />
+        </div>
         <div
             onClick={() => history({ pathname: "/admin?popup=twitter" })}
             className="buttons_monitoring"
@@ -163,7 +181,7 @@ export const Admin: React.FC = () => {
         <div className="adminNews__block">
           <div className="adminNews__block_title">New item</div>
           <BlockAdminCard
-            items={newsItems}
+            items={filteredSearch(newsItems)}
             status="newItem"
             handleClick={(_, status) => onNewItem(status)}
             featchItems={(offset) => onNewItem('offset', offset)}
@@ -173,7 +191,7 @@ export const Admin: React.FC = () => {
         <div className="adminNews__block">
           <div className="adminNews__block_title">Declined news</div>
           <BlockAdminCard
-            items={declinedItems}
+            items={filteredSearch(declinedItems)}
             status="declinedNews"
             handleClick={(_, status) => onDeclinedNews(status)}
             featchItems={(offset) => onDeclinedNews('offset', offset)}
@@ -183,7 +201,7 @@ export const Admin: React.FC = () => {
         <div className="adminNews__block">
           <div className="adminNews__block_title">Published news</div>
           <BlockAdminCard
-            items={publishedItems}
+            items={filteredSearch(publishedItems)}
             status="publishedNews"
             handleClick={(_, status) => onPublished(status)}
             featchItems={(offset) => onPublished('offset', offset)}
