@@ -1,5 +1,5 @@
 import { TwitterTimelineEmbed } from 'react-twitter-embed';
-import {FC, useEffect, useState} from "react";
+import {FC, useEffect, useRef, useState} from "react";
 import {useInterval} from "../../hooks/useInterval";
 import styles from './Twitter.module.scss';
 import {useHttp} from "../../hooks/useHttp";
@@ -63,6 +63,8 @@ export const Twitter: FC<Props> = ({isMobile = false}) => {
     const { width } = useWindowSize();
     const countsAccounts = width && width < 768 ? TwitterCountsMobile : TwitterCounts;
 
+    const ref = useRef<HTMLDivElement>(null);
+
     const getTwitters = async () => {
         try {
             const resp: Array<Twitters> | null = await request({
@@ -92,7 +94,14 @@ export const Twitter: FC<Props> = ({isMobile = false}) => {
         }
     }, [start])
 
-    return <div className={styles.TwitterWrapper}>
+    const getCardWidth = () => {
+        if (width && width < 768) return 300;
+        if (ref.current?.clientWidth) return ref.current.clientWidth / TwitterCounts;
+        return 275;
+    }
+
+    console.log('ref', ref.current?.clientWidth)
+    return <div className={styles.TwitterWrapper} ref={ref}>
         <div className={styles.TwitterContainerHeader}>Tweets from top Africans journalists</div>
         <div className={styles.TwitterContainer}>
             {accountsForShow.length > 0 && accountsForShow.map(({name}) =>
@@ -102,7 +111,7 @@ export const Twitter: FC<Props> = ({isMobile = false}) => {
                         key={name}
                         sourceType="profile"
                         screenName={name}
-                        options={{height: isMobile ? 400 : 400, width: 1200, align: 'center'}}
+                        options={{height: isMobile ? 400 : 400, width: getCardWidth(), align: 'center'}}
                         noFooter
                     />
                     {/*<div className={styles.Line}/>*/}
