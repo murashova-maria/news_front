@@ -100,7 +100,6 @@ export const Twitter: FC<Props> = ({isMobile = false}) => {
         return 275;
     }
 
-    console.log('ref', ref.current?.clientWidth)
     return <div className={styles.TwitterWrapper} ref={ref}>
         <div className={styles.TwitterContainerHeader}>Tweets from top Africans journalists</div>
         <div className={styles.TwitterContainer}>
