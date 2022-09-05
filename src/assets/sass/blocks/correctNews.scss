@@ -144,11 +144,6 @@
     }
 }
 
-@media  screen and (max-width: 600px) {
-    .no_right_side .correctnews__left {
-        width: 100%;
-    }
-    .no_right_side .correctnews__right {
-        display: none;
-    }
+.w100 {
+    width: 100%;
 }
