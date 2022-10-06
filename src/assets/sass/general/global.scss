@@ -128,7 +128,9 @@ body {
   }
   
   .main {
-    width: 100%;
+    max-width: 80%;
+    width: 80%;
+    box-sizing: border-box;
     color: black;
     padding: 0 70px;
     margin-top: 40px;
