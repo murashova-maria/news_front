@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import bluePlanet from "../../assets/img/bluePlanet.png";
 import iconAuthor from "../../assets/img/iconAuthor.svg";
 import iconDate from "../../assets/img/iconDate.svg";
@@ -37,10 +37,14 @@ export const CorrectNews: React.FC = () => {
     })();
   }, [location]);
 
+  const showRightSection = useMemo(() => {
+    return (item?.tab !== "Investigations" && like.length !== 0)
+  }, [like, item?.tab])
+
   return (
     <div className="correctnews">
       {item ? (
-        <div className={cn({"correctnews__left": true, "w100": item?.tab === "Investigations"})}>
+        <div className={cn({"correctnews__left": true, "w100": !showRightSection})}>
           <div className="correctnews__left_tags">
             <div className={`tagNews tag ${item?.tab?.replace("&", "")}`}>
               {item?.tab}
@@ -77,7 +81,7 @@ export const CorrectNews: React.FC = () => {
           />
         </div>
       ) : null}
-      {item?.tab !== "Investigations" && (
+      {showRightSection && (
         <div className="correctnews__right">
           <div className="correctnews__right_title">You may also like</div>
           <div className="correctnews__right_news">

@@ -26,3 +26,8 @@ src/config.js
 package-lock.json
 
 .idea
+
+
+#mkcert 
+localhost-key.pem
+localhost.pem
