@@ -96,7 +96,10 @@ export const Twitter: FC<Props> = ({isMobile = false}) => {
 
     const getCardWidth = () => {
         if (width && width < 768) return 300;
-        if (ref.current?.clientWidth) return 100 /  TwitterCounts - 5 + "%";
+        if (ref.current?.clientWidth) {
+            const gapSize = 15
+            return ref.current?.clientWidth /  TwitterCounts - gapSize
+        }
         return 275;
     }
 
