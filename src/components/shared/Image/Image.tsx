@@ -1,5 +1,5 @@
 import React, {FC, useEffect, useState} from "react";
-import DefaultImg from "../../../assets/img/placeholderRed.png";
+import DefaultImg from "../../../assets/img/placeholderBlack.png";
 
 type Props = {
     src?: string;
@@ -22,6 +22,5 @@ export const Image: FC<Props> = ({src, alt = '', className = ''}) => {
             alt={alt}
             onError={onError}
             className={className}
-            style={{background: `url(${DefaultImg}) center no-repeat`}}
         />
 }
