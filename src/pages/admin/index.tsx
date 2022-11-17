@@ -158,12 +158,12 @@ export const Admin: React.FC = () => {
         >
           Twitter widgets
         </div>
-        <div
+        {/* <div
             onClick={() => history({ pathname: "/admin?popup=twitter" })}
             className="buttons_monitoring"
         >
           Twitter accounts
-        </div>
+        </div> */}
         <div
           onClick={() => history({ pathname: "/admin?popup=monitoring" })}
           className="buttons_monitoring"
