@@ -1,0 +1,19 @@
+@import '../../assets/sass/general/global';
+
+.Container {
+  padding: 16px;
+}
+
+.Title {
+  padding: 27px 0;
+  border-radius: 17px;
+  background: #fff;
+  width: 100%;
+  @include adap-font(30, 20);
+  color: #000000;
+  text-align: center;
+  position: relative;
+  font-family: $smooch;
+  font-weight: 700;
+  font-size: 36px;
+}

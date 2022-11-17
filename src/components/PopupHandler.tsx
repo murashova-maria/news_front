@@ -14,6 +14,7 @@ import { SourcesAPI } from "../types/api/admin";
 import { BlockAdminCard } from "./BlockAdminCard/BlockAdminCard";
 import { PendingItems } from "./PendingItems";
 import { TwitterAccountsModal } from "./TwitterAccountsModal/TwitterAccountsModal";
+import TwitterWidgetsModal from "./TwitterWidgetsModal/TwitterWidgetsModal";
 
 interface LinksType {
   id: number;
@@ -105,7 +106,11 @@ export const PopupHandler: React.FC = () => {
                     Do you want to stop receiving data from this source?
                   </p>
                   <button
-                    className={`modal-wrapper__actions-btn ${el.status === "stop" ? 'modal-wrapper__actions-btn_green' : null}`}
+                    className={`modal-wrapper__actions-btn ${
+                      el.status === "stop"
+                        ? "modal-wrapper__actions-btn_green"
+                        : null
+                    }`}
                     onClick={() => handleUpdate(el)}
                   >
                     {el.status === "active" ? (
@@ -191,6 +196,12 @@ export const PopupHandler: React.FC = () => {
       {query.get("popup") === "twitter" && (
         <ModalWrapper>
           <TwitterAccountsModal />
+        </ModalWrapper>
+      )}
+
+      {query.get("popup") === "twitter-widgets" && (
+        <ModalWrapper>
+          <TwitterWidgetsModal />
         </ModalWrapper>
       )}
 
