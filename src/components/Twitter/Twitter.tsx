@@ -116,9 +116,9 @@ export const Twitter: FC<Props> = ({ isMobile = false }) => {
         Tweets from top Africans journalists
       </div>
       <div className={styles.TwitterContainer}>
-        <TwitterTweetEmbed options={{height: 400}} tweetId={"1592820762423226368"} />
-        <TwitterTweetEmbed options={{height: 400}} tweetId={"1592912382728470529"} />
-        <TwitterTweetEmbed options={{height: 400}} tweetId={"1592871964431257600"} />
+      <TwitterTweetEmbed options={{height: 400,}} tweetId={"1592049709773905921"} />
+        <TwitterTweetEmbed options={{height: 400,}} tweetId={"1592416241498861569"} />
+        <TwitterTweetEmbed options={{height: 400}} tweetId={"1592940288175128578"} />
 
       </div>
     </div>
