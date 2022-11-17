@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Input } from '../Input/Input'
+import { Button } from '../shared/Button/Button'
 import s from './TwitterWidgetsModal.module.scss'
 
 
@@ -14,6 +15,7 @@ const TwitterWidgetsModal = () => {
         <Input placeholder="First widget URL" onChange={(e: any) => setFirstLink(e.target.value)} value={firstLink} />
         <Input placeholder="Second widget URL" onChange={(e: any) => setSecondLink(e.target.value)} value={secondLink} />
         <Input placeholder="Third widget URL" onChange={(e: any) => setThirdLink(e.target.value)} value={thirdLink} />
+        <Button onClick={() => {}}>Save</Button>
     </div>
 }
 
