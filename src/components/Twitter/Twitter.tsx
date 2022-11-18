@@ -98,7 +98,6 @@ export const Twitter: FC<Props> = ({ isMobile = false }) => {
     }
   };
 
-  console.log(tweetsToShow);
 
   useEffect(() => {
     //Hide functionality for twitter timelines
