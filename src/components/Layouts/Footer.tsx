@@ -79,9 +79,9 @@ export const Footer: React.FC = () => {
                                         </NavLink>
                                     </li>
                                     <div className="footer__body_right_bot_social">
-                                        <a href="https://twitter.com/ThinkTAC2022" target="_blank" rel="noreferrer">
+                                        {/* <a href="https://twitter.com/ThinkTAC2022" target="_blank" rel="noreferrer">
                                             <img src={twitter} alt="twitter"/>
-                                        </a>
+                                        </a> */}
                                         {/*<a href="/">*/}
                                         {/*    <img src={telegram} alt="telegram"/>*/}
                                         {/*</a>*/}

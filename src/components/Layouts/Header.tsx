@@ -1,8 +1,6 @@
 import React, {memo, useEffect, useRef, useState} from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-
-import logo1 from "../../assets/img/firsticon.png";
-import logo2 from "../../assets/img/TAC.png";
+import twitter from '../../assets/img/twitter.png'
 import logo from "../../assets/img/Logo.svg";
 import { MAIN_ROUTE, TAB_NEWS } from "../../constants/paths";
 import { useHttp } from "../../hooks/useHttp";
@@ -110,7 +108,10 @@ export const Header: React.FC = () => {
                 ))}
               </ul>
             </nav>
-            <Button onClick={addNewsHandler} className="header__addNewsBtn">TIP US</Button>
+            <a href="https://twitter.com/ThinkTAC2022" target="_blank" rel="noreferrer" className="header__social-link">
+                                            <img src={twitter} alt="twitter"/>
+                                        </a>
+            <Button onClick={addNewsHandler} className="header__addNewsBtn">LEAK TO US</Button>
           </div>
         </div>
       </header>

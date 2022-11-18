@@ -153,11 +153,17 @@ export const Admin: React.FC = () => {
           <input value={searchText} onChange={(e) => setSearchText(e.target.value)} placeholder="Search" type="text" className="search__input" />
         </div>
         <div
+            onClick={() => history({ pathname: "/admin?popup=twitter-widgets" })}
+            className="buttons_monitoring"
+        >
+          Twitter widgets
+        </div>
+        {/* <div
             onClick={() => history({ pathname: "/admin?popup=twitter" })}
             className="buttons_monitoring"
         >
           Twitter accounts
-        </div>
+        </div> */}
         <div
           onClick={() => history({ pathname: "/admin?popup=monitoring" })}
           className="buttons_monitoring"

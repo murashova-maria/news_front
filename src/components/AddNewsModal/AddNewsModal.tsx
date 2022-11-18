@@ -18,7 +18,7 @@ type Props = {
 export const FORM_VALIDATION_SCHEMA = object({
   title: string().required(),
   media: mixed(),
-  link: string().required(),
+  link: string(),
   text: string().required(),
 });
 

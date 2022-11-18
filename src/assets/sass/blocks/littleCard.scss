@@ -115,6 +115,10 @@
             -webkit-box-orient: vertical;
         }
 
+        .littleCard__desc {
+            overflow: hidden;
+        }
+
         &.hasNewsId {
             & .littleCard__desc_bot {
                 font-size: 14px !important;
