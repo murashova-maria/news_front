@@ -56,11 +56,12 @@ const sliceAccounts = (accounts: Twitters[], start: number, counts: number) => {
 };
 
 export const Twitter: FC<Props> = ({ isMobile = false }) => {
-  const { request } = useHttp();
+  const { loading, request } = useHttp();
 
   const [start, setStart] = useState<number>(0);
   const [accounts, setAccounts] = useState<Twitters[]>([]);
   const [accountsForShow, setAccountsForShow] = useState<Twitters[]>([]);
+  const [tweetsToShow, setTweetsToShow] = useState<Twitters[]>([]);
 
   const { width } = useWindowSize();
   const countsAccounts =
@@ -82,9 +83,27 @@ export const Twitter: FC<Props> = ({ isMobile = false }) => {
       console.log(e);
     }
   };
+
+  const getTweets = async () => {
+    try {
+      const resp: Array<Twitters> | null = await request({
+        path: "/twitter_post_links/",
+        method: "GET",
+      });
+      if (resp) {
+        setTweetsToShow(resp);
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  console.log(tweetsToShow);
+
   useEffect(() => {
     //Hide functionality for twitter timelines
     //   getTwitters();
+    getTweets();
   }, []);
 
   useInterval(() => {
@@ -115,12 +134,18 @@ export const Twitter: FC<Props> = ({ isMobile = false }) => {
       <div className={styles.TwitterContainerHeader}>
         Tweets from top Africans journalists
       </div>
-      <div className={styles.TwitterContainer}>
-      <TwitterTweetEmbed options={{height: 400,}} tweetId={"1592049709773905921"} />
-        <TwitterTweetEmbed options={{height: 400,}} tweetId={"1592416241498861569"} />
-        <TwitterTweetEmbed options={{height: 400}} tweetId={"1592940288175128578"} />
-
-      </div>
+      {!loading && (
+        <div className={styles.TwitterContainer}>
+          {tweetsToShow.map((tweet: any) => (
+            <TwitterTweetEmbed
+              key={tweet.id}
+              options={{ height: 400 }}
+              tweetId={tweet.link}
+            />
+          ))}
+        </div>
+      )}
+      {loading && <h2 className={styles.Loader}>Loading...</h2>}
     </div>
   );
 };

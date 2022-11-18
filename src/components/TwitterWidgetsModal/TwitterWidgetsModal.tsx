@@ -30,14 +30,13 @@ const TwitterWidgetsModal = () => {
     getTweetIds();
   }, []);
 
-  console.log(links);
 
   const handleSave = useCallback(async (val: string, id: string) => {
     try {
         const resp = await request({
           path: `/tw_post_links/${id}/`,
           method: "POST",
-          body: {link: val}
+          body: {link: val, active: 'True'}
         });
         if (resp) {
 
@@ -54,7 +53,7 @@ const TwitterWidgetsModal = () => {
         <>
           {Object.keys(links).map((linkId) => {
             return (
-              <div className={s.InputBox}>
+              <div className={s.InputBox} key={linkId}>
                 <Input
                   placeholder="Tweet ID"
                   onChange={(e: any) =>
