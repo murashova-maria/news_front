@@ -63,8 +63,8 @@ const App: React.FC = () => {
         </div>
         {!ADMIN_PANEL && (
           <span className="ad-block">
-            <Adsense slot="2148763374" height="50%" width="360px" />
-            <Adsense slot="9463166679" height="50%" width="360px" />
+            <Adsense slot="2148763374" width="360px" />
+            <Adsense slot="9463166679" width="360px" />
           </span>
         )}
       </div>
