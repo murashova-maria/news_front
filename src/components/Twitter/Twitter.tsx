@@ -136,11 +136,13 @@ export const Twitter: FC<Props> = ({ isMobile = false }) => {
       {!loading && (
         <div className={styles.TwitterContainer}>
           {tweetsToShow.map((tweet: any) => (
+            <div>
             <TwitterTweetEmbed
               key={tweet.id}
               options={{ height: 400 }}
               tweetId={tweet.link}
             />
+            </div>
           ))}
         </div>
       )}
