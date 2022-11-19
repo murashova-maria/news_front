@@ -50,3 +50,9 @@
   padding: 20px;
   margin: 0 auto;
 }
+
+@media screen and (max-width: 900px) {
+  .TwitterContainer {
+    flex-direction: column;
+  }
+}
