@@ -1,4 +1,4 @@
-import { TwitterTimelineEmbed, TwitterTweetEmbed } from "react-twitter-embed";
+import { TwitterTweetEmbed } from "react-twitter-embed";
 import { FC, useEffect, useRef, useState } from "react";
 import { useInterval } from "../../hooks/useInterval";
 import styles from "./Twitter.module.scss";
