@@ -88,6 +88,7 @@
     }
 
     &__desc {
+        position:relative;
         padding: 10px 20px 20px;
         overflow: hidden;
 
@@ -106,6 +107,7 @@
         &_bot {
             font-weight: 400;
             font-size: 16px;
+            position:relative;
 
             overflow: hidden;
             text-overflow: ellipsis;
