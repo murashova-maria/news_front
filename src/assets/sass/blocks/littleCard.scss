@@ -1,165 +1,157 @@
 .littleCard {
-    border-radius: 10px;
-    max-width: 100%;
-    margin-bottom: 20px;
-    cursor: pointer;
-    transition: all .2s ease-in-out;
-    background-color: #fff;
-    figure {
-        display: none;
+  border-radius: 10px;
+  max-width: 100%;
+  margin-bottom: 20px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  background-color: #fff;
+  figure {
+    display: none;
+  }
+
+  &:hover {
+    transform: scale(1.02);
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  //&.Investigations {
+  //    border: 1px solid $investigations;
+  //}
+  //
+  //&.Sport {
+  //    border: 1px solid $sport;
+  //}
+  //
+  //&.ScienceTechnology {
+  //    border: 1px solid $technology;
+  //}
+  //
+  //&.News {
+  //    border: 1px solid $news;
+  //}
+  //
+  //&.Economy {
+  //    border: 1px solid $weather;
+  //}
+  //
+  //&.Business {
+  //    border: 1px solid $business;
+  //
+  //}
+
+  &__img {
+    position: relative;
+
+    img {
+      display: flex;
+      border-radius: 10px 10px 0 0;
+      width: 100%;
+      height: 130px;
+      overflow: hidden;
+    }
+    .blur {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      background: linear-gradient(
+        180deg,
+        rgba(0, 0, 0, 0) 24.99%,
+        #000000 100%
+      );
+      z-index: 1;
+    }
+    &.hasNewsId {
+      & .littleCard__img_title {
+        font-size: 14px !important;
+        white-space: nowrap;
+        overflow: hidden;
+      }
     }
 
-    &:hover {
-        transform: scale(1.02);
+    & .tag {
+      position: absolute;
+      right: 0;
+      top: 0;
+      background: #ffffff;
+      border-radius: 0px 9px 0px 5px;
+      padding: 5px 10px;
+      z-index: 2;
+
+      @media (max-width: 1190px) {
+        font-size: 10px;
+      }
     }
 
+    &_title {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 18px;
+      padding: 19px 20px;
+      z-index: 2;
+      overflow: hidden;
+      text-overflow: ellipsis;
 
-    &:last-child {
-        margin-bottom: 0;
+      @media (max-width: 1190px) {
+        font-size: 12px;
+      }
+    }
+  }
+
+  &__desc {
+    padding: 10px 20px 20px;
+    max-height: 115px;
+
+    &_bot {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      max-height: 75px;
+      font-weight: 400;
+      font-size: 16px;
     }
 
-    //&.Investigations {
-    //    border: 1px solid $investigations;
-    //}
-    //
-    //&.Sport {
-    //    border: 1px solid $sport;
-    //}
-    //
-    //&.ScienceTechnology {
-    //    border: 1px solid $technology;
-    //}
-    //
-    //&.News {
-    //    border: 1px solid $news;
-    //}
-    //
-    //&.Economy {
-    //    border: 1px solid $weather;
-    //}
-    //
-    //&.Business {
-    //    border: 1px solid $business;
-    //
-    //}
-
-    &__img {
-        position: relative;
-
-        img {
-            display: flex;
-            border-radius: 10px 10px 0 0;
-            width: 100%;
-            height: 130px;
-            overflow: hidden;
-        }
-        .blur {
-            position: absolute;
-            left:0;
-            right: 0;
-            top: 0;
-            bottom: 0;
-            background: linear-gradient(180deg, rgba(0, 0, 0, 0) 24.99%, #000000 100%);
-            z-index: 1;
-        }
-        &.hasNewsId {
-            & .littleCard__img_title {
-                font-size: 14px !important;
-                white-space: nowrap;
-                overflow: hidden;
-            }
-        }
-
-        & .tag {
-            position: absolute;
-            right: 0;
-            top: 0;
-            background: #FFFFFF;
-            border-radius: 0px 9px 0px 5px;
-            padding: 5px 10px;
-            z-index: 2;
-
-            @media(max-width: 1190px) {
-                font-size: 10px;
-            }
-        }
-
-        &_title {
-            position: absolute;
-            left: 0;
-            bottom: 0;
-            right: 0;
-            color: #FFFFFF;
-            font-weight: 700;
-            font-size: 18px;
-            padding: 19px 20px;
-            z-index: 2;
-            overflow: hidden;
-            text-overflow: ellipsis;
-
-            @media(max-width: 1190px) {
-                font-size: 12px;
-            }
-        }
+    .littleCard__desc {
+      overflow: hidden;
     }
 
-    &__desc {
-        padding: 10px 20px 20px;
-        max-height: 115px;
-
-        &_bot {
-            overflow: hidden;
-            text-overflow: ellipsis;
-            display: -webkit-box;
-            -webkit-line-clamp: 3;
-            -webkit-box-orient: vertical;
-        max-height: 40px;
-        }
-
-        .littleCard__desc {
-            overflow: hidden;
-        }
-
-        &.hasNewsId {
-            & .littleCard__desc_bot {
-                font-size: 14px !important;
-            }
-        }
-
-        &_top {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-
-            font-weight: 400;
-            font-size: 14px;
-            color: #cccccc;
-
-            margin-bottom: 10px;
-            @media(max-width: 1190px) {
-                font-size: 10px;
-            }
-            @media(max-width: 960px) {
-                font-size: 8px;
-            }
-
-            @media(max-width: 767px) {
-                flex-direction: column;
-                gap: 5px;
-            }
-        }
-
-        &_bot {
-            font-weight: 400;
-            font-size: 16px;
-
-            @media(max-width: 1190px) {
-                font-size: 10px;
-            }
-
-            @media(max-width: 960px) {
-                font-size: 8px;
-            }
-        }
+    &.hasNewsId {
+      & .littleCard__desc_bot {
+        font-size: 14px !important;
+      }
     }
+
+    &_top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      font-weight: 400;
+      font-size: 14px;
+      color: #cccccc;
+
+      margin-bottom: 10px;
+      @media (max-width: 1190px) {
+        font-size: 10px;
+      }
+      @media (max-width: 960px) {
+        font-size: 8px;
+      }
+
+      @media (max-width: 767px) {
+        flex-direction: column;
+        gap: 5px;
+      }
+    }
+  }
 }
