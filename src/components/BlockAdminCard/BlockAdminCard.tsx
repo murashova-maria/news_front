@@ -84,7 +84,7 @@ export const BlockAdminCard = ({
         scrollableTarget={status}
       >
         {items.map((el: any) => (
-          <AdminCard item={{ ...el, status }} handleClick={handleClick} permissions={permissions} />
+          <AdminCard key={el.id} item={{ ...el, status }} handleClick={handleClick} permissions={permissions} />
         ))}
       </InfiniteScroll>
     </div>
