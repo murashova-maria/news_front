@@ -107,17 +107,8 @@ body {
   }
 
   .wrapper {
+    padding-top: 138px;
     overflow: hidden;
-    margin-top: 138px;
-
-
-    &.overflowX {
-      overflow-y: auto;
-    }
-
-    @media(max-width:1400px) {
-      overflow-y: auto;
-  }
   }
   
   .container {
@@ -134,10 +125,6 @@ body {
     color: black;
     padding: 0 25px;
     margin-top: 40px;
-
-    &.h100vh {
-      height: 100vh;
-    }
 
     @media(max-width: 1000px) {
       padding: 0 30px;

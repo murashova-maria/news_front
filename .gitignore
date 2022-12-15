@@ -27,6 +27,7 @@ package-lock.json
 
 .idea
 
+config.js
 
 #mkcert 
 localhost-key.pem

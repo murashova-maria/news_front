@@ -88,7 +88,10 @@
     }
 
     &__desc {
+        position:relative;
         padding: 10px 20px 20px;
+        overflow: hidden;
+        height: 105px;
 
         &_top {
             display: flex;
@@ -105,16 +108,14 @@
         &_bot {
             font-weight: 400;
             font-size: 16px;
+            position:relative;
+            max-height: 75px;
 
             overflow: hidden;
             text-overflow: ellipsis;
             display: -webkit-box;
             -webkit-line-clamp: 3;
             -webkit-box-orient: vertical;
-
-            @media(max-width: 1000px) {
-                font-size: 12px;
-            }
         }
     }
 }

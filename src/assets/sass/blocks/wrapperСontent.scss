@@ -1,11 +1,11 @@
-.wrapper__content_public {
-  background-color: #EEEEEE;
-}
-
 .wrapper__content {
   display: flex;
-
+  justify-content: center;
   .ad-block {
+    position: fixed;
+    top: 138px;
+    right: 0;
+    bottom: 0;
     width: 20%;
     min-width: 20%;
     max-width: 20%;
@@ -32,4 +32,9 @@
 .timeline-Widget {
   width: 100%;
   max-width: 100%;
+}
+
+.wrapper__content_public {
+  background-color: #EEEEEE;
+  justify-content: flex-start;
 }
