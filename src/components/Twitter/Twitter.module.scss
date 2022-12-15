@@ -10,7 +10,6 @@
   justify-content: space-evenly;
   width: 100%;
   margin-bottom: 20px;
-  gap: 20px;
   > div {
     height: 450px;
     width: 350px;
@@ -20,6 +19,7 @@
   //Custom scrollbar
   > div::-webkit-scrollbar {
     width: 5px;
+    height: 5px;
   }
   > div::-webkit-scrollbar-track {
     background-color: transparent;
@@ -30,6 +30,11 @@
   > div::-webkit-scrollbar-thumb {
     background-color: #AAAAAA;
     border-radius: 10px;
+  }
+  @media screen and (max-width: 1500px) {
+    & >div {
+      width: 310px;
+    }
   }
 }
 .TwitterContainerHeader {
