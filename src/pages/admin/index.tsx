@@ -132,6 +132,7 @@ export const Admin: React.FC = () => {
     if (status === "publish")  await getPublished();
   };
 
+
   const filteredSearch = useCallback((items: INewsItem[]) => {
     return items.filter(item => {
       if (searchRegExp.test(item?.author)) return true
