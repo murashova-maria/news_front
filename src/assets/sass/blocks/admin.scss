@@ -282,10 +282,18 @@
       font-family: $smooch;
 
       margin-top: 60px;
-
-      .buttons_cancle {
-        margin-top: 20px;
-      }
     }
   }
 }
+
+.buttons_cancle {
+  margin-top: 20px;
+}
+
+.buttons_cancle:disabled, .buttons_create:disabled {
+  background-color: #CCC;
+  color: #fff;
+  border-color:#CCC;
+  cursor: wait;
+}
+
