@@ -17,6 +17,7 @@ import useQuery from "../../utils/hooks/useQuery";
 import { Button } from "@mui/material";
 import { Image } from "../../components/shared/Image/Image";
 import {getImgUrl} from "../../utils/getImgUrl";
+import { divideConent } from "../../utils/divideConent";
 
 export const CreatePage: React.FC = () => {
   const history = useNavigate();
@@ -132,22 +133,6 @@ export const CreatePage: React.FC = () => {
   const handleClick = async (editId?: number, published = false) => {
     if (data) {
 
-      const body:any = {
-        title: data.title,
-        text: data.text.replaceAll("\n", "<br>"),
-        copyright_label: data.copyright_label,
-        copyright_link: data.copyright_link,
-        by: data.by,
-        main: isCheckedMain,
-        breacking: isCheckedBreaking,
-        tab: tab ? tab : data.tab,
-        link: data.link,
-        media: selectedFile ?? data.media,
-        secondary_main: isCheckedSecondary,
-        cupturn: data.cupturn,
-        published: published,
-      }
-
       let requestBody:any = new FormData()
       requestBody.append('title', data.title)
       requestBody.append('copyright_label', data.copyright_label)
@@ -160,18 +145,49 @@ export const CreatePage: React.FC = () => {
       requestBody.append('media', selectedFile ?? data.media)
       requestBody.append('secondary_main', isCheckedSecondary)
       requestBody.append('cupturn', data.cupturn)
-      requestBody.append('published', published)
-      requestBody.append('text', data.text.replaceAll("\n", "<br>"))
+      //requestBody.append('published', published)
+      //requestBody.append('text', data.text.replaceAll("\n", "<br>"))
 
+      //Upload all data except text
       const resp: any | null = await request({
         path: `/save${editId ? "/" + editId : ""}/`,
         method: "PUT",
         body: requestBody,
       });
 
-      if (resp?.error) return toast.error(resp.error ?? "Error!");
+      //Handle error
+      if (resp?.error || typeof resp !== 'number') {
+        toast.error(resp.error ?? "Error!")
+        return
+      }
 
-      toast.success("Success!");
+
+      //Divide text into partials and upload each partial separately
+      const partials = divideConent(data.text)
+
+      for(let partial of partials) {
+        const partRes: any | null = await request({
+          path: `/add_text/${resp}/`,
+          method: "PUT",
+          body: {text: partial},
+        });
+        if(partRes?.error) {
+          toast.error(partRes?.error ?? "Error!")
+          return
+        }
+      }
+
+      if(!published) {
+        toast.success("Success!");
+      }
+      if(published) {
+        const publishResp: any | null = await request({
+          path: `/pending/publish/${resp}/`,
+          method: "POST",
+        });
+        if(!publishResp?.error) toast.success("Success!");
+      }
+      
       history({ pathname: "/admin" });
     }
   };
