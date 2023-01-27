@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { ModalWrapper } from "../../components/modal/ModalWrapper";
 import { BlockAdminCard } from "../../components";
 import { INewsItem, Status } from "../../types";
 import { INewsItemAPI } from "../../types/api/admin";
 import { useHttp } from "../../hooks/useHttp";
 import useQuery from "../../utils/hooks/useQuery";
-import {getImgUrl} from "../../utils/getImgUrl";
+import { getImgUrl } from "../../utils/getImgUrl";
 
 export const PendingItems: React.FC = () => {
   const query = useQuery();
@@ -18,8 +18,8 @@ export const PendingItems: React.FC = () => {
       path: `/pending/`,
       method: "GET",
       query: {
-        offset: offset ?? 0
-      }
+        offset: offset ?? 0,
+      },
     });
 
     if (respPending) {
@@ -34,23 +34,29 @@ export const PendingItems: React.FC = () => {
         mainNews: false,
       }));
 
-      if(status === 'offset'){
-        if(!newItems.length) return setDataEnd(true)
-        setNewsItems(prev => [...prev, ...newItems]);
+      if (status === "offset") {
+        if (!newItems.length) return setDataEnd(true);
+        setNewsItems((prev) => [...prev, ...newItems]);
       } else setNewsItems(newItems);
     }
   };
 
   const onNewItem = async (status: Status, offset?: number) => {
-    await getNews(status, offset)
+    await getNews(status, offset);
   };
 
-    useEffect(() => {
-        (async function () {
-        await getNews();
-        })();
-    }, [])
+  const showModal = useMemo(() => {
+    return query.get("popup") === "pendingItems"
+  }, [query])
 
+  useEffect(() => {
+    //Fetch every time modal opens
+    if (showModal) {
+      getNews();
+    }
+  }, [showModal]);
+
+  
   return (
     <div className="pendingItems">
       {query.get("popup") === "pendingItems" && (
@@ -58,13 +64,13 @@ export const PendingItems: React.FC = () => {
           <div className="adminNews__block">
             <div className="adminNews__block_title">Pending Items</div>
             <BlockAdminCard
-                items={newsItems}
-                status="pending"
-                handleClick={(_, status) => onNewItem(status)}
-                featchItems={(offset) => onNewItem('offset', offset)}
-                hasMore={endData}
+              items={newsItems}
+              status="pending"
+              handleClick={(_, status) => onNewItem(status)}
+              featchItems={(offset) => onNewItem("offset", offset)}
+              hasMore={endData}
             />
-        </div>
+          </div>
         </ModalWrapper>
       )}
     </div>

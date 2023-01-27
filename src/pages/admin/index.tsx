@@ -6,8 +6,10 @@ import { useHttp } from "../../hooks/useHttp";
 import { INewsItemAPI, IPublishedItemAPI } from "../../types/api/admin";
 import { useGlobalState } from "../../store";
 import {getImgUrl} from "../../utils/getImgUrl";
+import { useLocation } from 'react-router-dom'
 
 export const Admin: React.FC = () => {
+  const location = useLocation()
   const token = sessionStorage.getItem("token");
   const [isLogin, setLogin] = useGlobalState("isLogin");
   const [newsItems, setNewsItems] = useState<Array<INewsItem>>([]);
@@ -22,6 +24,7 @@ export const Admin: React.FC = () => {
   const searchRegExp = useMemo(() => {
     return new RegExp(searchText, "i")
   }, [searchText])
+  
 
 
   const history = useNavigate();
@@ -107,14 +110,12 @@ export const Admin: React.FC = () => {
   };
 
   useEffect(() => {
-    (async function () {
-      if (token || (token && isLogin)) {
-        await getNews();
-        await getDeclined();
-        await getPublished();
-      }
-    })();
-  }, [isLogin]);
+    if (token || (token && isLogin) && location.pathname === '/admin') { //Fetch every time user visits this URL
+      getNews();
+      getDeclined();
+      getPublished();
+    }
+  }, [isLogin, location]);
 
   const onNewItem = async (status: Status, offset?: number) => {
     await getNews(status, offset)
@@ -131,6 +132,7 @@ export const Admin: React.FC = () => {
     if (status === "offset")  await getPublished(status, offset);
     if (status === "publish")  await getPublished();
   };
+
 
   const filteredSearch = useCallback((items: INewsItem[]) => {
     return items.filter(item => {
