@@ -98,7 +98,7 @@
       padding: 19px 20px;
       z-index: 2;
       overflow: hidden;
-      text-overflow: ellipsis;
+      //text-overflow: ellipsis;
 
       @media (max-width: 1190px) {
         font-size: 12px;
@@ -112,7 +112,7 @@
 
     &_bot {
       overflow: hidden;
-      text-overflow: ellipsis;
+      //text-overflow: ellipsis;
       display: -webkit-box;
       -webkit-line-clamp: 3;
       -webkit-box-orient: vertical;
