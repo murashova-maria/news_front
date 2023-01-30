@@ -6,6 +6,7 @@ import { useHttp } from "../../hooks/useHttp";
 import { TabNewsType, MainType, TabType } from "../../types/api/subdomainTacnews";
 import {Image} from "../../components/shared/Image/Image";
 import {getImgUrl} from "../../utils/getImgUrl";
+import { htmlToText } from 'html-to-text';
 
 
 export const TabNews: React.FC = () => {
@@ -60,6 +61,9 @@ export const TabNews: React.FC = () => {
           })();
     }, [tab]);
 
+  const desc = htmlToText(main?.text || '');
+
+
     return (
         <>
             <div className='main__section0'>
@@ -78,7 +82,7 @@ export const TabNews: React.FC = () => {
                                 <div className="bigCard__desc_top_author">{main?.by}</div>
                                 <div className="bigCard__desc_top_date">{main?.date}</div>
                             </div>
-                            <div className="bigCard__desc_bot" dangerouslySetInnerHTML={{__html: main?.text || ''}} />
+                            <div className="bigCard__desc_bot">{desc}</div>
                         </div>
                     </div>
                 </div>

@@ -4,6 +4,7 @@ import { InfoBlock } from "../../components/InfoBlock/InfoBlock";
 import { useGlobalState } from "../../store";
 import { INewsItem } from "../../types";
 import {Image} from "../../components/shared/Image/Image";
+import { htmlToText } from "html-to-text";
 
 export const Technology: React.FC = () => {
   const [items] = useGlobalState("news");
@@ -12,6 +13,10 @@ export const Technology: React.FC = () => {
     items[1],
     items[2],
   ]);
+
+  const desc = htmlToText(newsItems[0].description || '');
+
+
   return (
     <>
       <div className="main__section0">
@@ -34,7 +39,7 @@ export const Technology: React.FC = () => {
                   {newsItems[0].date}
                 </div>
               </div>
-              <div className="bigCard__desc_bot" dangerouslySetInnerHTML={{__html: newsItems[0].description}} />
+              <div className="bigCard__desc_bot">{desc}</div>
             </div>
           </div>
         </div>

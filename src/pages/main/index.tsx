@@ -8,6 +8,7 @@ import {Image} from "../../components/shared/Image/Image";
 import {ADMIN_PANEL} from "../../config";
 import {Twitter} from "../../components/Twitter/Twitter";
 import {getImgUrl} from "../../utils/getImgUrl";
+import { htmlToText } from "html-to-text";
 
 export const Main: React.FC = () => {
   const [main, setMain] = useState<MainType>();
@@ -54,6 +55,9 @@ export const Main: React.FC = () => {
     )
   })
 
+  const desc = htmlToText(main?.text || '');
+
+
   return (
     <>
       <div className='main__section0'>
@@ -72,7 +76,7 @@ export const Main: React.FC = () => {
                                 <div className="bigCard__desc_top_author">{main?.by}</div>
                                 <div className="bigCard__desc_top_date">{main?.date}</div>
                             </div>
-                            <div className="bigCard__desc_bot" dangerouslySetInnerHTML={{__html: main?.text || ''}} />
+                            <div className="bigCard__desc_bot">{desc}</div>
                         </div>
                     </div>
                 </div>
