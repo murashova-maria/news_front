@@ -73,7 +73,7 @@
             font-weight: 700;
             z-index: 2;
             overflow: hidden;
-           // text-overflow: ellipsis;
+            text-overflow: ellipsis;
             @include adap-font(24, 20);
             padding: 19px 20px;
 
@@ -112,10 +112,11 @@
             max-height: 75px;
 
             overflow: hidden;
-           // text-overflow: ellipsis;
+            text-overflow: ellipsis;
             display: -webkit-box;
             -webkit-line-clamp: 3;
             -webkit-box-orient: vertical;
+
         }
     }
 }
