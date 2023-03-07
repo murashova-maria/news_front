@@ -52,6 +52,7 @@
             border-radius: 10px 10px 0 0;
             width: 100%;
             max-height: 393px;
+            object-fit: contain;
         }
 
 
@@ -107,7 +108,7 @@
 
         &_bot {
             font-weight: 400;
-            font-size: 16px;
+            font-size: 20px;
             position:relative;
             max-height: 75px;
 
