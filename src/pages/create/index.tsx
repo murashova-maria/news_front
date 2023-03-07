@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { TextArea } from "../../components/TextArea/TextArea";
 import PostEditor from "../../components/PostEditor/PostEditor";
@@ -16,13 +16,16 @@ import { TabType } from "../../types/api/subdomainTacnews";
 import useQuery from "../../utils/hooks/useQuery";
 import { Button } from "@mui/material";
 import { Image } from "../../components/shared/Image/Image";
-import {getImgUrl} from "../../utils/getImgUrl";
+import { getImgUrl } from "../../utils/getImgUrl";
+import { divideConent } from "../../utils/divideConent";
 
 export const CreatePage: React.FC = () => {
   const history = useNavigate();
   const [tabs, setTabs] = useGlobalState("tabs");
   const [tab, setTab] = useState<number>(0);
   const [adminEditNews] = useGlobalState("adminEditNews");
+
+  const [isFetching, setIsFetching] = useState<boolean>(false);
 
   const [data, setData] = useState<CreatePost>({
     title: "",
@@ -130,48 +133,66 @@ export const CreatePage: React.FC = () => {
   }, [selectedFile]);
 
   const handleClick = async (editId?: number, published = false) => {
+    setIsFetching(true);
     if (data) {
+      let requestBody: any = new FormData();
+      requestBody.append("title", data.title);
+      requestBody.append("copyright_label", data.copyright_label);
+      requestBody.append("copyright_link", data.copyright_link);
+      requestBody.append("by", data.by);
+      requestBody.append("main", isCheckedMain);
+      requestBody.append("breacking", isCheckedBreaking);
+      requestBody.append("tab", tab ? tab : data.tab);
+      requestBody.append("link", data.link);
+      requestBody.append("media", selectedFile ?? data.media);
+      requestBody.append("secondary_main", isCheckedSecondary);
+      requestBody.append("cupturn", data.cupturn);
+      //requestBody.append('published', published)
+      //requestBody.append('text', data.text.replaceAll("\n", "<br>"))
 
-      const body:any = {
-        title: data.title,
-        text: data.text.replaceAll("\n", "<br>"),
-        copyright_label: data.copyright_label,
-        copyright_link: data.copyright_link,
-        by: data.by,
-        main: isCheckedMain,
-        breacking: isCheckedBreaking,
-        tab: tab ? tab : data.tab,
-        link: data.link,
-        media: selectedFile ?? data.media,
-        secondary_main: isCheckedSecondary,
-        cupturn: data.cupturn,
-        published: published,
-      }
-
-      let requestBody:any = new FormData()
-      requestBody.append('title', data.title)
-      requestBody.append('copyright_label', data.copyright_label)
-      requestBody.append('copyright_link', data.copyright_link)
-      requestBody.append('by', data.by)
-      requestBody.append('main', isCheckedMain)
-      requestBody.append('breacking', isCheckedBreaking)
-      requestBody.append('tab', tab ? tab : data.tab)
-      requestBody.append('link', data.link)
-      requestBody.append('media', selectedFile ?? data.media)
-      requestBody.append('secondary_main', isCheckedSecondary)
-      requestBody.append('cupturn', data.cupturn)
-      requestBody.append('published', published)
-      requestBody.append('text', data.text.replaceAll("\n", "<br>"))
-
+      //Upload all data except text
       const resp: any | null = await request({
         path: `/save${editId ? "/" + editId : ""}/`,
         method: "PUT",
         body: requestBody,
       });
 
-      if (resp?.error) return toast.error(resp.error ?? "Error!");
+      //Handle error
+      if (resp?.error || typeof resp !== "number") {
+        toast.error(resp.error ?? "Error!");
+        setIsFetching(false);
+        return;
+      }
 
-      toast.success("Success!");
+      //Divide text into partials and upload each partial separately
+      const partials = divideConent(data.text);
+
+      for (let partial of partials) {
+        const partRes: any | null = await request({
+          path: `/add_text/${resp}/`,
+          method: "PUT",
+          body: { text: partial },
+        });
+        if (partRes?.error) {
+          toast.error(partRes?.error ?? "Error!");
+          setIsFetching(false);
+          return;
+        }
+      }
+
+      if (!published) {
+        toast.success("Success!");
+      }
+      if (published) {
+        const publishResp: any | null = await request({
+          path: `/pending/publish/${resp}/`,
+          method: "POST",
+        });
+        setIsFetching(false);
+        if (!publishResp?.error) toast.success("Success!");
+      }
+
+      setIsFetching(false);
       history({ pathname: "/admin" });
     }
   };
@@ -328,8 +349,8 @@ export const CreatePage: React.FC = () => {
           </div>
 
           <PostEditor
-            onChange={(content:string)=> {
-              setData((prev) => ({ ...prev, text: content }))
+            onChange={(content: string) => {
+              setData((prev) => ({ ...prev, text: content }));
             }}
             placeholder="Enter texts..."
             defaultValue={data.text}
@@ -392,18 +413,20 @@ export const CreatePage: React.FC = () => {
             >
               Close
             </div>
-            <span
+            <button
+            disabled={isFetching}
               onClick={() => handleClick(adminEditNews?.id, true)}
               className="buttons_create"
             >
               Publish
-            </span>
-            <span
+            </button>
+            <button
+            disabled={isFetching}
               onClick={() => handleClick(adminEditNews?.id)}
               className="buttons_monitoring buttons_cancle"
             >
               save changes & close
-            </span>
+            </button>
           </div>
         </div>
       </div>

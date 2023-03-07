@@ -4,11 +4,14 @@ import { useNavigate } from 'react-router-dom'
 import { IProps } from "../../types/api/subdomainTacnews";
 import {Image} from "../shared/Image/Image";
 import {getImgUrl} from "../../utils/getImgUrl";
+import {htmlToText } from 'html-to-text'
 
 
 export const TopCards: React.FC<IProps> = React.memo(({ item, hasNewsId }) => {
 
     const history = useNavigate()
+
+    const text = htmlToText(item?.text || '');
 
     return (
         <div onClick={() => history({ pathname: `/news?newsid=${item?.id}` })} className={hasNewsId ? `littleCard ${item?.tab?.replace('&', '')} hasNewsId` : `littleCard ${item?.tab.replace('&', '')}`}>
@@ -26,7 +29,7 @@ export const TopCards: React.FC<IProps> = React.memo(({ item, hasNewsId }) => {
                     <div className="littleCard__desc_top_author">{item?.by}</div>
                     <div className="littleCard__desc_top_date">{item?.date}</div>
                 </div>
-                <div className="littleCard__desc_bot" dangerouslySetInnerHTML={{ __html: item?.text || ''}}/>
+                <div className="littleCard__desc_bot">{text}</div>
             </div>
         </div>
     )
